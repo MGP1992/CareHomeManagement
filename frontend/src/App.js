@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
+import AddCarer from './components/signup/Signup';
+
 const Placeholder = () => {
   return (
     <div className="App">
@@ -28,6 +30,7 @@ const App = () => {
       <div>
         <Routes>
           <Route exact path='/' element={<Placeholder />} />
+          <Route exact path='signup' element={<AddCarer />} />
         </Routes>
       </div>
     </Router>
