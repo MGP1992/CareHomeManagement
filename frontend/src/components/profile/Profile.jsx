@@ -1,7 +1,9 @@
 import React from 'react'
 
-const Profile = () => {
+const CarerProfile = () => {
   const carer = JSON.parse(window.localStorage.getItem('carer'))
+
+
 
   return (
     <>
@@ -12,4 +14,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default CarerProfile

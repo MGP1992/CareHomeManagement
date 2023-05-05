@@ -1,26 +1,53 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const ResidentSchema = new mongoose.Schema({
-    firstName: {
+  password: {
+    type: String,
+    default: "password1!",
+  },
+  firstName: {
+    type: String,
+    required: true,
+  },
+  lastName: {
+    type: String,
+    required: true,
+  },
+  DOB: {
+    type: Date,
+    required: true,
+  },
+  residentID: {
+    type: String,
+    required: true,
+  },
+  // residency: {
+  //     type: String,
+  //     required: true
+  // refer to business account that creates the resident
+  // },
+  notes: {
+    activities: [
+      {
+        type: String, 
+      },
+    ],
+    medication: [
+      {
         type: String,
-        required: true
-    },
-    lastName: {
+      },
+    ],
+    wellbeing: [
+      {
         type: String,
-        required: true
-    },
-    dOB: {
-        type: Date,
-        required: true
-    },
-    residentID: {
+      },
+    ],
+    other: [
+      {
         type: String,
-        // required: true
-    },
-    homeLivingAt: {
-        type: String,
-        required: true
-    }
+      },
+    ],
+  },
 });
 
-module.exports = Resident = mongoose.model('resident', ResidentSchema);
+module.exports = Resident = mongoose.model("resident", ResidentSchema);
