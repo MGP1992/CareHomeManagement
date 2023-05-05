@@ -30,7 +30,7 @@ const App = () => {
       <div>
         <Routes>
           <Route exact path='/' element={<Placeholder />} />
-          <Route exact path='signup' element={<AddCarer />} />
+          <Route exact path='/signup' element={<AddCarer />} />
         </Routes>
       </div>
     </Router>
