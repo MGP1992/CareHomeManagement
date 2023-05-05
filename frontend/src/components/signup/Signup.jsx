@@ -7,15 +7,24 @@ const AddCarer = (props) => {
   const [carer, setCarer] = useState({
     email: '',
     password: '',
-    name: '',
+    firstName: '',
+    lastName: '',
+    staffID: '' 
   });
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
   };
 
+  const generateID = () => {
+    const staffID = `${carer.firstName.slice(0, 2).toUpperCase()}${carer.lastName.slice(0, 2).toUpperCase()}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}`
+    carer.staffID = staffID
+    setCarer({...carer})
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
+    generateID()
     axios
       .post('http://localhost:8082/carers/add', carer)
       .then((res) => {
@@ -23,9 +32,10 @@ const AddCarer = (props) => {
         setCarer({
           email: '',
           password: '',
-          name: '',
+          firstName: '',
+          lastName: '',
+          staffID: ''
         });
-        navigate('/');
       })
       .catch((err) => {
         console.log('Error adding a carer.');
@@ -62,10 +72,21 @@ const AddCarer = (props) => {
           <div className='addcarer-form-entry'>
             <input
               type='text'
-              placeholder='Name'
-              name='name'
+              placeholder='First Name'
+              name='firstName'
               className='addcarer-input'
-              value={carer.name}
+              value={carer.firstName}
+              onChange={onChange}
+            />
+          </div>
+          <br />
+          <div className='addcarer-form-entry'>
+            <input
+              type='text'
+              placeholder='Last Name'
+              name='lastName'
+              className='addcarer-input'
+              value={carer.lastName}
               onChange={onChange}
             />
           </div>

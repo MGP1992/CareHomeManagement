@@ -18,8 +18,10 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 
 // use Routes
-app.use('/carers/add', carers);
-app.use('/residents/add', residents);
+
+app.use('/residents/add', residents); //need to change route to just be /residents then change in router
+app.use('/carers', carers);
+
 
 const port = process.env.PORT || 8082;
 
