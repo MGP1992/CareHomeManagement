@@ -12,7 +12,6 @@ router.get("/", (req, res) => {
     );
 });
 
-
 // Carer sign up
 router.post("/add", (req, res) => {
   Carer.create(req.body)
@@ -21,6 +20,7 @@ router.post("/add", (req, res) => {
       res.status(400).json({ error: "Error creating the carer." })
     );
 });
+
 // Carer login
 router.post('/auth', async (req, res) => {
   try {

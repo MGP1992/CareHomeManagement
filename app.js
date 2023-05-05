@@ -19,7 +19,7 @@ app.use(express.json({ extended: false }));
 
 // use Routes
 
-app.use('/residents/add', residents); //need to change route to just be /residents then change in router
+app.use('/residents', residents); 
 app.use('/carers', carers);
 
 

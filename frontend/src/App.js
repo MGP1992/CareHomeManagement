@@ -3,9 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 import AddCarer from './components/signup/Signup';
-import AddResident from './components/residents/CreateResident';
+import AddResident from './components/residents/AddResident';
 import Login from './components/login/Login';
-import Profile from './components/profile/Profile';
+import CarerProfile from './components/profile/Profile';
+import ResidentProfile from './components/resident/Profile';
 
 const Placeholder = () => {
   return (
@@ -34,10 +35,10 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Placeholder />} />
           <Route exact path='/signup' element={<AddCarer />} />
-          <Route exact path='/residents/create' element={<AddResident />} /> // need to change route
           <Route exact path='/login' element={<Login />} />
-          <Route exact path='/profile' element={<Profile />} />
-
+          <Route exact path='/carers/profile' element={<CarerProfile />} />
+          <Route path='/residents/profile/:residentID' element={<ResidentProfile />} />
+          <Route exact path='/residents/add' element={<AddResident />} /> 
         </Routes>
       </div>
     </Router>
