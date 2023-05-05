@@ -15,6 +15,7 @@ const ResidentSchema = new mongoose.Schema({
     },
     residentID: {
         type: String,
+        // required: true
     },
     homeLivingAt: {
         type: String,

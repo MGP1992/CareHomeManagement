@@ -12,14 +12,15 @@ const AddResident = (props) => {
     homeLivingAt: '',
   });
 
-  const onChange = (e) => {
-    console.log(resident.firstName)
-    console.log(resident.lastName)
-    console.log(resident.dOB)
-    console.log(resident.homeLivingAt)
+//   const generateId = () => {
+//     const generate = `${resident.firstName.slice(0,1).toUpperCase()}${resident.lastName.slice(0,4).toUpperCase()}${Math.floor(Math.random()*1000)}`
+//     setResident(...resident)
+//   }
 
+  const onChange = (e) => {
     setResident({ ...resident, [e.target.name]: e.target.value });
   };
+
 
   const onSubmit = (e) => {
     e.preventDefault();
