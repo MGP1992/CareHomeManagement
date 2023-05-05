@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 import AddCarer from './components/signup/Signup';
+import AddResident from './components/residents/CreateResident';
 import Login from './components/login/Login';
 import Profile from './components/profile/Profile';
 
@@ -33,6 +34,7 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Placeholder />} />
           <Route exact path='/signup' element={<AddCarer />} />
+          <Route exact path='/residents/create' element={<AddResident />} /> // need to change route
           <Route exact path='/login' element={<Login />} />
           <Route exact path='/profile' element={<Profile />} />
 
