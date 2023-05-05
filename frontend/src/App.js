@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 import AddCarer from './components/signup/Signup';
+import Login from './components/login/Login';
+import Profile from './components/profile/Profile';
 
 const Placeholder = () => {
   return (
@@ -31,6 +33,9 @@ const App = () => {
         <Routes>
           <Route exact path='/' element={<Placeholder />} />
           <Route exact path='/signup' element={<AddCarer />} />
+          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/profile' element={<Profile />} />
+
         </Routes>
       </div>
     </Router>
