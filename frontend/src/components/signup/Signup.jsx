@@ -17,7 +17,7 @@ const AddCarer = (props) => {
   const onSubmit = (e) => {
     e.preventDefault();
     axios
-      .post('http://localhost:8082/api/carers', carer)
+      .post('http://localhost:8082/carers/add', carer)
       .then((res) => {
         console.log("res", res)
         setCarer({
