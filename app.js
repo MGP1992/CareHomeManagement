@@ -5,7 +5,7 @@ const cors = require('cors');
 
 // routes
 const carers = require('./backend/routes/api/carers');
-
+const residents = require('./backend/routes/api/residents');
 const app = express();
 
 // Connect Database
@@ -18,7 +18,8 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 
 // use Routes
-app.use('/api/carers', carers);
+app.use('/carers/add', carers);
+app.use('/residents/add', residents);
 
 const port = process.env.PORT || 8082;
 

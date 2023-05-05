@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
 import AddCarer from './components/signup/Signup';
+import AddResident from './components/residents/CreateResident';
 
 const Placeholder = () => {
   return (
@@ -30,7 +31,8 @@ const App = () => {
       <div>
         <Routes>
           <Route exact path='/' element={<Placeholder />} />
-          <Route exact path='signup' element={<AddCarer />} />
+          <Route exact path='/signup' element={<AddCarer />} />
+          <Route exact path='/residents/create' element={<AddResident />} />
         </Routes>
       </div>
     </Router>
