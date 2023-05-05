@@ -18,7 +18,7 @@ app.use(cors({ origin: true, credentials: true }));
 app.use(express.json({ extended: false }));
 
 // use Routes
-app.use('/carers/add', carers);
+app.use('/carers', carers);
 
 const port = process.env.PORT || 8082;
 
