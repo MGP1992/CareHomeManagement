@@ -6,16 +6,18 @@ import AddNotes from "../addNotes/AddNotes";
 const ResidentProfile = () => {
     const {residentID} = useParams()
     const [resident, setResident] = useState([])
+    const [notes, setNotes] = useState('')
 
     useEffect(() => {
-        console.log(residentID)
         axios
         .get(`http://localhost:8082/residents/${residentID}`)
         .then((res) => {
-            console.log(res)
+            console.log('the response:',res.data)
             setResident(res.data);
+            setNotes(res.data.notes)
         });
     }, [])
+
 
     return (
         <div className="container py-5 h-100">
@@ -28,10 +30,10 @@ const ResidentProfile = () => {
                                 <p style={{fontSize: "24px"}}>{resident.residentID}</p>
                                 <br />
                                 <AddNotes residentID={resident.residentID} />
-                                <p>Activity Log: theresa was raving tonight</p>
-                                <p>Medication Log: 10g of ket</p>
-                                <p>Wellbeing Log: not very well following the ket</p>
-                                <p>Other: i quit my job</p>
+                                <div className="activity-notes"><h5>Activities:</h5>{notes.activities}</div><br/>
+                                <div className="medication-notes"><h5>Medications:</h5>{notes.medication}</div><br/>
+                                <div className="wellbeing-notes"><h5>Well-being</h5>{notes.wellbeing}</div><br/>
+                                <div className="other-notes"><h5>Other</h5>{notes.others}</div><br/>
                             </div>      
                         </div>
                     </div>

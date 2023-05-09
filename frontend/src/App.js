@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AddCarer from './components/signup/Signup';
 import AddResident from './components/addResidents/AddResident';
 import Login from './components/auth/Login';
-import CarerProfile from './components/profile/Profile';
-import ResidentProfile from './components/resident/Profile';
+import CarerProfile from './components/carerProfile/CarerProfile';
+import ResidentProfile from './components/residentProfile/ResidentProfile';
 import AddNotes from './components/addNotes/AddNotes'
 
 
