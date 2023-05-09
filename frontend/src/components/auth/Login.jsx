@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -14,18 +14,16 @@ const Login = () => {
     // going forward perform the check for resident or carer here maybe?
     //could add a box to check if signing in as carer
     axios
-      .post("http://localhost:8082/carers/auth", loginInfo)
+      .post("http://localhost:8082/tokens", loginInfo)
       .then((res) => {
-        window.localStorage.setItem("carer", JSON.stringify(res.data.user));
-        // window.localStorage.setItem("staffID", res.data.user.staffID);
-        // window.localStorage.setItem("firstName", res.data.user.firstName);
-        // window.localStorage.setItem("lastName", res.data.user.lastName);
+        window.localStorage.setItem("user", JSON.stringify(res.data.user));
+        window.localStorage.setItem("token", res.data.token);
       })
       .then((res) => {
-        navigate("/profile");
+        navigate("/");
       })
       .catch((err) => {
-        console.log("Could not log in");
+        console.log(err);
       });
   };
 

@@ -28,7 +28,6 @@ const AddCarer = (props) => {
     axios
       .post('http://localhost:8082/carers/add', carer)
       .then((res) => {
-        console.log("res", res)
         setCarer({
           email: '',
           password: '',
@@ -38,7 +37,7 @@ const AddCarer = (props) => {
         });
       })
       .catch((err) => {
-        console.log('Error adding a carer.');
+        console.log(err);
       });
   };
 
