@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios';
-
+import AddNotes from "../addNotes/AddNotes";
 
 const ResidentProfile = () => {
     const {residentID} = useParams()
@@ -27,6 +27,7 @@ const ResidentProfile = () => {
                                 <p style={{fontSize: "36px"}}>{resident.firstName} {resident.lastName}</p>
                                 <p style={{fontSize: "24px"}}>{resident.residentID}</p>
                                 <br />
+                                <AddNotes residentID={resident.residentID} />
                                 <p>Activity Log: theresa was raving tonight</p>
                                 <p>Medication Log: 10g of ket</p>
                                 <p>Wellbeing Log: not very well following the ket</p>

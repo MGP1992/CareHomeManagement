@@ -41,6 +41,18 @@ const ResidentsController = {
       )
       .catch((err) => res.status(404).json({ error: "No such resident" }));
   },
+  AddNote: async (req, res) => {
+    const category = req.body.category;
+    const notes = req.body.notes;
+    const resident = await Resident.findOne({
+      residentID: req.body.residentID,
+    });
+    resident.notes[category].push(notes);
+    resident
+      .save()
+      .then((resident) => res.status(201).json({ message: "Yes!" }))
+      .catch((err) => res.status(404).json({ error: "Error adding notes" }));
+  },
 };
 
 module.exports = ResidentsController;
