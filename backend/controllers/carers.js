@@ -13,37 +13,14 @@ const CarersController = {
   Create: async (req, res) => {
     let id = req.body.staffID;
     let checkEmail = null;
-    let uniqueID = null;
-
-    // const generateID = () => {
-    //   const ID = `${req.body.firstName
-    //     .slice(0, 2)
-    //     .toUpperCase()}${req.body.lastName
-    //     .slice(0, 2)
-    //     .toUpperCase()}${Math.floor(Math.random() * 10)}${Math.floor(
-    //     Math.random() * 10
-    //   )}`;
-    //   id = ID;
-    // };
-
-    // const idSearch = async () => {
-    //   let user = await Carer.findOne({ staffID: id });
-    //   if (user.staffID === id) {
-    //     console.log("IT HAS FOUND THE USER");
-    //     generateID();
-    //     console.log("IT HAS REGERATED THE ID: ", id);
-    //   } else {
-    //     console.log("uniqueID has been marked");
-    //     uniqueID = "generated";
-    //   }
-    // };
-
-    // while (!uniqueID) {
-    //   await idSearch();
-    // }
+    let checkID = null;
 
     await Carer.findOne({ email: req.body.email }).then(
       (foundUser) => (checkEmail = foundUser)
+    );
+
+    await Carer.findOne({ staffID: req.body.staffID }).then(
+      (foundUser) => (checkID = foundUser)
     );
 
     if (
@@ -55,6 +32,10 @@ const CarersController = {
       return res.status(401).json({ message: "Please fill all fields." });
     } else if (checkEmail) {
       res.status(401).json({ message: "Email is already in use." });
+    } else if (checkID) {
+      res
+        .status(401)
+        .json({ message: "Error generating Staff ID, please try again." });
     } else {
       bcrypt.hash(req.body.password, 11).then((hashPassword) => {
         const newCarer = {

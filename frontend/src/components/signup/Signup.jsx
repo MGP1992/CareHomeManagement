@@ -9,7 +9,7 @@ const AddCarer = (props) => {
     password: "",
     firstName: "",
     lastName: "",
-    staffID: "GECL19",
+    staffID: "",
   });
 
   const onChange = (e) => {
@@ -58,7 +58,7 @@ const AddCarer = (props) => {
     } else if (!validateEmail(carer.email)) {
       alert("The email address entered is invalid");
     } else {
-      console.log("got past the checks m8")
+      console.log("got past the checks m8");
       generateID();
       axios
         .post("http://localhost:8082/carers/add", carer)

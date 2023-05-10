@@ -8,23 +8,16 @@ import Login from './components/auth/Login';
 import CarerProfile from './components/carerProfile/CarerProfile';
 import ResidentProfile from './components/residentProfile/ResidentProfile';
 import AddNotes from './components/addNotes/AddNotes'
+import LandingPage from './components/landingPage/LandingPage';
 
-
-const Placeholder = () => {
-  return (
-    <>
-    <p>Care Link</p>
-    </>
-  );
-}
 const App = () => {
   return (
     <Router>
       <div>
         <Routes>
-          <Route exact path='/' element={<Placeholder />} />
+          <Route exact path='/' element={<LandingPage />} />
           <Route exact path='/signup' element={<AddCarer />} />
-          <Route exact path='/login' element={<Login />} />
+          <Route exact path='/login' element={<Login  />} />
           <Route exact path='/carers/profile' element={<CarerProfile />} />
           <Route path='/residents/profile/:residentID' element={<ResidentProfile />} />
           <Route exact path='/residents/add' element={<AddResident />} /> 
