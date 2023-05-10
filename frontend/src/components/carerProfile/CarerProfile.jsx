@@ -27,6 +27,8 @@ const newResident = () =>{
     <h1>Staff ID -- {carer.staffID}</h1>
     <h1>Staff Name -- {`${carer.firstName} ${carer.lastName}`}</h1>
     <input type='submit' value='Add Resident' onClick={newResident}/>
+    <div>
+    </div>
     </>
   )
 }
