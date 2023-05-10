@@ -9,7 +9,7 @@ const AddCarer = (props) => {
     password: "",
     firstName: "",
     lastName: "",
-    staffID: "GECL19",
+    staffID: "",
   });
 
   const onChange = (e) => {
@@ -18,10 +18,9 @@ const AddCarer = (props) => {
 
   const generateID = () => {
     const staffID = `${carer.firstName
-      .slice(0, 2)
-      .toUpperCase()}${carer.lastName.slice(0, 2).toUpperCase()}${Math.floor(
-      Math.random() * 10
-    )}${Math.floor(Math.random() * 10)}`;
+      .slice(0, 3)
+      .toUpperCase()}${carer.lastName.slice(0, 3).toUpperCase()}${
+      Math.floor(Math.random() * 900000) + 100000}`;
     carer.staffID = staffID;
     setCarer({ ...carer });
   };
@@ -58,7 +57,7 @@ const AddCarer = (props) => {
     } else if (!validateEmail(carer.email)) {
       alert("The email address entered is invalid");
     } else {
-      console.log("got past the checks m8")
+      console.log("got past the checks m8");
       generateID();
       axios
         .post("http://localhost:8082/carers/add", carer)

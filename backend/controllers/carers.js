@@ -13,7 +13,6 @@ const CarersController = {
   Create: async (req, res) => {
     let id = req.body.staffID;
     let checkEmail = null;
-    let uniqueID = null;
 
     // const generateID = () => {
     //   const ID = `${req.body.firstName
@@ -26,25 +25,17 @@ const CarersController = {
     //   id = ID;
     // };
 
-    // const idSearch = async () => {
-    //   let user = await Carer.findOne({ staffID: id });
-    //   if (user.staffID === id) {
-    //     console.log("IT HAS FOUND THE USER");
-    //     generateID();
-    //     console.log("IT HAS REGERATED THE ID: ", id);
-    //   } else {
-    //     console.log("uniqueID has been marked");
-    //     uniqueID = "generated";
-    //   }
-    // };
-
-    // while (!uniqueID) {
-    //   await idSearch();
-    // }
-
     await Carer.findOne({ email: req.body.email }).then(
       (foundUser) => (checkEmail = foundUser)
     );
+
+    // await Carer.findOne({ staffID: id }).then(
+    //   (foundUser = () => {
+    //     if (foundUser) {
+    //       generateID()
+    //     }
+    //   })
+    // );
 
     if (
       !req.body.firstName ||
