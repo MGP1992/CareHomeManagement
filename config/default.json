@@ -1,4 +1,6 @@
 {
     "mongoURI":
-        "mongodb+srv://carelinkdb:3teQew127mnt4tXT@carelink.7crs4eb.mongodb.net/?retryWrites=true&w=majority"
+        "mongodb+srv://carelinkdb:3teQew127mnt4tXT@carelink.7crs4eb.mongodb.net/?retryWrites=true&w=majority",
+    "secret":
+        "carelinkdev"
 }
