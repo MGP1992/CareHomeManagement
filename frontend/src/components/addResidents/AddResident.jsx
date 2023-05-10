@@ -9,6 +9,7 @@ const AddResident = (props) => {
     lastName: "",
     DOB: "",
     residentID: "",
+    password: "",
     // residency: "",
   });
 
@@ -34,6 +35,7 @@ const AddResident = (props) => {
           lastName: "",
           DOB: "",
           residentID: "",
+          password: "",
           // residency: "",
         });
         navigate("/");
@@ -76,6 +78,17 @@ const AddResident = (props) => {
               name="DOB"
               className="addresident-input"
               value={resident.DOB}
+              onChange={onChange}
+            />
+          </div>
+          <br />
+          <div className="addresident-form-entry">
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              className="addresident-input"
+              value={resident.password}
               onChange={onChange}
             />
           </div>

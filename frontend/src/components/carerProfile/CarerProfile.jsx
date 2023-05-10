@@ -3,8 +3,9 @@ import { useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import Resident from '../resident/resident';
 
+
 const CarerProfile = () => {
-  const carer = JSON.parse(window.localStorage.getItem('carer'))
+  const user = JSON.parse(window.localStorage.getItem("user"));
   const navigate = useNavigate();
   const [residents, setResidents] = useState([])
 
@@ -14,11 +15,11 @@ const CarerProfile = () => {
     .then((res) => {
         setResidents(res.data);
     });
-}, [])
+  }, []);
 
-const newResident = () =>{
-  navigate('/residents/add')
-}
+  const newResident = () => {
+    navigate("/residents/add");
+  };
 
   return (
     <>
@@ -34,7 +35,7 @@ const newResident = () =>{
     <div>
     </div>
     </>
-  )
-}
+  );
+};
 
-export default CarerProfile
+export default CarerProfile;

@@ -12,14 +12,15 @@ const CarersController = {
   },
   Create: async (req, res) => {
     let checkEmail = null;
-    let checkStaffID = null;
+    let checkID = null;
+
 
     await Carer.findOne({ email: req.body.email }).then(
       (foundUser) => (checkEmail = foundUser)
     );
 
     await Carer.findOne({ staffID: req.body.staffID }).then(
-      (foundUser) => (checkStaffID = foundUser)
+      (foundUser) => (checkID = foundUser)
     );
 
     if (
@@ -31,7 +32,7 @@ const CarersController = {
       return res.status(401).json({ message: "Please fill all fields." });
     } else if (checkEmail) {
       res.status(401).json({ message: "Email is already in use." });
-    } else if (checkStaffID) {
+    } else if (checkID) {
       res
         .status(401)
         .json({ message: "Error generating Staff ID, please try again." });

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const ResidentSchema = new mongoose.Schema({
   password: {
     type: String,
-    default: "password1!",
+    required: true,
   },
   firstName: {
     type: String,
