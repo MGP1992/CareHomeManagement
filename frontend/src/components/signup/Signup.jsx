@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const AddCarer = (props) => {
   const navigate = useNavigate();
+  const [img, setImg] = useState("");
   const [carer, setCarer] = useState({
     email: "",
     password: "",
@@ -20,7 +21,8 @@ const AddCarer = (props) => {
     const staffID = `${carer.firstName
       .slice(0, 3)
       .toUpperCase()}${carer.lastName.slice(0, 3).toUpperCase()}${
-      Math.floor(Math.random() * 900000) + 100000}`;
+      Math.floor(Math.random() * 900000) + 100000
+    }`;
     carer.staffID = staffID;
     setCarer({ ...carer });
   };
@@ -45,33 +47,83 @@ const AddCarer = (props) => {
     }
   };
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    if (!validatePassword(carer.password) && !validateEmail(carer.email)) {
-      alert("The email address and password entered are invalid.");
-      //console.log("The email address and password entered are invalid.");
-    } else if (!validatePassword(carer.password)) {
-      alert(
-        "Password needs to be at least 8 characters long, contain 1 number & special character."
-      );
-    } else if (!validateEmail(carer.email)) {
-      alert("The email address entered is invalid");
+    if (!img) {
+      if (!validatePassword(carer.password) && !validateEmail(carer.email)) {
+        alert("The email address and password entered are invalid.");
+      } else if (!validatePassword(carer.password)) {
+        alert(
+          "Password needs to be at least 8 characters long, contain 1 number & special character."
+        );
+      } else if (!validateEmail(carer.email)) {
+        alert("The email address entered is invalid");
+      } else {
+        console.log("got past the checks m8");
+        generateID();
+        axios
+          .post("http://localhost:8082/carers/add", carer)
+          .then((res) => {
+            setCarer({
+              email: "",
+              password: "",
+              firstName: "",
+              lastName: "",
+              staffID: "",
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     } else {
-      console.log("got past the checks m8");
       generateID();
+      const data = new FormData();
+      data.append("file", img);
+      data.append("upload_preset", "carelink");
+      data.append("cloud_name", "dhocnl7tm");
       axios
-        .post("http://localhost:8082/carers/add", carer)
-        .then((res) => {
+        .post("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", data)
+        .then((imgData) => {
           setCarer({
-            email: "",
-            password: "",
-            firstName: "",
-            lastName: "",
-            staffID: "",
+            email: carer.email,
+            password: carer.password,
+            firstName: carer.firstName,
+            lastName: carer.lastName,
+            staffID: carer.staffID,
+            profilePic: imgData.data.url.toString(),
           });
         })
-        .catch((err) => {
-          console.log(err);
+        .then(() => {
+          if (
+            !validatePassword(carer.password) &&
+            !validateEmail(carer.email)
+          ) {
+            alert("The email address and password entered are invalid.");
+          } else if (!validatePassword(carer.password)) {
+            alert(
+              "Password needs to be at least 8 characters long, contain 1 number & special character."
+            );
+          } else if (!validateEmail(carer.email)) {
+            alert("The email address entered is invalid");
+          } else {
+            console.log("got past the checks m8");
+            axios
+              .post("http://localhost:8082/carers/add", carer)
+              .then((res) => {
+                setCarer({
+                  email: "",
+                  password: "",
+                  firstName: "",
+                  lastName: "",
+                  staffID: "",
+                  profilePic: "",
+                });
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
         });
     }
   };
@@ -124,6 +176,12 @@ const AddCarer = (props) => {
               onChange={onChange}
             />
           </div>
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            id="chooseImg"
+            onChange={(e) => setImg(e.target.files[0])}
+          ></input>
           <br />
           <input type="submit" className="addcarer-submit-btn" />
         </form>

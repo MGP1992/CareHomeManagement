@@ -81,11 +81,11 @@ const SessionsController = {
           .then((match) => {
             if (match) {
               const token = TokenGenerator.jsonwebtoken(user.id);
-              const { residentID, email, firstName, lastName } = user;
+              const { residentID, email, firstName, lastName, profilePic } = user;
               res.status(201).json({
                 token: token,
                 message: "Sign in successful!",
-                user: { residentID, email, firstName, lastName },
+                user: { residentID, email, firstName, lastName, profilePic },
               });
             } else {
               res
