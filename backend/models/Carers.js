@@ -20,7 +20,7 @@ const CarerSchema = new mongoose.Schema({
     staffID: {
         type: String,
         required: true
-    }
+    },
 });
 
 module.exports = Carer = mongoose.model('carer', CarerSchema);
