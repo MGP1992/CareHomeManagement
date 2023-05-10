@@ -18,6 +18,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 // Init Middleware
 app.use(express.json({ extended: false }));
+require("dotenv").config()
 
 // middleware function to check for valid tokens
 const tokenChecker = (req, res, next) => {
