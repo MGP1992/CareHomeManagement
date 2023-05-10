@@ -19,9 +19,9 @@ const AddCarer = (props) => {
 
   const generateID = () => {
     const staffID = `${carer.firstName
-      .slice(0, 3)
-      .toUpperCase()}${carer.lastName.slice(0, 3).toUpperCase()}${
-      Math.floor(Math.random() * 900000) + 100000
+      .slice(0, 2)
+      .toUpperCase()}${carer.lastName.slice(0, 2).toUpperCase()}${
+      Math.floor(Math.random() * 89) + 10
     }`;
     carer.staffID = staffID;
     setCarer({ ...carer });

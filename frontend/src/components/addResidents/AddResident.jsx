@@ -14,10 +14,14 @@ const AddResident = (props) => {
   });
 
   const generateID = () => {
-    const residentID = `${resident.firstName.slice(0, 2).toUpperCase()}${resident.lastName.slice(0, 2).toUpperCase()}${Math.floor(Math.random()*10)}${Math.floor(Math.random()*10)}`
-    resident.residentID = residentID
-    setResident({...resident})
-  }
+    const residentID = `${resident.firstName
+      .slice(0, 2)
+      .toUpperCase()}${resident.lastName.slice(0, 2).toUpperCase()}${
+      Math.floor(Math.random() * 89) + 10
+    }`;
+    resident.residentID = residentID;
+    setResident({ ...resident });
+  };
 
   const onChange = (e) => {
     setResident({ ...resident, [e.target.name]: e.target.value });
@@ -25,7 +29,7 @@ const AddResident = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    generateID()
+    generateID();
     axios
       .post("http://localhost:8082/residents/add", resident)
       .then((res) => {
