@@ -21,6 +21,10 @@ const CarerSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    profilePic: {
+        type: String,
+        default: "https://imgur.com/na6zgUo.png"
+    }
 });
 
 module.exports = Carer = mongoose.model('carer', CarerSchema);

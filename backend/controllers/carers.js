@@ -11,10 +11,9 @@ const CarersController = {
       );
   },
   Create: async (req, res) => {
-    let id = req.body.staffID;
     let checkEmail = null;
     let checkID = null;
-
+    console.log("PROFILE PIC IN BACKEND: ", req.body.profilePic)
     await Carer.findOne({ email: req.body.email }).then(
       (foundUser) => (checkEmail = foundUser)
     );
@@ -22,7 +21,7 @@ const CarersController = {
     await Carer.findOne({ staffID: req.body.staffID }).then(
       (foundUser) => (checkID = foundUser)
     );
-
+  
     if (
       !req.body.firstName ||
       !req.body.lastName ||
@@ -41,7 +40,8 @@ const CarersController = {
           password: hashPassword,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          staffID: id,
+          staffID: req.body.staffID,
+          profilePic: req.body.profilePic
         };
         const carer = new Carer(newCarer);
         console.log(carer);
