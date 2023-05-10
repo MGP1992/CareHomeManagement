@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import axios from 'axios';
 import AddNotes from "../addNotes/AddNotes";
 
-const ResidentProfile = ({residentprofile}) => {
+const ResidentProfile = () => {
     const {residentID} = useParams()
-    const [resident, setResident] = useState([])
+    const [residents, setResidents] = useState([])
     const [notes, setNotes] = useState('')
 
     useEffect(() => {
@@ -13,7 +13,7 @@ const ResidentProfile = ({residentprofile}) => {
         .get(`http://localhost:8082/residents/${residentID}`)
         .then((res) => {
             console.log('the response:',res.data)
-            setResident(res.data);
+            setResidents(res.data);
             setNotes(res.data.notes)
         });
     }, [])
@@ -26,10 +26,10 @@ const ResidentProfile = ({residentprofile}) => {
                     <div className="card" style={{"borderRadius": "15px"}}>
                         <div className="card-body text-center">
                             <div className="mt-3 mb-4">
-                                <p style={{fontSize: "36px"}}>{resident.firstName} {resident.lastName}</p>
-                                <p style={{fontSize: "24px"}}>{resident.residentID}</p>
+                                <p style={{fontSize: "36px"}}>{residents.firstName} {residents.lastName}</p>
+                                <p style={{fontSize: "24px"}}>{residents.residentID}</p>
                                 <br />
-                                <AddNotes residentID={resident.residentID} />
+                                <AddNotes residentID={residents.residentID} />
                                 <div className="activity-notes"><h5>Activities:</h5>{notes.activities}</div><br/>
                                 <div className="medication-notes"><h5>Medications:</h5>{notes.medication}</div><br/>
                                 <div className="wellbeing-notes"><h5>Well-being</h5>{notes.wellbeing}</div><br/>
