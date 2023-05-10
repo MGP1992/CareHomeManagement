@@ -11,9 +11,9 @@ const CarersController = {
       );
   },
   Create: async (req, res) => {
+    let id = req.body.staffID;
     let checkEmail = null;
     let checkID = null;
-
 
     await Carer.findOne({ email: req.body.email }).then(
       (foundUser) => (checkEmail = foundUser)
@@ -33,9 +33,7 @@ const CarersController = {
     } else if (checkEmail) {
       res.status(401).json({ message: "Email is already in use." });
     } else if (checkID) {
-      res
-        .status(401)
-        .json({ message: "Error generating Staff ID, please try again." });
+      res.status(401).json({ message: "Error generating Staff ID, please try again." });
     } else {
       bcrypt.hash(req.body.password, 11).then((hashPassword) => {
         const newCarer = {

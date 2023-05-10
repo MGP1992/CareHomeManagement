@@ -24,8 +24,8 @@ const CarerProfile = () => {
   return (
     <>
     <h1>Carer profile</h1>
-    <h1>Staff ID -- {carer.staffID}</h1>
-    <h1>Staff Name -- {`${carer.firstName} ${carer.lastName}`}</h1>
+    <h1>Staff ID -- {user.staffID}</h1>
+    <h1>Staff Name -- {`${user.firstName} ${user.lastName}`}</h1>
     <input type='submit' value='Add Resident' onClick={newResident}/>
     <div className='all-residents'>
       {residents.map(
