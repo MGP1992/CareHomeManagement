@@ -11,9 +11,9 @@ const CarersController = {
       );
   },
   Create: async (req, res) => {
-    let id = req.body.staffID;
     let checkEmail = null;
     let checkID = null;
+
 
     await Carer.findOne({ email: req.body.email }).then(
       (foundUser) => (checkEmail = foundUser)
