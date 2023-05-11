@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Modal from '../modal/Modal';
-
+import { Button } from 'reactstrap';
 
 const AddNotes = (props) => {
   const residentID = props.residentID;
@@ -61,7 +61,7 @@ const AddNotes = (props) => {
 
   return (
     <>
-    <div className='comments-btn-div'><button onClick={() => setShow(true)}>Add Note</button></div>
+    <div className='comments-btn-div'><Button onClick={() => setShow(true)}>Add Note</Button></div>
     <Modal title="New Note" className="notes-modal" onClose={() => setShow(false)} show={show}>
       <form noValidate onSubmit={onSubmit}>
       <label htmlFor="dropdown">Choose a category:</label>
