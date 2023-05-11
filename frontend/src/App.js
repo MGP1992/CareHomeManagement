@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Outlet
+  Outlet,
 } from "react-router-dom";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -25,6 +25,7 @@ const AppLayout = () => (
 );
 
 const App = () => {
+
   return (
     <Router>
       <div>
@@ -34,7 +35,10 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route element={<AppLayout />}>
             <Route exact path="/carers/profile" element={<CarerProfile />} />
-            <Route path="/residents/profile/:residentID" element={<ResidentProfile />}/>
+            <Route
+              path="/residents/profile/:residentID"
+              element={<ResidentProfile />}
+            />
             <Route exact path="/residents/add" element={<AddResident />} />
             <Route exact path="/residents/add-note" element={<AddNotes />} />
             <Route exact path="/residents" element={<Resident />} />

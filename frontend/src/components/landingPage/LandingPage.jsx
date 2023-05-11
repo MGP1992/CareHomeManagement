@@ -3,9 +3,11 @@ import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const navigate = useNavigate();
-  const routeChange = (path) => {
-    navigate(path);
-  };
+
+  const link = () => {
+    navigate('/login')
+  }
+
 
   return (
     <section className="landing">
@@ -14,7 +16,7 @@ const LandingPage = () => {
         CareLink - Making sure that when you shit yourself, the family can see
       </p>
 
-      <button className="btn" onClick={routeChange("/login")}>
+      <button className="btn" onClick={link}>
         Login
       </button>
     </section>
