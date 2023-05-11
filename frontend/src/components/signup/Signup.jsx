@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const AddCarer = (props) => {
   const navigate = useNavigate();
-  const [img, setImg] = useState("");
   const [carer, setCarer] = useState({
     email: "",
     password: "",
@@ -49,81 +48,30 @@ const AddCarer = (props) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (!img) {
-      if (!validatePassword(carer.password) && !validateEmail(carer.email)) {
-        alert("The email address and password entered are invalid.");
-      } else if (!validatePassword(carer.password)) {
-        alert(
-          "Password needs to be at least 8 characters long, contain 1 number & special character."
-        );
-      } else if (!validateEmail(carer.email)) {
-        alert("The email address entered is invalid");
-      } else {
-        console.log("got past the checks m8");
-        generateID();
-        axios
-          .post("http://localhost:8082/carers/add", carer)
-          .then((res) => {
-            setCarer({
-              email: "",
-              password: "",
-              firstName: "",
-              lastName: "",
-              staffID: "",
-            });
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
+    if (!validatePassword(carer.password) && !validateEmail(carer.email)) {
+      alert("The email address and password entered are invalid.");
+    } else if (!validatePassword(carer.password)) {
+      alert(
+        "Password needs to be at least 8 characters long, contain 1 number & special character."
+      );
+    } else if (!validateEmail(carer.email)) {
+      alert("The email address entered is invalid");
     } else {
+      console.log("got past the checks m8");
       generateID();
-      const data = new FormData();
-      data.append("file", img);
-      data.append("upload_preset", "carelink");
-      data.append("cloud_name", "dhocnl7tm");
       axios
-        .post("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", data)
-        .then((imgData) => {
+        .post("http://localhost:8082/carers/add", carer)
+        .then((res) => {
           setCarer({
-            email: carer.email,
-            password: carer.password,
-            firstName: carer.firstName,
-            lastName: carer.lastName,
-            staffID: carer.staffID,
-            profilePic: imgData.data.url.toString(),
+            email: "",
+            password: "",
+            firstName: "",
+            lastName: "",
+            staffID: "",
           });
         })
-        .then(() => {
-          if (
-            !validatePassword(carer.password) &&
-            !validateEmail(carer.email)
-          ) {
-            alert("The email address and password entered are invalid.");
-          } else if (!validatePassword(carer.password)) {
-            alert(
-              "Password needs to be at least 8 characters long, contain 1 number & special character."
-            );
-          } else if (!validateEmail(carer.email)) {
-            alert("The email address entered is invalid");
-          } else {
-            console.log("got past the checks m8");
-            axios
-              .post("http://localhost:8082/carers/add", carer)
-              .then((res) => {
-                setCarer({
-                  email: "",
-                  password: "",
-                  firstName: "",
-                  lastName: "",
-                  staffID: "",
-                  profilePic: "",
-                });
-              })
-              .catch((err) => {
-                console.log(err);
-              });
-          }
+        .catch((err) => {
+          console.log(err);
         });
     }
   };
@@ -176,12 +124,6 @@ const AddCarer = (props) => {
               onChange={onChange}
             />
           </div>
-          <input
-            type="file"
-            accept="image/png, image/jpeg"
-            id="chooseImg"
-            onChange={(e) => setImg(e.target.files[0])}
-          ></input>
           <br />
           <input type="submit" className="addcarer-submit-btn" />
         </form>

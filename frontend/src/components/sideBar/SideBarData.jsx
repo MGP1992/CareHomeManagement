@@ -30,7 +30,7 @@ export const SideBarData = [
   },
   {
     title: "Log Out",
-    path: "/logout",
+    path: "/login",
     icons: <RiIcons.RiLogoutCircleFill />,
     cName: "nav-text",
   },
