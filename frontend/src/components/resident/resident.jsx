@@ -3,14 +3,11 @@ import AddNotes from "../addNotes/AddNotes";
 
 const Resident = ({resident}) => {
 
-
-    console.log(resident.notes)
-
     return (
         <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
                 <div className="col-md-12 col-xl-4">
-                    <div className="card" style={{"borderRadius": "15px"}}>
+                    <div className="card" style={{"borderRadius": "15px", "zIndex": "-1"}}>
                         <div className="card-body text-center">
                             <div className="mt-3 mb-4">
                                 <p style={{fontSize: "36px"}}>{resident.firstName} {resident.lastName}</p>
