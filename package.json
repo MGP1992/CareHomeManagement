@@ -30,7 +30,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.1.0",
     "react-bootstrap": "^2.7.4",
-    "reactstrap": "^9.1.9"
+    "reactstrap": "^9.1.9",
     "react-icons": "^4.8.0"
 
   },
