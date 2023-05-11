@@ -25,11 +25,11 @@ const Resident = ({resident}) => {
                     <p style={{fontSize: "24px"}}>Resident ID: {resident.residentID}</p>
                     </CardSubtitle>
                 <br />
-                        <CardText
-                        className="text-secondary mb-4"
-                        style={{ fontSize: "0.75rem" }}
-                        > 
-                        <AddNotes residentID={resident.residentID}/>  
+                    <CardText
+                    className="text-secondary mb-4"
+                    style={{ fontSize: "0.75rem" }}
+                    > 
+                    <AddNotes residentID={resident.residentID}/>  
                     <div className="activity-notes"><h5>Activities:</h5>{resident.notes.activities}</div><br/>
                     <div className="medication-notes"><h5>Medications:</h5>{resident.notes.medication}</div><br/>
                     <div className="wellbeing-notes"><h5>Well-being</h5>{resident.notes.wellbeing}</div><br/>
