@@ -187,7 +187,12 @@ const CarerProfile = () => {
         <br />
         <input type="submit" className="addcarer-submit-btn" />
       </form>
-//         useEffect(() => {
+      </>
+      );
+  }
+  
+           
+// useEffect(() => {
 //           axios
 //           .get(`http://localhost:8082/residents/`)
 //           .then((res) => {
@@ -223,8 +228,8 @@ const CarerProfile = () => {
 //         </Row>
 //       </Container>
 //       </main>
-    </>
-  );
-};
+//    </>
+
+
 
 export default CarerProfile;
