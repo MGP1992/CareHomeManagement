@@ -42,7 +42,7 @@ const CarersController = {
           password: hashPassword,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          staffID: id,
+          staffID: req.body.staffID,
         };
         const carer = new Carer(newCarer);
         console.log(carer);
