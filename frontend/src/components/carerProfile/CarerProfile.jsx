@@ -7,8 +7,9 @@ import {
 } from 'reactstrap';
 import Header from '../sass-css/Header';
 
+
 const CarerProfile = () => {
-  const carer = JSON.parse(window.localStorage.getItem('carer'))
+  const user = JSON.parse(window.localStorage.getItem("user"));
   const navigate = useNavigate();
   const [residents, setResidents] = useState([])
 
@@ -49,8 +50,9 @@ const CarerProfile = () => {
       </Container>
       </main>
 
-    </>
-  )
-}
 
-export default CarerProfile
+    </>
+  );
+};
+
+export default CarerProfile;

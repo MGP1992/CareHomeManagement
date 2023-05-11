@@ -12,16 +12,16 @@ const CarersController = {
   },
   Create: async (req, res) => {
     let checkEmail = null;
-    let checkStaffID = null;
-
+    let checkID = null;
+    console.log("PROFILE PIC IN BACKEND: ", req.body.profilePic)
     await Carer.findOne({ email: req.body.email }).then(
       (foundUser) => (checkEmail = foundUser)
     );
 
     await Carer.findOne({ staffID: req.body.staffID }).then(
-      (foundUser) => (checkStaffID = foundUser)
+      (foundUser) => (checkID = foundUser)
     );
-
+  
     if (
       !req.body.firstName ||
       !req.body.lastName ||
@@ -31,10 +31,8 @@ const CarersController = {
       return res.status(401).json({ message: "Please fill all fields." });
     } else if (checkEmail) {
       res.status(401).json({ message: "Email is already in use." });
-    } else if (checkStaffID) {
-      res
-        .status(401)
-        .json({ message: "Error generating Staff ID, please try again." });
+    } else if (checkID) {
+      res.status(401).json({ message: "Error generating Staff ID, please try again." });
     } else {
       bcrypt.hash(req.body.password, 11).then((hashPassword) => {
         const newCarer = {
@@ -43,6 +41,7 @@ const CarersController = {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           staffID: req.body.staffID,
+          profilePic: req.body.profilePic
         };
         const carer = new Carer(newCarer);
         console.log(carer);

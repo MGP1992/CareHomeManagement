@@ -4,15 +4,27 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [loginInfo, setloginInfo] = useState({
     email: "",
     password: "",
+    typeOfUser: "",
   });
+
+  const navigate = useNavigate();
+  const routeChange = (path) => {
+    navigate(path);
+  };
+
+  const emailOrID = () => {
+    if (loginInfo.typeOfUser === "Family Member") {
+      return "Resident ID";
+    } else {
+      return "Email";
+    }
+  };
+
   const onSubmit = (e) => {
     e.preventDefault();
-    // going forward perform the check for resident or carer here maybe?
-    //could add a box to check if signing in as carer
     axios
       .post("http://localhost:8082/tokens", loginInfo)
       .then((res) => {
@@ -20,7 +32,7 @@ const Login = () => {
         window.localStorage.setItem("token", res.data.token);
       })
       .then((res) => {
-        navigate("/");
+        navigate("/carers/profile");
       })
       .catch((err) => {
         console.log(err);
@@ -28,13 +40,58 @@ const Login = () => {
   };
 
   return (
-    <div className="loginContainer">
+    <div>
       <h1 className="login-header">Login</h1>
       <form noValidate onSubmit={onSubmit}>
         <div className="login-form-entry">
+          <div className="loginContainer">
+            <div className="App">
+              <h3>Who are you logging in as?</h3>
+
+              <input
+                type="radio"
+                name="typeOfUser"
+                value="Carer"
+                id="carer"
+                checked={loginInfo.typeOfUser === "Carer"}
+                onChange={(e) => {
+                  setloginInfo({ ...loginInfo, typeOfUser: e.target.value });
+                }}
+              />
+              <label htmlFor="regular">Carer</label>
+              <br />
+              <input
+                type="radio"
+                name="typeOfUser"
+                value="Family Member"
+                id="family"
+                checked={loginInfo.typeOfUser === "Family Member"}
+                onChange={(e) => {
+                  setloginInfo({ ...loginInfo, typeOfUser: e.target.value });
+                }}
+              />
+              <label htmlFor="medium">Family Member</label>
+              <br />
+              <input
+                type="radio"
+                name="typeOfUser"
+                value="Business"
+                id="business"
+                checked={loginInfo.typeOfUser === "Business"}
+                onChange={(e) => {
+                  setloginInfo({ ...loginInfo, typeOfUser: e.target.value });
+                }}
+              />
+              <label htmlFor="large">Business</label>
+
+              <p>
+                You are logging in as a <strong>{loginInfo.typeOfUser}</strong>
+              </p>
+            </div>
+          </div>
           <input
             type="text"
-            placeholder="Email"
+            placeholder={emailOrID()}
             name="email"
             className="addcarer-input"
             onChange={(e) => {

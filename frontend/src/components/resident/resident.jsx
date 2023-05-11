@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 const Resident = ({resident}) => {
     const navigate = useNavigate()
     const RESIDENTPIC = "URL";
-
     const goToProfile = () => {
         navigate(`/residents/profile/${resident.residentID}`)
     }
@@ -40,6 +39,7 @@ const Resident = ({resident}) => {
                 </Button>
             </CardBody>
         </Card>
+
     );
 };
 
