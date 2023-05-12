@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
-import { useNavigate} from 'react-router-dom'
-import axios from 'axios';
-import Resident from '../resident/resident';
-import { 
-  Container, Row, Col, Button,
-} from 'reactstrap';
-import Header from '../sass-css/Header';
+/*eslint no-use-before-define: 2*/ 
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Resident from "../resident/resident";
+import { Container, Row, Col, Button } from "reactstrap";
+import Header from "../sass-css/Header";
+import './CarerProfile.css'
 
 const CarerProfile = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -18,9 +18,14 @@ const CarerProfile = () => {
     staffID: user.staffID,
   });
   const [rerender, setRerender] = useState(false);
+  const [tfa, setTfa] = useState("");
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
+  };
+
+  const onChangeTfa = (e) => {
+    setTfa(e.target.value);
   };
 
   const validatePassword = (input) => {
@@ -156,42 +161,116 @@ const CarerProfile = () => {
   };
 
   return (
-    <>
-      <h1>Carer profile</h1>
-      <h1>Staff ID -- {user.staffID}</h1>
-      <img
-        src={user.profilePic}
-        style={{ maxWidth: "264px" }}
-        alt="Not rendering profile pic"
-      ></img>
-      <h1>Staff Name -- {`${user.firstName} ${user.lastName}`}</h1>
-      <form noValidate onSubmit={onSubmit}>
-        <br />
-        <div className="addcarer-form-entry">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            className="addcarer-input"
-            value={carer.password}
-            onChange={onChange}
-          />
+    <div class="container rounded bg-white mt-5 mb-5">
+      <div class="row">
+        <div class="col-md-3 border-right">
+          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img
+              class="rounded"
+              width="150px"
+              src={user.profilePic}
+              alt="img"
+            />
+            <p />
+            <h4 class="font-weight-bold">
+              {user.firstName} {user.lastName}
+            </h4>
+            <h6 class="text-black-50">{user.email}</h6>
+            <span> </span>
+          </div>
         </div>
-        <br />
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          id="chooseImg"
-          onChange={(e) => setImg(e.target.files[0])}
-        ></input>
-        <br />
-        <input type="submit" className="addcarer-submit-btn" />
-      </form>
-      </>
-      );
-  }
-  
-           
+        <div class="col-md-5 border-right">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Profile Settings</h4>
+            </div>
+            <form>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <label class="labels">Password</label>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    className="form-control"
+                    value={carer.password}
+                    onChange={onChange}
+                  />
+                </div>
+                <p />
+                <div class="col-md-12">
+                  <label class="labels">Profile Picture</label>
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    id="chooseImg"
+                    className="form-control"
+                    onChange={(e) => setImg(e.target.files[0])}
+                  />
+                </div>
+                <p />
+                <div class="col-md-12">
+                  <label class="labels">Placeholder</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder=""
+                    value=""
+                  />
+                </div>
+                <p />
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h5 class="text-left">2FA</h5>
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Mobile Number</label>
+                  <h6 style={{color: "#AAAAAA"}}class="text-left">Please enter your mobile number starting 07</h6>
+                  <input
+                    type="number"
+                    inputmode="numeric"
+                    pattern="[0-9]*"
+                    class="form-control"
+                    placeholder=""
+                    value={tfa}
+                    onChange={onChangeTfa}
+                  />
+                </div>
+              </div>
+              <div class="mt-5 text-center">
+                <input
+                  type="submit"
+                  className="btn btn-primary profile-button"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="p-3 py-5">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h4 class="text-right">Your Employer</h4>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="text-right">Sevenoaks Residential Home</h5>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="text-left">118 Carehome Road, Sevenoaks, SO1 3LF</h6>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="text-left">Phone: 01834 494 2344</h6>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="text-left">Email: socarehome@email.com</h6>
+            </div>
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // useEffect(() => {
 //           axios
 //           .get(`http://localhost:8082/residents/`)
@@ -210,26 +289,24 @@ const CarerProfile = () => {
 //     <main className="my-5 py-5">
 //     <div  className='d-flex justify-content-center'>
 //     <Button type='submit' onClick={newResident} color='warning'>Add Resident</Button>
-//     </div> 
+//     </div>
 //     <Container className="px-0 md-5">
 //         <Row
 //           className="pt-2 pt-md-5 w-100 px-4 px-xl-0"
 //         >
 //               {residents.map(
 //                 (resident) =>
-//                 <Col 
+//                 <Col
 //                 xs={{ order: 3 }}
 //                 md={{ size: 6, order: 1 }}
 //                 tag="aside"
-//                 className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0"> 
-//                 <Resident resident={resident} key={resident._id}/> 
+//                 className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0">
+//                 <Resident resident={resident} key={resident._id}/>
 //                 </Col>
 //               )}
 //         </Row>
 //       </Container>
 //       </main>
 //    </>
-
-
 
 export default CarerProfile;
