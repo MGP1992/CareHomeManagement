@@ -84,6 +84,45 @@ const ResidentsController = {
       .then((resident) => res.status(201).json({ message: "Yes!" }))
       .catch((err) => res.status(404).json({ error: "Error adding notes" }));
   },
+
+  SearchFunction: async (req, res, next) => {
+    // We look for a query parameter "search"
+    const { search } = req.query;
+    let residents;
+    if (search) { // If search exists, the user typed in the search bar
+      residents = await Resident.aggregate(
+        [
+          {
+            '$search': {
+              'index': 'default', 
+              'autocomplete': {
+                'query': search, // noticed we assign a dynamic value to "query"
+                'path': 'firstName'
+              }
+            }
+          }, {
+            '$limit': 5
+          }, {
+            '$project': {
+              '_id': 1, 
+              'title': 1, 
+              'author': 1, 
+              'createdAt': 1,
+            }
+          }
+        ]
+      );
+    } else { // The search is empty so the value of "search" is undefined
+      posts = await Post.find().sort({ createdAt: 'desc' });
+    }
+  
+    return res.status(200).json({
+      statusCode: 200,
+      message: 'Fetched posts',
+      data: { posts },
+    });
+  }
+
 };
 
 module.exports = ResidentsController;

@@ -61,6 +61,9 @@ const CarersController = {
       .then((carer) => res.json({ message: "Carer successfully deleted!" }))
       .catch((err) => res.status(404).json({ error: "No such a book" }));
   },
+
+
+  
 };
 
 module.exports = CarersController;
