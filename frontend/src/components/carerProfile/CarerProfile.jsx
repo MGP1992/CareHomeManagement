@@ -49,7 +49,6 @@ const CarerProfile = () => {
           "Password needs to be at least 8 characters long, contain 1 number & special character."
         );
       } else {
-        console.log("got past the checks m8 1");
         setCarer({
           password: "",
           profilePic: user.profilePic,
@@ -86,7 +85,6 @@ const CarerProfile = () => {
               "Password needs to be at least 8 characters long, contain 1 number & special character."
             );
           } else {
-            console.log("got past the checks m8 2");
             axios
               .post("http://localhost:8082/carers/update", carer)
               .then((res) => {
@@ -124,7 +122,6 @@ const CarerProfile = () => {
           carer.profilePic = imgData.data.url.toString();
         })
         .then(() => {
-          console.log("got past the checks m8 3");
           axios
             .post("http://localhost:8082/carers/update", carer)
             .then((res) => {
@@ -239,10 +236,10 @@ const CarerProfile = () => {
         <div className="col-md-4">
           <div className="p-3 py-5">
             <div className="d-flex justify-content-between align-items-center mb-3">
-              <h4 className="text-right">Your Employer</h4>
+              <h4 className="text-left">Your Employer</h4>
             </div>
             <div className="d-flex justify-content-between align-items-center mb-3">
-              <h5 className="text-right">Sevenoaks Residential Home</h5>
+              <h5 className="text-left">Sevenoaks Residential Home</h5>
             </div>
             <div className="d-flex justify-content-between align-items-center mb-3">
               <h6 className="text-left">
