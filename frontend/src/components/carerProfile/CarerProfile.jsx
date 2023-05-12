@@ -16,7 +16,7 @@ const CarerProfile = () => {
 
         useEffect(() => {
           axios
-          .get(`http://localhost:8082/residents/`)
+          .get(`http://localhost:8082/residents/search`)
           .then((res) => {
               setResidents(res.data);
           });
@@ -29,7 +29,7 @@ const CarerProfile = () => {
         const searchResident = async (e) => {
           const searchValue = e.target.value;
           axios
-            .get(`/api/carers/profile?search=${searchValue}`)
+            .get(`/api/posts?search=${searchValue}`)
             .then(data => {
               console.log(data.data)
               setResidents(data.data); 
