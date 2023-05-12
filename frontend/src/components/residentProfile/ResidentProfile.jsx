@@ -10,7 +10,6 @@ const ResidentProfile = () => {
 
   useEffect(() => {
     axios.get(`http://localhost:8082/residents/${residentID}`).then((res) => {
-      console.log("the response:", res.data);
       setResidents(res.data);
       setNotes(res.data.notes);
     });
@@ -40,7 +39,7 @@ const ResidentProfile = () => {
                 </div>
                 <br />
                 <div className="wellbeing-notes">
-                  <h5>Well-being</h5>
+                  <h5>Well-being</h5>ye
                   {notes.wellbeing}
                 </div>
                 <br />

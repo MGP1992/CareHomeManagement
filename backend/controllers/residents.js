@@ -84,6 +84,57 @@ const ResidentsController = {
       .then((resident) => res.status(201).json({ message: "Yes!" }))
       .catch((err) => res.status(404).json({ error: "Error adding notes" }));
   },
-};
+
+  SearchFunction: async (req, res) => {
+    // We look for a query parameter "search"
+    const { search } = req.query;
+
+    let residents; 
+    if (search) {
+      // If search exists, the user typed in the search bar
+      residents = await Resident.aggregate([
+        {
+          $search: {
+            index: "default",
+            autocomplete: {
+              query: search, // assign a dynamic value to "query"
+              path: "firstName",
+            },
+          },
+        },
+        {
+          $limit: 5,
+        },
+        {
+          $project: {
+            _id: 1,
+            firstName: 1,
+            lastName: 1,
+            notes: 1,
+            residentID: 1,
+          },
+        },
+      ]);
+    } else {
+      // The search is empty so give an error
+      residents = await Resident.find()
+
+      }
+      return res.status(200).json({
+        resident: residents,
+      });
+
+      // else { // The search is empty so the value of "search" is undefined
+      //   posts = await Post.find();
+    }
+
+    // if (residents.length === 0) {
+    //   return res.status(404).json({
+    //     statusCode: 404,
+    //     message: "There are no residents with this name",
+    //   });
+    // }
+    
+  }
 
 module.exports = ResidentsController;

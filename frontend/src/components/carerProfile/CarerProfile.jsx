@@ -1,3 +1,4 @@
+
 /*eslint no-use-before-define: 2*/
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -6,6 +7,7 @@ import Resident from "../resident/resident";
 import { Container, Row, Col, Button } from "reactstrap";
 import Header from "../sass-css/Header";
 import "./CarerProfile.css";
+
 
 const CarerProfile = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -150,6 +152,7 @@ const CarerProfile = () => {
         });
     }
   };
+
 
   return (
     <div className="container rounded bg-white mt-5 mb-5">
