@@ -4,7 +4,7 @@
 .sidebar {
   background: #007bff;
   background: linear-gradient(to right, #0062e6, #33aeff);
-  height: 80px;
+  height: 60px;
   display: flex;
   justify-content: start;
   align-items: center;
