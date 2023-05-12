@@ -1,11 +1,11 @@
-/*eslint no-use-before-define: 2*/ 
+/*eslint no-use-before-define: 2*/
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Resident from "../resident/resident";
 import { Container, Row, Col, Button } from "reactstrap";
 import Header from "../sass-css/Header";
-import './CarerProfile.css'
+import "./CarerProfile.css";
 
 const CarerProfile = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -17,7 +17,6 @@ const CarerProfile = () => {
     profilePic: "",
     staffID: user.staffID,
   });
-  const [rerender, setRerender] = useState(false);
   const [tfa, setTfa] = useState("");
 
   const onChange = (e) => {
@@ -40,13 +39,15 @@ const CarerProfile = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    console.log(img);
     if (!img) {
+      console.log("the img exists otherwise this would run");
       if (carer.password !== "" && !validatePassword(carer.password)) {
         alert(
           "Password needs to be at least 8 characters long, contain 1 number & special character."
         );
       } else {
-        console.log("got past the checks m8");
+        console.log("got past the checks m8 1");
         setCarer({
           password: "",
           profilePic: user.profilePic,
@@ -74,11 +75,8 @@ const CarerProfile = () => {
       axios
         .post("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", data)
         .then((imgData) => {
-          setCarer({
-            password: password,
-            profilePic: imgData.data.url.toString(),
-            staffID: user.staffID,
-          });
+          carer.profilePic = imgData.data.url.toString();
+          carer.password = password;
         })
         .then(() => {
           if (!validatePassword(carer.password)) {
@@ -86,12 +84,10 @@ const CarerProfile = () => {
               "Password needs to be at least 8 characters long, contain 1 number & special character."
             );
           } else {
-            console.log("got past the checks m8");
+            console.log("got past the checks m8 2");
             axios
               .post("http://localhost:8082/carers/update", carer)
               .then((res) => {
-                console.log(res);
-                // CHECK RESPONSE VALUE FOR UPDATED DATA ROUTE??? res.data.profilePic?
                 setCarer({
                   password: "",
                   profilePic: "",
@@ -109,7 +105,6 @@ const CarerProfile = () => {
                   "user",
                   JSON.stringify(updatedUser)
                 );
-                // setRerender(!false)
               })
               .catch((err) => {
                 console.log(err);
@@ -121,17 +116,13 @@ const CarerProfile = () => {
       data.append("file", img);
       data.append("upload_preset", "carelink");
       data.append("cloud_name", "dhocnl7tm");
-      axios
+      await axios
         .post("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", data)
         .then((imgData) => {
-          setCarer({
-            password: password,
-            profilePic: imgData.data.url.toString(),
-            staffID: user.staffID,
-          });
+          carer.profilePic = imgData.data.url.toString();
         })
         .then(() => {
-          console.log("got past the checks m8");
+          console.log("got past the checks m8 3");
           axios
             .post("http://localhost:8082/carers/update", carer)
             .then((res) => {
@@ -161,33 +152,33 @@ const CarerProfile = () => {
   };
 
   return (
-    <div class="container rounded bg-white mt-5 mb-5">
-      <div class="row">
-        <div class="col-md-3 border-right">
-          <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+    <div className="container rounded bg-white mt-5 mb-5">
+      <div className="row">
+        <div className="col-md-3 border-right">
+          <div className="d-flex flex-column align-items-center text-center p-3 py-5">
             <img
-              class="rounded"
+              className="rounded"
               width="150px"
               src={user.profilePic}
               alt="img"
             />
             <p />
-            <h4 class="font-weight-bold">
+            <h4 className="font-weight-bold">
               {user.firstName} {user.lastName}
             </h4>
-            <h6 class="text-black-50">{user.email}</h6>
+            <h6 className="text-black-50">{user.email}</h6>
             <span> </span>
           </div>
         </div>
-        <div class="col-md-5 border-right">
-          <div class="p-3 py-5">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="text-right">Profile Settings</h4>
+        <div className="col-md-5 border-right">
+          <div className="p-3 py-5">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h4 className="text-right">Profile Settings</h4>
             </div>
-            <form>
-              <div class="row mt-3">
-                <div class="col-md-12">
-                  <label class="labels">Password</label>
+            <form onSubmit={onSubmit}>
+              <div className="row mt-3">
+                <div className="col-md-12">
+                  <label className="labels">Password</label>
                   <input
                     type="password"
                     placeholder="Password"
@@ -198,8 +189,8 @@ const CarerProfile = () => {
                   />
                 </div>
                 <p />
-                <div class="col-md-12">
-                  <label class="labels">Profile Picture</label>
+                <div className="col-md-12">
+                  <label className="labels">Profile Picture</label>
                   <input
                     type="file"
                     accept="image/png, image/jpeg"
@@ -209,34 +200,31 @@ const CarerProfile = () => {
                   />
                 </div>
                 <p />
-                <div class="col-md-12">
-                  <label class="labels">Placeholder</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder=""
-                    value=""
-                  />
+                <div className="col-md-12">
+                  <label className="labels">Placeholder</label>
+                  <input type="text" className="form-control" placeholder="" />
                 </div>
                 <p />
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                  <h5 class="text-left">2FA</h5>
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h5 className="text-left">2FA</h5>
                 </div>
-                <div class="col-md-12">
-                  <label class="labels">Mobile Number</label>
-                  <h6 style={{color: "#AAAAAA"}}class="text-left">Please enter your mobile number starting 07</h6>
+                <div className="col-md-12">
+                  <label className="labels">Mobile Number</label>
+                  <h6 style={{ color: "#AAAAAA" }} className="text-left">
+                    Please enter your mobile number starting 07 (placeholder)
+                  </h6>
                   <input
                     type="number"
-                    inputmode="numeric"
+                    inputMode="numeric"
                     pattern="[0-9]*"
-                    class="form-control"
+                    className="form-control"
                     placeholder=""
                     value={tfa}
                     onChange={onChangeTfa}
                   />
                 </div>
               </div>
-              <div class="mt-5 text-center">
+              <div className="mt-5 text-center">
                 <input
                   type="submit"
                   className="btn btn-primary profile-button"
@@ -245,22 +233,24 @@ const CarerProfile = () => {
             </form>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="p-3 py-5">
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h4 class="text-right">Your Employer</h4>
+        <div className="col-md-4">
+          <div className="p-3 py-5">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h4 className="text-right">Your Employer</h4>
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h5 class="text-right">Sevenoaks Residential Home</h5>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="text-right">Sevenoaks Residential Home</h5>
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h6 class="text-left">118 Carehome Road, Sevenoaks, SO1 3LF</h6>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h6 className="text-left">
+                118 Carehome Road, Sevenoaks, SO1 3LF
+              </h6>
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h6 class="text-left">Phone: 01834 494 2344</h6>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h6 className="text-left">Phone: 01834 494 2344</h6>
             </div>
-            <div class="d-flex justify-content-between align-items-center mb-3">
-              <h6 class="text-left">Email: socarehome@email.com</h6>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h6 className="text-left">Email: socarehome@email.com</h6>
             </div>
             <br />
             <br />
