@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate} from 'react-router-dom'
 import axios from 'axios';
-import Resident from '../resident/resident';
-import { 
-  Container, Row, Col, Button, Form, Input
-} from 'reactstrap';
-import Header from '../sass-css/Header';
+// import Resident from '../resident/resident';
+// import { 
+//   Container, Row, Col, Button, Form, Input
+// } from 'reactstrap';
+// import Header from '../sass-css/Header';
 
 
 
@@ -157,16 +157,6 @@ const CarerProfile = () => {
     }
   };
 
-        const searchResident = async (e) => {
-          const searchValue = e.target.value;
-          axios
-            .get(`/api/posts?search=${searchValue}`)
-            .then(data => {
-              console.log(data.data)
-              setResidents(data.data); 
-            })
-          // The subset of posts is added to the state that will trigger a re-render of the UI
-        };
 
   return (
     <>
