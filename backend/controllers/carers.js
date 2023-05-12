@@ -13,7 +13,6 @@ const CarersController = {
   Create: async (req, res) => {
     let checkEmail = null;
     let checkID = null;
-    console.log("PROFILE PIC IN BACKEND: ", req.body.profilePic)
     await Carer.findOne({ email: req.body.email }).then(
       (foundUser) => (checkEmail = foundUser)
     );
@@ -21,7 +20,7 @@ const CarersController = {
     await Carer.findOne({ staffID: req.body.staffID }).then(
       (foundUser) => (checkID = foundUser)
     );
-  
+
     if (
       !req.body.firstName ||
       !req.body.lastName ||
@@ -32,7 +31,9 @@ const CarersController = {
     } else if (checkEmail) {
       res.status(401).json({ message: "Email is already in use." });
     } else if (checkID) {
-      res.status(401).json({ message: "Error generating Staff ID, please try again." });
+      res
+        .status(401)
+        .json({ message: "Error generating Staff ID, please try again." });
     } else {
       bcrypt.hash(req.body.password, 11).then((hashPassword) => {
         const newCarer = {
@@ -41,7 +42,6 @@ const CarersController = {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
           staffID: req.body.staffID,
-          profilePic: req.body.profilePic
         };
         const carer = new Carer(newCarer);
         console.log(carer);
@@ -49,6 +49,72 @@ const CarersController = {
           .save()
           .then((carer) =>
             res.status(201).json({ message: "Carer successfully created!" })
+          )
+          .catch((err) =>
+            res.status(400).json({ message: "Error creating carer." })
+          );
+      });
+    }
+  },
+  Update: async (req, res) => {
+    const user = await Carer.findOne({ staffID: req.body.staffID });
+    console.log(req.body)
+    if (!req.body.profilePic && !req.body.password) {
+      res.status(401).json({ message: "Please update at least one field." });
+    } else if (!req.body.password) {
+      console.log("USER ON LINE 66", user)
+      user.profilePic = req.body.profilePic;
+      user
+        .save()
+        .then((user) =>
+          res.status(201).json({
+            message: "Carer successfully updated!",
+            staffID: user.staffID,
+            email: user.email,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            profilePic: user.profilePic,
+          })
+        )
+        .catch((err) =>
+          res.status(400).json({ message: "Error creating carer." })
+        );
+    } else if (!req.body.profilePic) {
+      console.log("USER ON LINE 84", user)
+      bcrypt.hash(req.body.password, 11).then((hashPassword) => {
+        user.password = hashPassword;
+        user
+          .save()
+          .then((user) =>
+            res.status(201).json({
+              message: "Carer successfully updated!",
+              staffID: user.staffID,
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              profilePic: user.profilePic,
+            })
+          )
+          .catch((err) =>
+            res.status(400).json({ message: "Error creating carer." })
+          );
+      });
+    } else {
+      console.log("USER ON LINE 105", user)
+      bcrypt.hash(req.body.password, 11).then((hashPassword) => {
+        user.password = hashPassword;
+        user.profilePic = req.body.profilePic;
+        user
+          .save()
+          .then((user) =>
+            res.status(201).json({
+              message: "Carer successfully updated!",
+              staffID: user.staffID,
+              email: user.email,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              profilePic: user.profilePic,
+            })
           )
           .catch((err) =>
             res.status(400).json({ message: "Error creating carer." })

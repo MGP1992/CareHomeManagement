@@ -21,11 +21,11 @@ const SessionsController = {
           .then((match) => {
             if (match) {
               const token = TokenGenerator.jsonwebtoken(user.id);
-              const { staffID, email, firstName, lastName } = user;
+              const { staffID, email, firstName, lastName, profilePic } = user;
               res.status(201).json({
                 token: token,
                 message: "Sign in successful!",
-                user: { staffID, email, firstName, lastName },
+                user: { staffID, email, firstName, lastName, profilePic },
               });
             } else {
               res
@@ -51,11 +51,11 @@ const SessionsController = {
           .then((match) => {
             if (match) {
               const token = TokenGenerator.jsonwebtoken(user.id);
-              const { businessID, email, firstName, lastName } = user;
+              const { businessID, email, firstName, lastName, profilePic } = user;
               res.status(201).json({
                 token: token,
                 message: "Sign in successful!",
-                user: { businessID, email, firstName, lastName },
+                user: { businessID, email, firstName, lastName, profilePic },
               });
             } else {
               res
