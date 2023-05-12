@@ -14,14 +14,14 @@ const SideBar = () => {
     <>
       <IconContext.Provider value={{ color: "undefined" }}>
         <div className="sidebar">
-          <Link to="#" className="menu-bars">
+          <Link to="#" className="menu-bars open-bars">
             <FaIcons.FaBars onClick={showSideBar} />
           </Link>
         </div>
         <nav className={sideBar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSideBar}>
             <li className="navbar-toggle">
-              <Link to="#" className="menu-bars">
+              <Link to="#" className="menu-bars close-bars">
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
