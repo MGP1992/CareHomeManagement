@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from 'react'
-import { useNavigate} from 'react-router-dom'
-import axios from 'axios';
-// import Resident from '../resident/resident';
-// import { 
-//   Container, Row, Col, Button, Form, Input
-// } from 'reactstrap';
-// import Header from '../sass-css/Header';
 
+/*eslint no-use-before-define: 2*/
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Resident from "../resident/resident";
+import { Container, Row, Col, Button } from "reactstrap";
+import Header from "../sass-css/Header";
+import "./CarerProfile.css";
 
 
 const CarerProfile = () => {
@@ -19,10 +19,14 @@ const CarerProfile = () => {
     profilePic: "",
     staffID: user.staffID,
   });
-  const [rerender, setRerender] = useState(false);
+  const [tfa, setTfa] = useState("");
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
+  };
+
+  const onChangeTfa = (e) => {
+    setTfa(e.target.value);
   };
 
   const validatePassword = (input) => {
@@ -37,13 +41,15 @@ const CarerProfile = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
+    console.log(img);
     if (!img) {
+      console.log("the img exists otherwise this would run");
       if (carer.password !== "" && !validatePassword(carer.password)) {
         alert(
           "Password needs to be at least 8 characters long, contain 1 number & special character."
         );
       } else {
-        console.log("got past the checks m8");
+        console.log("got past the checks m8 1");
         setCarer({
           password: "",
           profilePic: user.profilePic,
@@ -71,11 +77,8 @@ const CarerProfile = () => {
       axios
         .post("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", data)
         .then((imgData) => {
-          setCarer({
-            password: password,
-            profilePic: imgData.data.url.toString(),
-            staffID: user.staffID,
-          });
+          carer.profilePic = imgData.data.url.toString();
+          carer.password = password;
         })
         .then(() => {
           if (!validatePassword(carer.password)) {
@@ -83,12 +86,10 @@ const CarerProfile = () => {
               "Password needs to be at least 8 characters long, contain 1 number & special character."
             );
           } else {
-            console.log("got past the checks m8");
+            console.log("got past the checks m8 2");
             axios
               .post("http://localhost:8082/carers/update", carer)
               .then((res) => {
-                console.log(res);
-                // CHECK RESPONSE VALUE FOR UPDATED DATA ROUTE??? res.data.profilePic?
                 setCarer({
                   password: "",
                   profilePic: "",
@@ -106,7 +107,6 @@ const CarerProfile = () => {
                   "user",
                   JSON.stringify(updatedUser)
                 );
-                // setRerender(!false)
               })
               .catch((err) => {
                 console.log(err);
@@ -118,17 +118,13 @@ const CarerProfile = () => {
       data.append("file", img);
       data.append("upload_preset", "carelink");
       data.append("cloud_name", "dhocnl7tm");
-      axios
+      await axios
         .post("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", data)
         .then((imgData) => {
-          setCarer({
-            password: password,
-            profilePic: imgData.data.url.toString(),
-            staffID: user.staffID,
-          });
+          carer.profilePic = imgData.data.url.toString();
         })
         .then(() => {
-          console.log("got past the checks m8");
+          console.log("got past the checks m8 3");
           axios
             .post("http://localhost:8082/carers/update", carer)
             .then((res) => {
@@ -159,42 +155,115 @@ const CarerProfile = () => {
 
 
   return (
-    <>
-      <h1>Carer profile</h1>
-      <h1>Staff ID -- {user.staffID}</h1>
-      <img
-        src={user.profilePic}
-        style={{ maxWidth: "264px" }}
-        alt="Not rendering profile pic"
-      ></img>
-      <h1>Staff Name -- {`${user.firstName} ${user.lastName}`}</h1>
-      <form noValidate onSubmit={onSubmit}>
-        <br />
-        <div className="addcarer-form-entry">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            className="addcarer-input"
-            value={carer.password}
-            onChange={onChange}
-          />
+    <div className="container rounded bg-white mt-5 mb-5">
+      <div className="row">
+        <div className="col-md-3 border-right">
+          <div className="d-flex flex-column align-items-center text-center p-3 py-5">
+            <img
+              className="rounded"
+              width="150px"
+              src={user.profilePic}
+              alt="img"
+            />
+            <p />
+            <h4 className="font-weight-bold">
+              {user.firstName} {user.lastName}
+            </h4>
+            <h6 className="text-black-50">{user.email}</h6>
+            <span> </span>
+          </div>
         </div>
-        <br />
-        <input
-          type="file"
-          accept="image/png, image/jpeg"
-          id="chooseImg"
-          onChange={(e) => setImg(e.target.files[0])}
-        ></input>
-        <br />
-        <input type="submit" className="addcarer-submit-btn" />
-      </form>
-      </>
-      );
-  }
-  
-           
+        <div className="col-md-5 border-right">
+          <div className="p-3 py-5">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h4 className="text-right">Profile Settings</h4>
+            </div>
+            <form onSubmit={onSubmit}>
+              <div className="row mt-3">
+                <div className="col-md-12">
+                  <label className="labels">Password</label>
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    name="password"
+                    className="form-control"
+                    value={carer.password}
+                    onChange={onChange}
+                  />
+                </div>
+                <p />
+                <div className="col-md-12">
+                  <label className="labels">Profile Picture</label>
+                  <input
+                    type="file"
+                    accept="image/png, image/jpeg"
+                    id="chooseImg"
+                    className="form-control"
+                    onChange={(e) => setImg(e.target.files[0])}
+                  />
+                </div>
+                <p />
+                <div className="col-md-12">
+                  <label className="labels">Placeholder</label>
+                  <input type="text" className="form-control" placeholder="" />
+                </div>
+                <p />
+                <div className="d-flex justify-content-between align-items-center mb-3">
+                  <h5 className="text-left">2FA</h5>
+                </div>
+                <div className="col-md-12">
+                  <label className="labels">Mobile Number</label>
+                  <h6 style={{ color: "#AAAAAA" }} className="text-left">
+                    Please enter your mobile number starting 07 (placeholder)
+                  </h6>
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    pattern="[0-9]*"
+                    className="form-control"
+                    placeholder=""
+                    value={tfa}
+                    onChange={onChangeTfa}
+                  />
+                </div>
+              </div>
+              <div className="mt-5 text-center">
+                <input
+                  type="submit"
+                  className="btn btn-primary profile-button"
+                />
+              </div>
+            </form>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="p-3 py-5">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h4 className="text-right">Your Employer</h4>
+            </div>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h5 className="text-right">Sevenoaks Residential Home</h5>
+            </div>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h6 className="text-left">
+                118 Carehome Road, Sevenoaks, SO1 3LF
+              </h6>
+            </div>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h6 className="text-left">Phone: 01834 494 2344</h6>
+            </div>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h6 className="text-left">Email: socarehome@email.com</h6>
+            </div>
+            <br />
+            <br />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // useEffect(() => {
 //           axios
 //           .get(`http://localhost:8082/residents/`)
@@ -213,26 +282,24 @@ const CarerProfile = () => {
 //     <main className="my-5 py-5">
 //     <div  className='d-flex justify-content-center'>
 //     <Button type='submit' onClick={newResident} color='warning'>Add Resident</Button>
-//     </div> 
+//     </div>
 //     <Container className="px-0 md-5">
 //         <Row
 //           className="pt-2 pt-md-5 w-100 px-4 px-xl-0"
 //         >
 //               {residents.map(
 //                 (resident) =>
-//                 <Col 
+//                 <Col
 //                 xs={{ order: 3 }}
 //                 md={{ size: 6, order: 1 }}
 //                 tag="aside"
-//                 className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0"> 
-//                 <Resident resident={resident} key={resident._id}/> 
+//                 className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0">
+//                 <Resident resident={resident} key={resident._id}/>
 //                 </Col>
 //               )}
 //         </Row>
 //       </Container>
 //       </main>
 //    </>
-
-
 
 export default CarerProfile;
