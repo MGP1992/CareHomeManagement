@@ -23,7 +23,6 @@ const AddCarer = (props) => {
       Math.floor(Math.random() * 89) + 10
     }`;
     carer.staffID = staffID;
-    setCarer({ ...carer });
   };
 
   const validatePassword = (input) => {
