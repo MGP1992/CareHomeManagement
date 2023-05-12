@@ -27,7 +27,7 @@ const Header = () => {
   
   return (
   <header>
-    <Navbar fixed="top" color="light" light expand="xs" className="border-bottom border-gray bg-white" style={{ height: 80 }}>
+    <Navbar fixed="top" color="light" light expand="xs" className="border-bottom border-gray bg-white" style={{ height: 80, padding: 1}}>
       <Container>
         <Row noGutters className="position-relative w-100 align-items-center">
 

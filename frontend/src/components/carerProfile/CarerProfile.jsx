@@ -3,9 +3,10 @@ import { useNavigate} from 'react-router-dom'
 import axios from 'axios';
 import Resident from '../resident/resident';
 import { 
-  Container, Row, Col, Button,
+  Container, Row, Col, Button, Form, Input
 } from 'reactstrap';
 import Header from '../sass-css/Header';
+
 
 
 const CarerProfile = () => {
@@ -25,13 +26,32 @@ const CarerProfile = () => {
           navigate('/residents/add')
         }
 
+        const searchResident = async (e) => {
+          const searchValue = e.target.value;
+          axios
+            .get(`/api/carers/profile?search=${searchValue}`)
+            .then(data => {
+              console.log(data.data)
+              setResidents(data.data); 
+            })
+          // The subset of posts is added to the state that will trigger a re-render of the UI
+        };
+
   return (
     <>
-    <Header/>
     <main className="my-5 py-5">
     <div  className='d-flex justify-content-center'>
     <Button type='submit' onClick={newResident} color='warning'>Add Resident</Button>
     </div> 
+    <div className='d-flex justify-content-center'>
+    <Col className="d-none d-lg-flex justify-content-center">
+            <Form inline>
+              <Input type="search" className="mr-3" placeholder="Search React Courses" />
+              <Button type="submit" color="info" outline onChange={searchResident}>Search</Button>
+            </Form>
+    </Col>
+
+    </div>
     <Container className="px-0 md-5">
         <Row
           className="pt-2 pt-md-5 w-100 px-4 px-xl-0"
