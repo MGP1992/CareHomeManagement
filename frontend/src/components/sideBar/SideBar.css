@@ -6,10 +6,11 @@
   background: linear-gradient(to right, #0062e6, #2f8ac7, #0062e6);
   border-bottom: 2px solid rgb(187, 187, 187);
   height: 60px;
+  width: 100%;
   display: flex;
   justify-content: start;
   align-items: center;
-  z-index: 1000000;
+  z-index: 100000011;
 }
 
 .menu-bars {
@@ -72,7 +73,8 @@
 
 .nav-text a:hover {
   border: 2px solid rgb(187, 187, 187);
-  background: linear-gradient(to right, #004aac, #125dbe, #004aac);
+  background: rgb(187, 187, 187);
+  color: #0e1e34;
 }
 
 .logout-text a {

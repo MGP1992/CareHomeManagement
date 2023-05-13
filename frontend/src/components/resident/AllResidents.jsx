@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Resident from "../resident/resident";
 import { Container, Row, Col, Button, Form, Input } from "reactstrap";
+import './AllResidents.css'
 const AllResidents = () => {
   useEffect(() => {
     axios.get(`http://localhost:8082/residents/`).then((res) => {
@@ -45,22 +46,24 @@ const AllResidents = () => {
             <p />
             <div>
               <Col className="d-none d-lg-flex justify-content-center">
-                <Form inline>
+                <Form>
                   <Input
                     type="search"
-                    className="mr-3"
-                    placeholder="Search Residents"
+                    className="form-input form-control-lg"
+                    placeholder="Search by first name..."
                     onChange={searchResident}
                   />
                 </Form>
               </Col>
             </div>
+            <p />
+            <div className="residents-box border-1 rounded-5 my-1">
             <Container className="px-0 md-5">
-              <Row className="pt-2 pt-md-5 w-100 px-4 px-xl-0">
+            <Row className="pt-2 pt-md-5 px-4 px-xl-0 justify-content-center">
                 {residents.map((resident) => (
                   <Col
                     xs={{ order: 3 }}
-                    md={{ size: 6, order: 1 }}
+                    md={{ size: 4, order: 1 }}
                     tag="aside"
                     className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0"
                   >
@@ -69,9 +72,11 @@ const AllResidents = () => {
                 ))}
               </Row>
             </Container>
+            </div>
           </main>
         </div>
       </div>
+ 
     </>
   );
 };
