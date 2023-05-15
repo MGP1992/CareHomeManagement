@@ -24,6 +24,8 @@ const AppLayout = () => (
   </>
 );
 
+
+
 const App = () => {
 
   return (
@@ -34,13 +36,14 @@ const App = () => {
           <Route exact path="/signup" element={<AddCarer />} />
           <Route exact path="/login" element={<Login />} />
           <Route element={<AppLayout />}>
-            <Route exact path="/carers/profile" element={<CarerProfile />} />
+            <Route exact path="/carers/profile" element={<CarerProfile />} /> 
+             {/* //done token for residents profile*/}
             <Route
               path="/residents/profile/:residentID"
               element={<ResidentProfile />}
             />
             <Route exact path="/residents/add" element={<AddResident />} />
-            <Route exact path="/residents/add-note" element={<AddNotes />} />
+             {/* //done token for residents*/}
             <Route exact path="/residents" element={<AllResidents />} />
           </Route>
         </Routes>
@@ -48,5 +51,7 @@ const App = () => {
     </Router>
   );
 };
+
+
 
 export default App;
