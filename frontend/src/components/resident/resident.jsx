@@ -79,7 +79,7 @@ const Resident = ({ resident }) => {
             >
               <div className="activity-notes">
                 <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Activities:</h5>
-                <h6 style={{ "fontize": "14px" }}>
+                <h6 style={{ "fontSize": "14px" }}>
                   {resident.notes.activities.length > 0
                     ? resident.notes.activities[
                         resident.notes.activities.length - 1
