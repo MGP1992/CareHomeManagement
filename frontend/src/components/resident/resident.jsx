@@ -2,13 +2,9 @@ import React, { useState } from "react";
 import AddNotes from "../addNotes/AddNotes";
 import {
   Button,
-  Card,
-  CardImg,
-  CardBody,
   CardTitle,
   CardSubtitle,
   CardText,
-  CardGroup,
 } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
@@ -17,37 +13,7 @@ const Resident = ({ resident }) => {
   const goToProfile = () => {
     navigate(`/residents/profile/${resident.residentID}`);
   };
-  const [checkArr, setCheckArr] = useState(false);
 
-  const latestActivity = () => {
-    if (resident.notes.activities.length > 0) {
-      const dateTime = resident.notes.activities[0].time;
-      return `${resident.notes.activities[0].time} ${resident.notes.activities[0].note}`;
-    } else {
-      return "No notes added.";
-    }
-  };
-  const latestMedication = () => {
-    if (resident.notes.medication.length > 0) {
-      return resident.notes.medication[0].note;
-    } else {
-      return "No notes added.";
-    }
-  };
-  const latestWellbeing = () => {
-    if (resident.notes.wellbeing.length > 0) {
-      return resident.notes.wellbeing[0].note;
-    } else {
-      return "No notes added.";
-    }
-  };
-  const latestOthers = () => {
-    if (resident.notes.other.length > 0) {
-      return resident.notes.other[0].note;
-    } else {
-      return "No notes added.";
-    }
-  };
 
   return (
     <div className="container">
@@ -71,14 +37,12 @@ const Resident = ({ resident }) => {
               <AddNotes residentID={resident.residentID} />
               <p />
             </CardTitle>
-            <h5 className="text-left">Most Recent Notes</h5>
-            <br />
             <CardText
               className="text-secondary mb-4"
               style={{ fontSize: "16px" }}
-            >
-              <div className="activity-notes">
-                <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Activities:</h5>
+            >                
+            <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}> Latest Activity</h5>
+              <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
                   {resident.notes.activities.length > 0
                     ? resident.notes.activities[
@@ -102,8 +66,8 @@ const Resident = ({ resident }) => {
                 </h6>
               </div>
               <br />
-              <div className="medication-notes">
-                <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Medication:</h5>
+              <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Medication</h5>
+              <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
                   {resident.notes.medication.length > 0
                     ? resident.notes.medication[resident.notes.medication.length  - 1].by
@@ -121,8 +85,8 @@ const Resident = ({ resident }) => {
                 </h6>
               </div>
               <br />
-              <div className="wellbeing-notes">
-                <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Well-being:</h5>
+              <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Wellbeing</h5>
+              <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
                   {resident.notes.wellbeing.length > 0
                     ? resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].by
@@ -140,8 +104,8 @@ const Resident = ({ resident }) => {
                 </h6>
               </div>
               <br />
-              <div className="other-notes">
-                <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Other:</h5>
+              <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Other</h5>
+              <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
                   {resident.notes.other.length > 0
                     ? resident.notes.other[resident.notes.other.length  - 1].by

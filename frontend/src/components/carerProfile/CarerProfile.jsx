@@ -8,7 +8,6 @@ import "./CarerProfile.css";
 
 const CarerProfile = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
-  const [password, setPassword] = useState("");
   const [img, setImg] = useState("");
   const navigate = useNavigate();
   const [carer, setCarer] = useState({
@@ -74,7 +73,6 @@ const CarerProfile = () => {
         .post("https://api.cloudinary.com/v1_1/dhocnl7tm/image/upload", data)
         .then((imgData) => {
           carer.profilePic = imgData.data.url.toString();
-          carer.password = password;
         })
         .then(() => {
           if (!validatePassword(carer.password)) {

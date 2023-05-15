@@ -9,3 +9,9 @@
     padding-right: 40px;
     background-color: rgb(247, 247, 247);
 }
+
+.res-prof-spinner {
+    top: 45% !important;
+    left: 48% !important;
+    position: fixed !important;
+}

@@ -17,9 +17,11 @@ const ResidentsController = {
           .json({ noresident: "No Residents found in the database." })
       );
   },
-  FindByID: (req, res) => {
+  FindByID: async (req, res) => {
     Resident.findOne({ residentID: req.params.id })
-      .then((resident) => res.json(resident))
+      .then((resident) => {
+        res.status(201).json({ resident: resident });
+      })
       .catch((err) =>
         res
           .status(404)
@@ -32,7 +34,7 @@ const ResidentsController = {
     await Resident.findOne({ residentID: req.body.residentID }).then(
       (foundUser) => (checkID = foundUser)
     );
-console.log(req.body)
+    console.log(req.body);
     if (
       !req.body.firstName ||
       !req.body.lastName ||
@@ -61,6 +63,65 @@ console.log(req.body)
           )
           .catch((err) =>
             res.status(400).json({ message: "Error creating resident." })
+          );
+      });
+    }
+  },
+  Update: async (req, res) => {
+    const user = await Resident.findOne({ residentID: req.body.residentID });
+    if (!req.body.profilePic && !req.body.password) {
+      res.status(401).json({ message: "Please update at least one field." });
+    } else if (!req.body.password) {     
+      user.profilePic = req.body.profilePic;
+      user
+        .save()
+        .then((user) =>
+          res.status(201).json({
+            message: "Carer successfully updated!",
+            residentID: user.residentID,
+            firstName: user.firstName,
+            lastName: user.lastName,
+            profilePic: user.profilePic,
+          })
+        )
+        .catch((err) =>
+          res.status(400).json({ message: "Error updating resident." })
+        );
+    } else if (!req.body.profilePic) {
+      bcrypt.hash(req.body.password, 11).then((hashPassword) => {
+        user.password = hashPassword;
+        user
+          .save()
+          .then((user) =>
+            res.status(201).json({
+              message: "Carer successfully updated!",
+              residentID: user.residentID,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              profilePic: user.profilePic,
+            })
+          )
+          .catch((err) =>
+            res.status(400).json({ message: "Error updating resident." })
+          );
+      });
+    } else {
+      bcrypt.hash(req.body.password, 11).then((hashPassword) => {
+        user.password = hashPassword;
+        user.profilePic = req.body.profilePic;
+        user
+          .save()
+          .then((user) =>
+            res.status(201).json({
+              message: "Carer successfully updated!",
+              residentID: user.residentID,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              profilePic: user.profilePic,
+            })
+          )
+          .catch((err) =>
+            res.status(400).json({ message: "Error updating resident." })
           );
       });
     }
