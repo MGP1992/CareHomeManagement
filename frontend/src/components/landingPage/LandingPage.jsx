@@ -12,10 +12,6 @@ import Reviews from "./Reviews";
 const LandingPage = () => {
   const navigate = useNavigate();
 
-  const link = () => {
-    navigate('/login')
-  }
-
   return (
     <>
   <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -27,10 +23,10 @@ const LandingPage = () => {
     <div className="collapse navbar-collapse" id="navbarResponsive">
       <ul className="navbar-nav ms-auto">
         <li className="nav-item active">
-          <a className="nav-link" href=".">Main</a>
+          <a className="nav-link" href="/">Main</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href={link}>Log In</a>
+          <a className="nav-link" href="/login" >Log In</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href=".">Services</a>
@@ -57,7 +53,9 @@ const LandingPage = () => {
     <h1 className="fw-light">Welcome to CareLink </h1>
     <p className="lead">We provide the best tools to help your staff and residents. Delivering the best solutions for any problem you may counter</p>
   </div>
-    <Reviews/>
+  <div>
+  <Reviews/>
+  </div>
   </section>
   <footer>
   <Footer/>

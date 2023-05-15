@@ -29,7 +29,9 @@ const imgSize = {
   width: "80%",
   height: "620px",
   marginLeft: "10%",
-  marginRight: "10%"
+  marginRight: "10%",
+  borderRadius: 40,
+  marginTop: 100
 }
 
 class Caroussel extends Component {

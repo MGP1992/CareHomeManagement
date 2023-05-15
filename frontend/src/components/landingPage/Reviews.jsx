@@ -20,12 +20,12 @@ return (
 					<div class="carousel-item active">
 						<div class="img-box"><img src="/examples/images/clients/1.jpg" alt=""/></div>
 						<p class="testimonial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu sem tempor, varius quam at, luctus dui. Mauris magna metus, dapibus nec turpis vel, semper malesuada ante. Idac bibendum scelerisque non non purus. Suspendisse varius nibh non aliquet.</p>
-						<p class="overview"><b>Paula Wilson</b>, Media Analyst</p>
+						<p class="overview"><b>Paula Wilson</b>, Care Home Assistant</p>
 					</div>
 					<div class="carousel-item">
 						<div class="img-box"><img src="/examples/images/clients/2.jpg" alt=""/></div>
 						<p class="testimonial">Vestibulum quis quam ut magna consequat faucibus. Pellentesque eget nisi a mi suscipit tincidunt. Utmtc tempus dictum risus. Pellentesque viverra sagittis quam at mattis. Suspendisse potenti. Aliquam sit amet gravida nibh, facilisis gravida odio.</p>
-						<p class="overview"><b>Antonio Moreno</b>, Web Developer</p>
+						<p class="overview"><b>Antonio Moreno</b>, </p>
 					</div>
 					<div class="carousel-item">
 						<div class="img-box"><img src="/examples/images/clients/3.jpg" alt=""/></div>
