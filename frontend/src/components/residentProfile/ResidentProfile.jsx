@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import AddNotes from "../addNotes/AddNotes";
 
@@ -7,16 +7,24 @@ const ResidentProfile = () => {
   const { residentID } = useParams();
   const [residents, setResidents] = useState([]);
   const [notes, setNotes] = useState("");
+  const navigate = useNavigate()
   const [isBusy, setBusy] = useState(true)
+  const token = window.localStorage.getItem("token");
 
+  const tokenCheck = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   useEffect(() => {
-      axios.get(`http://localhost:8082/residents/${residentID}`).then((res) => {
+    if (token) {
+      axios.get(`http://localhost:8082/residents/${residentID}`, tokenCheck).then((res) => {
         console.log(res.data.notes)
         setResidents(res.data);
         setNotes(res.data.notes);
         setBusy(false)
       });
-      
+    } else {
+      navigate("/")
+    } 
   }, []);
 
 console.log(notes)

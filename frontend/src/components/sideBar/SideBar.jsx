@@ -8,7 +8,7 @@ import { IconContext } from "react-icons";
 
 const SideBar = () => {
   const [sideBar, setSideBar] = useState(false);
-  const showSideBar = () => setSideBar(!sideBar)
+  const showSideBar = () => setSideBar(!sideBar);
 
   return (
     <>
@@ -17,7 +17,6 @@ const SideBar = () => {
           <Link to="#" className="menu-bars open-bars">
             <FaIcons.FaBars onClick={showSideBar} />
           </Link>
-        
         </div>
         <nav className={sideBar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSideBar}>
@@ -27,14 +26,31 @@ const SideBar = () => {
               </Link>
             </li>
             {SideBarData.map((item, index) => {
-              return (
-                <li key={index} className={item.cName}>
-                  <Link to={item.path}>
-                    {item.icons}
-                    <span>{item.title}</span>
-                  </Link>
-                </li>
-              );
+              if (item.path === "/login") {
+                return (
+                  <li
+                    key={index}
+                    className={item.cName}
+                    onClick={() => {
+                      window.localStorage.clear();
+                    }}
+                  >
+                    <Link to={item.path}>
+                      {item.icons}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              } else {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={item.path}>
+                      {item.icons}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              }
             })}
           </ul>
         </nav>
@@ -42,5 +58,4 @@ const SideBar = () => {
     </>
   );
 };
-
 export default SideBar;

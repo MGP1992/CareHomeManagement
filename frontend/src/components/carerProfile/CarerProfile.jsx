@@ -17,6 +17,18 @@ const CarerProfile = () => {
     staffID: user.staffID,
   });
   const [tfa, setTfa] = useState("");
+  const token = window.localStorage.getItem("token");
+  const tokenCheck = {
+    headers: {Authorization: `Bearer: ${token}`}
+  }
+
+  useEffect(() => {
+    if (token) {
+      axios.get(`http://localhost:8082/carers/profile`, tokenCheck)
+    } else {
+      navigate("/");
+    }
+  }, []);
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
