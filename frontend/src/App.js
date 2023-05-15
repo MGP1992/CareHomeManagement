@@ -14,8 +14,8 @@ import CarerProfile from "./components/carerProfile/CarerProfile";
 import ResidentProfile from "./components/residentProfile/ResidentProfile";
 import AddNotes from "./components/addNotes/AddNotes";
 import LandingPage from "./components/landingPage/LandingPage";
-import Resident from "./components/resident/resident";
 import SideBar from "./components/sideBar/SideBar";
+import AllResidents from "./components/resident/AllResidents";
 
 const AppLayout = () => (
   <>
@@ -41,7 +41,7 @@ const App = () => {
             />
             <Route exact path="/residents/add" element={<AddResident />} />
             <Route exact path="/residents/add-note" element={<AddNotes />} />
-            <Route exact path="/residents" element={<Resident />} />
+            <Route exact path="/residents" element={<AllResidents />} />
           </Route>
         </Routes>
       </div>
