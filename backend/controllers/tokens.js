@@ -37,47 +37,47 @@ const SessionsController = {
             throw err;
           });
       }
-    } else if (req.body.typeOfUser === "Business") {
-      const user = await Business.findOne({ email: email });
-      if (!email) {
-        res.status(422).json({ message: "Please enter an email." });
-      } else if (!password) {
-        res.status(422).json({ message: "Please enter a password." });
-      } else if (!user) {
-        res.status(401).json({ message: "Account not found." });
-      } else {
-        bcrypt
-          .compare(password, user.password)
-          .then((match) => {
-            if (match) {
-              const token = TokenGenerator.jsonwebtoken(user.id);
-              const { businessID, email, firstName, lastName, profilePic } = user;
-              res.status(201).json({
-                token: token,
-                message: "Sign in successful!",
-                user: { businessID, email, firstName, lastName, profilePic },
-              });
-            } else {
-              res
-                .status(401)
-                .json({ message: "Email or password is invalid." });
-            }
-          })
-          .catch((err) => {
-            throw err;
-          });
-      }
+    // } else if (req.body.typeOfUser === "Business") {
+    //   const user = await Business.findOne({ email: email });
+    //   if (!email) {
+    //     res.status(422).json({ message: "Please enter an email." });
+    //   } else if (!password) {
+    //     res.status(422).json({ message: "Please enter a password." });
+    //   } else if (!user) {
+    //     res.status(401).json({ message: "Account not found." });
+    //   } else {
+    //     bcrypt
+    //       .compare(password, user.password)
+    //       .then((match) => {
+    //         if (match) {
+    //           const token = TokenGenerator.jsonwebtoken(user.id);
+    //           const { businessID, email, firstName, lastName, profilePic } = user;
+    //           res.status(201).json({
+    //             token: token,
+    //             message: "Sign in successful!",
+    //             user: { businessID, email, firstName, lastName, profilePic },
+    //           });
+    //         } else {
+    //           res
+    //             .status(401)
+    //             .json({ message: "Email or password is invalid." });
+    //         }
+    //       })
+    //       .catch((err) => {
+    //         throw err;
+    //       });
+    //   }
     } else if (req.body.typeOfUser === "Family Member") {
-      const user = await Resident.findOne({ residentID: req.body.residentID });
-      if (!req.body.residentID) {
-        res.status(422).json({ message: "Please enter the resident ID." });
-      } else if (!password) {
+      const user = await Resident.findOne({ residentID: req.body.email });
+      if (!req.body.email) {
+        res.status(422).json({ message: "Please enter a resident ID." });
+      } else if (!req.body.password) {
         res.status(422).json({ message: "Please enter a password." });
       } else if (!user) {
         res.status(401).json({ message: "Account not found." });
       } else {
         bcrypt
-          .compare(password, user.password)
+          .compare(req.body.password, user.password)
           .then((match) => {
             if (match) {
               const token = TokenGenerator.jsonwebtoken(user.id);

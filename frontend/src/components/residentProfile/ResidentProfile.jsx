@@ -7,14 +7,19 @@ const ResidentProfile = () => {
   const { residentID } = useParams();
   const [residents, setResidents] = useState([]);
   const [notes, setNotes] = useState("");
+  const [isBusy, setBusy] = useState(true)
 
   useEffect(() => {
-    axios.get(`http://localhost:8082/residents/${residentID}`).then((res) => {
-      setResidents(res.data);
-      setNotes(res.data.notes);
-    });
+      axios.get(`http://localhost:8082/residents/${residentID}`).then((res) => {
+        console.log(res.data.notes)
+        setResidents(res.data);
+        setNotes(res.data.notes);
+        setBusy(false)
+      });
+      
   }, []);
 
+console.log(notes)
   return (
     <div className="container py-5 h-100">
       <div className="row d-flex justify-content-center align-items-center h-100">
@@ -26,26 +31,50 @@ const ResidentProfile = () => {
                   {residents.firstName} {residents.lastName}
                 </p>
                 <p style={{ fontSize: "24px" }}>{residents.residentID}</p>
-                <br />
                 <AddNotes residentID={residents.residentID} />
+                <br />
                 <div className="activity-notes">
                   <h5>Activities:</h5>
-                  {notes.activities}
+                  {notes && notes.activities.map((item) => {
+                    return (
+                    <>
+                    <p>{`${item.time} - ${item.by}: ${item.note}`}</p>
+                    </>
+                    );
+                  })}
                 </div>
                 <br />
                 <div className="medication-notes">
                   <h5>Medications:</h5>
-                  {notes.medication}
+                  {notes && notes.medication.map((item) => {
+                    return (
+                    <>
+                    <p>{`${item.time} - ${item.by}: ${item.note}`}</p>
+                    </>
+                    );
+                  })}
                 </div>
                 <br />
                 <div className="wellbeing-notes">
-                  <h5>Well-being</h5>ye
-                  {notes.wellbeing}
+                  <h5>Well-being:</h5>
+                  {notes && notes.wellbeing.map((item) => {
+                    return (
+                    <>
+                    <p>{`${item.time} - ${item.by}: ${item.note}`}</p>
+                    </>
+                    );
+                  })}
                 </div>
                 <br />
                 <div className="other-notes">
-                  <h5>Other</h5>
-                  {notes.others}
+                  <h5>Other:</h5>
+                  {notes && notes.other.map((item) => {
+                    return (
+                    <>
+                    <p>{`${item.time} - ${item.by}: ${item.note}`}</p>
+                    </>
+                    );
+                  })}
                 </div>
                 <br />
               </div>
