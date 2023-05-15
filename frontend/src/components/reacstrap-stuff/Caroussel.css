@@ -1,0 +1,10 @@
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  filter: contrast(0%) !important;
+}
+
+.carousel-caption h3 {
+  filter: contrast(0%) !important;
+  position: relative;
+  top: 60px;
+}

@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Header from '../reacstrap-stuff/Header'
 import './LandingPage';
 import Caroussel from "../reacstrap-stuff/Caroussel";
 import Footer from "../reacstrap-stuff/Footer";
 import Reviews from "./Reviews";
+import './LandingPage.css'
 
 
 
@@ -14,33 +14,75 @@ const LandingPage = () => {
 
   return (
     <>
-  <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div className="container" style={{height: 65}}>
-    <a className="navbar-brand" href="."><img src='https://res.cloudinary.com/delftjfkr/image/upload/c_crop,h_306,r_0,w_310/v1684141905/CareLink_u8ka9p.png' alt="main-logo" style={{width: 80, height: 75, marginLeft: 60, marginRight: 20, padding: 0}}/>The home for homes</a>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
-    </button>
-    <div className="collapse navbar-collapse" id="navbarResponsive">
-      <ul className="navbar-nav ms-auto">
-        <li className="nav-item active">
-          <a className="nav-link" href="/">Main</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/login" >Log In</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href=".">Services</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href=".">About</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href=".">Contact</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div className="container" style={{ height: 65 }}>
+          <a className="navbar-brand" href=".">
+            <img
+              src="https://res.cloudinary.com/delftjfkr/image/upload/c_crop,h_306,r_0,w_310/v1684141905/CareLink_u8ka9p.png"
+              alt="main-logo"
+              style={{
+                width: 80,
+                height: 75,
+                marginLeft: 60,
+                marginRight: 20,
+                padding: 0,
+              }}
+            />
+            Linking care, residents, and family
+          </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarResponsive"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ms-auto">
+              <li className="nav-item nav-link-cl">
+                <a className="nav-link" href=".">
+                  Main
+                </a>
+              </li>
+              <li className="nav-item nav-link-cl">
+                <a className="nav-link" href=".">
+                  About
+                </a>
+              </li>
+              <li className="nav-item nav-link-cl">
+                <a className="nav-link" href=".">
+                  Features
+                </a>
+              </li>
+              <li className="nav-item nav-link-cl">
+                <a className="nav-link" href=".">
+                  Enquire
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/signup">
+                  <button type="button" class="signup-btn">
+                    Sign Up
+                  </button>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="/login">
+                  <button type="button" class="login-btn">
+                    Log In
+                  </button>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+
 <div>
 <Caroussel/>
 </div>
@@ -48,8 +90,8 @@ const LandingPage = () => {
 
 </section>
 
-<section className="py-5">
-  <div className="container">
+<section className="py-5" >
+  <div className="container" styles={{"backgroundColor" : "#f5f5f5"}}>
     <h1 className="fw-light">Welcome to CareLink </h1>
     <p className="lead">Stay connected with your loved ones </p>
     <p>Care, with CareLink</p>
