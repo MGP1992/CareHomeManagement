@@ -6,32 +6,37 @@ import {
   CarouselIndicators,
   CarouselCaption
 } from 'reactstrap';
+import './Caroussel.css'
 
 const items = [
   {
-    src: 'https://media.product.which.co.uk/prod/images/1500_750/gm-fa7c88aa-2054-4b34-942f-57780f359ae0-carehomealternativesmain.jpeg',
+    src: 'https://i.imgur.com/QuoaRou.jpg',
     altText: 'Slide 1',
-    caption: 'We look after them',
+    caption: '',
   },
   {
-    src: 'https://img.freepik.com/premium-photo/seniors-doing-exercises_107420-36444.jpg?w=1800',
+    src: 'https://i.imgur.com/4VE5s2m.jpg',
     altText: 'Slide 2',
-    caption: 'Health is our priority',
+    caption: '',
   },
   {
-    src: 'https://lottie.org/_next/image/?url=https%3A%2F%2Flottie-backend-prod-images.s3.eu-west-2.amazonaws.com%2FOutstanding_Care_Home_5e2594a36c.jpg&w=3840&q=75',
+    src: 'https://i.imgur.com/HZkv3MK.jpg',
     altText: 'Slide 3',
-    caption: 'Delivering always outstanding'
+    caption: ''
   }
 ];
 
 const imgSize = {
-  width: "80%",
-  height: "620px",
+  height: "500px",
   marginLeft: "10%",
   marginRight: "10%",
   borderRadius: 40,
   marginTop: 100
+}
+
+const textStyle = {
+  color: "black",
+
 }
 
 class Caroussel extends Component {
@@ -81,7 +86,7 @@ class Caroussel extends Component {
           key={item.src}
                   >
           <img src={item.src} alt={item.altText} style={imgSize}/>
-          <CarouselCaption  captionHeader={item.caption} />
+          <CarouselCaption captionHeader={item.caption} style={textStyle}/>
         </CarouselItem>
       );
     });
@@ -92,10 +97,10 @@ class Caroussel extends Component {
         next={this.next}
         previous={this.previous}
       >
-        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+        <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex}  />
         {slides}
-        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+        <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} style={textStyle}/>
+        <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} style={textStyle}/>
       </Carousel>
     );
   }

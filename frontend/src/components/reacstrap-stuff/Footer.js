@@ -7,93 +7,52 @@ const Footer = () => {
         <>
         <body className='footer-body'>
         <div class='container-fluid'>
-        <div class="card">
+        <div class="fcard">
             <div class="heading text-center">
                 <div class="head1">Just Scratching the Surface</div>
                 <p class="bdr"></p>
             </div>
             <div class="card-body">
                 <div class="row m-0 pt-5">
-                    <div class="card col-12 col-md-3">
+                    <div class="fcard col-12 col-md-3">
                         <div class="card-content">
                             <i class="fas fa-hand-holding-usd fa-3x"></i>
                             <div class="card-title">
-                                RECHARGE REPEAT
-                                CUSTOMER
+                                COMPETITIVE PRICING FOR YOUR BUSINESS
                             </div>
-                            <p><small>Save customers' cards for future phone orders</small></p>
-                            <div class="learn-more">
-                                <p>
-                                    <small>
-                                        LEARN MORE
-                                        <label><i class="fas fa-angle-right"></i></label>
-                                    </small>
-                                </p>
-                            </div>
+                            <p><small>Helping employees work more efficiently, saving you money in the long run.</small></p>
                         </div>
                     </div>
-                    <div class="card col-12 col-md-3">
+                    <div class="fcard col-12 col-md-3">
                         <div class="card-content">
                             <i class="far fa-handshake fa-3x"></i>
                             <div class="card-title">
-                                ACCEPT ELECTRONIC
-                                CHECK
+                                CONNECTING YOU WITH YOUR RESIDENTS FAMILY
                             </div>
-                            <p><small>Save customers' cards for future phone orders</small></p>
-                            <div class="learn-more">
-                                <p>
-                                    <small>
-                                        LEARN MORE
-                                        <label><i class="fas fa-angle-right"></i></label>
-                                    </small>
-                                </p>
-                            </div>
+                            <p><small>Allow your resident's loved ones to be more connected with their life.</small></p>
                         </div>
                     </div>
-                    <div class="card col-12 col-md-3">
+                    <div class="fcard col-12 col-md-3">
                         <div class="card-content">
                             <i class="fas fa-mobile-alt fa-3x"></i>
                             <div class="card-title">
-                                STREAMLINE PHONE
-                                PAYMENTS
+                                MOBILE SOLUTIONS FOR EMPLOYEES
                             </div>
-                            <p><small>Save customers' cards for future phone orders</small></p>
-                            <div class="learn-more">
-                                <p>
-                                    <small>
-                                        LEARN MORE
-                                        <label><i class="fas fa-angle-right"></i></label>
-                                    </small>
-                                </p>
-                            </div>
+                            <p><small>Our web-app is compatible on all devices, so you are not reliant on PCs.</small></p>
                         </div>
                     </div>
-                    <div class="card col-12 col-md-3">
+                    <div class="fcard col-12 col-md-3">
                         <div class="card-content">
                             <i class="fas fa-user-secret fa-3x"></i>
                             <div class="card-title">
-                                STAY<br />
-                                SECURE
+                                SECURE DATA STORAGE
                             </div>
-                            <p><small>Save customers' cards for future phone orders</small></p>
-                            <div class="learn-more">
-                                <p>
-                                    <small>
-                                        LEARN MORE
-                                        <label><i class="fas fa-angle-right"></i></label>
-                                    </small>
-                                </p>
-                            </div>
+                            <p><small>All data stored is safe and secure from any cyberattacks.</small></p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="card-footer row m-0">
-                <p>
-                    <label>
-                        <i class="fas fa-phone fa-rotate-90 text-primary"></i>
-                    </label>
-                    800-601-0230</p>
                 <div>
                     <p>
                         <small class="follow-text">FOLLOW US ON SOCIAL MEDIA</small> <label class="footer-right">
@@ -103,10 +62,8 @@ const Footer = () => {
                             <i class="fab fa-twitter-square"></i>
                         </label>
                     </p>
-
                 </div>
             </div>
-            
         </div>
     </div>
     </body>
