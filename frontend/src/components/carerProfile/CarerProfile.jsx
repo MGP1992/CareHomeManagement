@@ -3,9 +3,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Resident from "../resident/resident";
-import { Container, Row, Col, Button } from "reactstrap";
-import Header from "../sass-css/Header";
 import "./CarerProfile.css";
 
 
