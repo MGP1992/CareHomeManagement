@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import Header from '../reacstrap-stuff/Header'
 import './LandingPage';
 import Caroussel from "../reacstrap-stuff/Caroussel";
+import Footer from "../reacstrap-stuff/Footer";
+import Reviews from "./Reviews";
+
 
 
 
@@ -27,10 +30,13 @@ const LandingPage = () => {
           <a className="nav-link" href=".">Main</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href=".">About</a>
+          <a className="nav-link" href={link}>Log In</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href=".">Services</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href=".">About</a>
         </li>
         <li className="nav-item">
           <a className="nav-link" href=".">Contact</a>
@@ -39,18 +45,23 @@ const LandingPage = () => {
     </div>
   </div>
 </nav>
-<body>
 <div>
 <Caroussel/>
 </div>
+<section>
+
+</section>
 
 <section className="py-5">
   <div className="container">
     <h1 className="fw-light">Welcome to CareLink </h1>
     <p className="lead">We provide the best tools to help your staff and residents. Delivering the best solutions for any problem you may counter</p>
   </div>
+    <Reviews/>
   </section>
-  </body>
+  <footer>
+  <Footer/>
+  </footer>
     </>
   );
 };
