@@ -51,7 +51,8 @@ const LandingPage = () => {
 <section className="py-5">
   <div className="container">
     <h1 className="fw-light">Welcome to CareLink </h1>
-    <p className="lead">We provide the best tools to help your staff and residents. Delivering the best solutions for any problem you may counter</p>
+    <p className="lead">Stay connected with your loved ones </p>
+    <p>Care, with CareLink</p>
   </div>
   <div>
   <Reviews/>

@@ -11,17 +11,17 @@ const items = [
   {
     src: 'https://media.product.which.co.uk/prod/images/1500_750/gm-fa7c88aa-2054-4b34-942f-57780f359ae0-carehomealternativesmain.jpeg',
     altText: 'Slide 1',
-    caption: 'We look after them',
+    caption: 'Empowering families and residents',
   },
   {
     src: 'https://img.freepik.com/premium-photo/seniors-doing-exercises_107420-36444.jpg?w=1800',
     altText: 'Slide 2',
-    caption: 'Health is our priority',
+    caption: 'Carers -- Residents -- Familes',
   },
   {
     src: 'https://lottie.org/_next/image/?url=https%3A%2F%2Flottie-backend-prod-images.s3.eu-west-2.amazonaws.com%2FOutstanding_Care_Home_5e2594a36c.jpg&w=3840&q=75',
     altText: 'Slide 3',
-    caption: 'Delivering always outstanding'
+    caption: 'Feel better connected'
   }
 ];
 
@@ -81,7 +81,7 @@ class Caroussel extends Component {
           key={item.src}
                   >
           <img src={item.src} alt={item.altText} style={imgSize}/>
-          <CarouselCaption captionText={item.caption} captionHeader={item.caption} />
+          <CarouselCaption captionHeader={item.caption} />
         </CarouselItem>
       );
     });
