@@ -17,39 +17,37 @@ const Resident = ({ resident }) => {
   const goToProfile = () => {
     navigate(`/residents/profile/${resident.residentID}`);
   };
-  const [checkArr, setCheckArr] = useState(false)
-  console.log(resident)
-  console.log(resident.notes.activities)
+  const [checkArr, setCheckArr] = useState(false);
 
-const latestActivity = () => {
-    if (resident.notes.activities.length > 1) {
-        return resident.notes.activities[0]
+  const latestActivity = () => {
+    if (resident.notes.activities.length > 0) {
+      const dateTime = resident.notes.activities[0].time;
+      return `${resident.notes.activities[0].time} ${resident.notes.activities[0].note}`;
     } else {
-        return "No notes added."
+      return "No notes added.";
     }
-}
-const latestMedication = () => {
+  };
+  const latestMedication = () => {
     if (resident.notes.medication.length > 0) {
-        return resident.notes.medication[0]
+      return resident.notes.medication[0].note;
     } else {
-        return "No notes added."
+      return "No notes added.";
     }
-}
-const latestWellbeing = () => {
+  };
+  const latestWellbeing = () => {
     if (resident.notes.wellbeing.length > 0) {
-        return resident.notes.wellbeing[0]
+      return resident.notes.wellbeing[0].note;
     } else {
-        return "No notes added."
+      return "No notes added.";
     }
-}
-const latestOthers = () => {
+  };
+  const latestOthers = () => {
     if (resident.notes.other.length > 0) {
-        return resident.notes.other[0]
+      return resident.notes.other[0].note;
     } else {
-        return "No notes added."
+      return "No notes added.";
     }
-}
-
+  };
 
   return (
     <div className="container">
@@ -80,23 +78,85 @@ const latestOthers = () => {
               style={{ fontSize: "16px" }}
             >
               <div className="activity-notes">
-                <h5>Activities:</h5>
-                {latestActivity()}
+                <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Activities:</h5>
+                <h6 style={{ "fontize": "14px" }}>
+                  {resident.notes.activities.length > 0
+                    ? resident.notes.activities[
+                        resident.notes.activities.length - 1
+                      ].by
+                    : ""}
+                </h6>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.activities.length > 0
+                    ? resident.notes.activities[
+                        resident.notes.activities.length - 1
+                      ].time
+                    : ""}
+                </h6>
+                <h6 style={{ color: "#3b3a3a" }}>
+                  {resident.notes.activities.length > 0
+                    ? `'${resident.notes.activities[
+                        resident.notes.activities.length - 1
+                      ].note}'`
+                    : "No notes added."}
+                </h6>
               </div>
               <br />
               <div className="medication-notes">
-                <h5>Medication:</h5>
-                {latestMedication()}
+                <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Medication:</h5>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.medication.length > 0
+                    ? resident.notes.medication[resident.notes.medication.length  - 1].by
+                    : ""}
+                </h6>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.medication.length > 0
+                    ? resident.notes.medication[resident.notes.medication.length  - 1].time
+                    : ""}
+                </h6>
+                <h6 style={{ color: "#3b3a3a" }}>
+                  {resident.notes.medication.length > 0
+                    ? `'${resident.notes.medication[resident.notes.medication.length  - 1].note}'`
+                    : "No notes added."}
+                </h6>
               </div>
               <br />
               <div className="wellbeing-notes">
-                <h5>Well-being:</h5>
-                {latestWellbeing()}
+                <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Well-being:</h5>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.wellbeing.length > 0
+                    ? resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].by
+                    : ""}
+                </h6>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.wellbeing.length > 0
+                    ? resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].time
+                    : ""}
+                </h6>
+                <h6 style={{ color: "#3b3a3a" }}>
+                  {resident.notes.wellbeing.length > 0
+                    ? `'${resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].note}'`
+                    : "No notes added."}
+                </h6>
               </div>
               <br />
               <div className="other-notes">
-                <h5>Other:</h5>
-                {latestOthers()}
+                <h5 style={{ color: "black", fontStyle: "italic", fontSize: "18px" }}>Other:</h5>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.other.length > 0
+                    ? resident.notes.other[resident.notes.other.length  - 1].by
+                    : ""}
+                </h6>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.other.length > 0
+                    ? resident.notes.other[resident.notes.other.length  - 1].time
+                    : ""}
+                </h6>
+                <h6 style={{ color: "#3b3a3a" }}>
+                  {resident.notes.other.length > 0
+                    ? `'${resident.notes.other[resident.notes.other.length  - 1].note}'`
+                    : "No notes added."}
+                </h6>
               </div>
               <br />
             </CardText>
@@ -104,22 +164,6 @@ const latestOthers = () => {
         </div>
       </div>
     </div>
-
-    // <Card>
-    //   <CardBody>
-    //     <CardTitle className="h2 mb-2 pt-2 text-center font-weight-bold text-secondary">
-    //       <p style={{ fontSize: "32px" }}>
-    //         {resident.firstName} {resident.lastName}
-    //       </p>
-    //     </CardTitle>
-
-    //     <br />
-
-    //       View Profile
-    //     </Button>
-
-    //   </CardBody>
-    // </Card>
   );
 };
 

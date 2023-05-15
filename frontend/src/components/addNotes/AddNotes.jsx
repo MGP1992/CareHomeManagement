@@ -4,6 +4,7 @@ import Modal from "../modal/Modal";
 import { Button } from "reactstrap";
 
 const AddNotes = (props) => {
+  const user = JSON.parse(window.localStorage.getItem("user"));
   const residentID = props.residentID;
   const [input, setInput] = useState("");
   const [show, setShow] = useState(false);
@@ -35,7 +36,15 @@ const AddNotes = (props) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const data = { residentID: residentID, notes: input, category: category };
+    const data = {
+      residentID: residentID,
+      notes: input, 
+      category: category,
+      time: new Date().toLocaleString(
+        ("en-GB", { hour: "numeric", minute: "numeric" })
+      ),
+      by: user.firstName + ' ' + user.lastName
+    };
     try {
       const res = await axios.post(
         "http://localhost:8082/residents/add-note",

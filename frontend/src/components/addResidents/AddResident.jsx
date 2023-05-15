@@ -8,9 +8,9 @@ const AddResident = (props) => {
   const [resident, setResident] = useState({
     firstName: "",
     lastName: "",
-    DOB: "",
     residentID: "",
     password: "",
+    DOB: undefined,
     // residency: "",
   });
 
@@ -38,15 +38,15 @@ const AddResident = (props) => {
         setResident({
           firstName: "",
           lastName: "",
-          DOB: "",
           residentID: "",
           password: "",
+          DOB: undefined
           // residency: "",
         });
-        navigate("/");
+        navigate("/residents");
       })
       .catch((err) => {
-        console.log("Error adding a resident.");
+        console.log(err);
       });
   };
 
@@ -92,7 +92,7 @@ const AddResident = (props) => {
                       placeholder="DD/MM/YYY"
                       name="date"
                       className="form-control"
-                      value={resident.dob}
+                      value={resident.DOB}
                       onChange={onChange}
                     />
                     <label htmlFor="floatingInput">Date of Birth</label>

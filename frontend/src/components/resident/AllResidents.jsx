@@ -43,7 +43,7 @@ const AllResidents = () => {
                 Add Resident
               </Button>
             </div>
-            <p />
+            <br />
             <div>
               <Col className="d-none d-lg-flex justify-content-center">
                 <Form>
@@ -56,7 +56,7 @@ const AllResidents = () => {
                 </Form>
               </Col>
             </div>
-            <p />
+            <br />
             <div className="residents-box border-1 rounded-5 my-1">
             <Container className="px-0 md-5">
             <Row className="pt-2 pt-md-5 px-4 px-xl-0 justify-content-center">

@@ -28,15 +28,15 @@ const ResidentsController = {
   },
   Create: async (req, res) => {
     let checkID = null;
-
-    await Carer.findOne({ staffID: req.body.residentID }).then(
+    console.log(req.body);
+    await Resident.findOne({ residentID: req.body.residentID }).then(
       (foundUser) => (checkID = foundUser)
     );
-
+console.log(req.body)
     if (
       !req.body.firstName ||
       !req.body.lastName ||
-      !req.body.DOB ||
+      !req.body.date ||
       !req.body.password
     ) {
       return res.status(401).json({ message: "Please fill all fields." });
@@ -50,7 +50,7 @@ const ResidentsController = {
           password: hashPassword,
           firstName: req.body.firstName,
           lastName: req.body.lastName,
-          DOB: req.body.DOB,
+          DOB: req.body.date,
           residentID: req.body.residentID,
         };
         const resident = new Resident(newResident);
@@ -74,7 +74,11 @@ const ResidentsController = {
   },
   AddNote: async (req, res) => {
     const category = req.body.category;
-    const notes = req.body.notes;
+    const notes = {
+      note: req.body.notes,
+      time: req.body.time,
+      by: req.body.by,
+    };
     const resident = await Resident.findOne({
       residentID: req.body.residentID,
     });
@@ -89,7 +93,7 @@ const ResidentsController = {
     // We look for a query parameter "search"
     const { search } = req.query;
 
-    let residents; 
+    let residents;
     if (search) {
       // If search exists, the user typed in the search bar
       residents = await Resident.aggregate([
@@ -117,24 +121,22 @@ const ResidentsController = {
       ]);
     } else {
       // The search is empty so give an error
-      residents = await Resident.find()
-
-      }
-      return res.status(200).json({
-        resident: residents,
-      });
-
-      // else { // The search is empty so the value of "search" is undefined
-      //   posts = await Post.find();
+      residents = await Resident.find();
     }
+    return res.status(200).json({
+      resident: residents,
+    });
 
-    // if (residents.length === 0) {
-    //   return res.status(404).json({
-    //     statusCode: 404,
-    //     message: "There are no residents with this name",
-    //   });
-    // }
-    
-  }
+    // else { // The search is empty so the value of "search" is undefined
+    //   posts = await Post.find();
+  },
+
+  // if (residents.length === 0) {
+  //   return res.status(404).json({
+  //     statusCode: 404,
+  //     message: "There are no residents with this name",
+  //   });
+  // }
+};
 
 module.exports = ResidentsController;

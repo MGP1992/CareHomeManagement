@@ -10,11 +10,11 @@ const Login = () => {
     password: "",
     typeOfUser: "",
   });
-  
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handlePathChange = () => {
-    navigate("/signup")
-  }
+    navigate("/signup");
+  };
 
   const emailOrID = () => {
     if (loginInfo.typeOfUser === "Family Member") {
@@ -23,7 +23,7 @@ const Login = () => {
       return "Email";
     }
   };
-  console.log(loginInfo.typeOfUser);
+
   const onSubmit = (e) => {
     e.preventDefault();
     axios
@@ -31,12 +31,14 @@ const Login = () => {
       .then((res) => {
         window.localStorage.setItem("user", JSON.stringify(res.data.user));
         window.localStorage.setItem("token", res.data.token);
+        console.log(res);
       })
-      .then((res) => {
-        navigate("/carers/profile");
+      .then(() => {
+        navigate('/carers/profile')
       })
       .catch((err) => {
-        console.log(err);
+        setErrorMsg(err.response.data.message);
+        console.log(err.response.data.message);
       });
   };
 
@@ -152,6 +154,11 @@ const Login = () => {
                     />
                     <label htmlFor="floatingPassword">Password</label>
                   </div>
+                  {errorMsg !== "" ? (
+                    <p style={{ color: "red" }}>{errorMsg}</p>
+                  ) : (
+                    false
+                  )}
                   <div className="d-grid">
                     <button
                       className="btn btn-primary btn-login text-uppercase fw-bold"
@@ -163,7 +170,10 @@ const Login = () => {
                   <hr className="my-4" />
                 </form>
                 <div className="d-grid mb-2">
-                  <button className="btn btn-login text-uppercase a-user" onClick={handlePathChange} >
+                  <button
+                    className="btn btn-login text-uppercase a-user"
+                    onClick={handlePathChange}
+                  >
                     Don't have an account?
                   </button>
                 </div>

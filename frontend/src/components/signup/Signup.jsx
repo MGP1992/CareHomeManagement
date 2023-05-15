@@ -4,7 +4,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import "./Signup.css";
 
 const AddCarer = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [carer, setCarer] = useState({
     email: "",
     password: "",
@@ -12,10 +12,11 @@ const AddCarer = (props) => {
     lastName: "",
     staffID: "",
   });
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handlePathChange = () => {
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
@@ -76,6 +77,7 @@ const AddCarer = (props) => {
           navigate("/login");
         })
         .catch((err) => {
+          setErrorMsg(err.response.data.message);
           console.log(err);
         });
     }
@@ -139,6 +141,11 @@ const AddCarer = (props) => {
                     />
                     <label htmlFor="floatingPassword">Password</label>
                   </div>
+                  {errorMsg !== "" ? (
+                    <p style={{ color: "red" }}>{errorMsg}</p>
+                  ) : (
+                    false
+                  )}
                   <div className="d-grid">
                     <button
                       className="btn btn-primary btn-login text-uppercase fw-bold"
@@ -150,7 +157,10 @@ const AddCarer = (props) => {
                   <hr className="my-4" />
                 </form>
                 <div className="d-grid mb-2">
-                  <button className="btn btn-login text-uppercase a-user" onClick={handlePathChange}>
+                  <button
+                    className="btn btn-login text-uppercase a-user"
+                    onClick={handlePathChange}
+                  >
                     Already a user?
                   </button>
                 </div>
