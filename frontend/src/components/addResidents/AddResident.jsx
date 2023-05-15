@@ -47,7 +47,7 @@ const AddResident = (props) => {
         navigate("/");
       })
       .catch((err) => {
-        console.log("Error adding a resident.");
+        console.log(err);
       });
   };
 

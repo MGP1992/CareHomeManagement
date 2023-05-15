@@ -27,6 +27,7 @@ const ResidentsController = {
       );
   },
   Create: async (req, res) => {
+    console.log(req.body)
 
     let checkID = null;
 
@@ -35,7 +36,7 @@ const ResidentsController = {
     }
     
 
-    await Carer.findOne({ staffID: req.body.residentID }).then(
+    await Resident.findOne({ residentID: req.body.residentID }).then(
       (foundUser) => (checkID = foundUser)
     );
 

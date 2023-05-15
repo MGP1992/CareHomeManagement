@@ -23,7 +23,6 @@ const Login = () => {
       return "Email";
     }
   };
-  console.log(loginInfo.typeOfUser);
   const onSubmit = (e) => {
     e.preventDefault();
     axios

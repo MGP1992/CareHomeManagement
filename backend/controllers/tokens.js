@@ -77,15 +77,15 @@ const SessionsController = {
         res.status(401).json({ message: "Account not found." });
       } else {
         bcrypt
-          .compare(password, user.password)
+          .compare(req.body.password, user.password)
           .then((match) => {
             if (match) {
               const token = TokenGenerator.jsonwebtoken(user.id);
-              const { residentID, email, firstName, lastName, profilePic } = user;
+              const { residentID, email, firstName, lastName, profilePic, admin } = user;
               res.status(201).json({
                 token: token,
                 message: "Sign in successful!",
-                user: { residentID, email, firstName, lastName, profilePic },
+                user: { residentID, email, firstName, lastName, profilePic, admin },
               });
             } else {
               res
