@@ -32,7 +32,8 @@ const Login = () => {
         window.localStorage.setItem("token", res.data.token);
       })
       .then((res) => {
-        navigate("/carers/profile");
+        navigate("/carers/profile")
+        console.log(JSON.parse(window.localStorage.getItem("user")).admin);
       })
       .catch((err) => {
         console.log(err);

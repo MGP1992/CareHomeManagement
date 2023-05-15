@@ -21,11 +21,11 @@ const SessionsController = {
           .then((match) => {
             if (match) {
               const token = TokenGenerator.jsonwebtoken(user.id);
-              const { staffID, email, firstName, lastName, profilePic } = user;
+              const { staffID, email, firstName, lastName, profilePic, admin } = user;
               res.status(201).json({
                 token: token,
                 message: "Sign in successful!",
-                user: { staffID, email, firstName, lastName, profilePic },
+                user: { staffID, email, firstName, lastName, profilePic, admin },
               });
             } else {
               res
@@ -68,8 +68,8 @@ const SessionsController = {
           });
       }
     } else if (req.body.typeOfUser === "Family Member") {
-      const user = await Resident.findOne({ residentID: req.body.residentID });
-      if (!req.body.residentID) {
+      const user = await Resident.findOne({ residentID: req.body.email });
+      if (!req.body.email) {
         res.status(422).json({ message: "Please enter the resident ID." });
       } else if (!password) {
         res.status(422).json({ message: "Please enter a password." });

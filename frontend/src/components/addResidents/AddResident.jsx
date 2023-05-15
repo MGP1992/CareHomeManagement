@@ -10,6 +10,7 @@ const AddResident = (props) => {
     DOB: "",
     residentID: "",
     password: "",
+    admin: JSON.parse(window.localStorage.getItem("user")).admin
     // residency: "",
   });
 
@@ -40,6 +41,7 @@ const AddResident = (props) => {
           DOB: "",
           residentID: "",
           password: "",
+          admin: JSON.parse(window.localStorage.getItem("user")).admin
           // residency: "",
         });
         navigate("/");

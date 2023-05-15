@@ -27,7 +27,13 @@ const ResidentsController = {
       );
   },
   Create: async (req, res) => {
+
     let checkID = null;
+
+    if (req.body.admin !== true) {
+      return res.status(401).json({ message: "You must be an administrator to add residents" });
+    }
+    
 
     await Carer.findOne({ staffID: req.body.residentID }).then(
       (foundUser) => (checkID = foundUser)

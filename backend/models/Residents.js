@@ -48,6 +48,10 @@ const ResidentSchema = new mongoose.Schema({
       },
     ],
   },
+  admin: {
+    type:Boolean,
+    default: false
+}
 });
 
 module.exports = Resident = mongoose.model("resident", ResidentSchema);
