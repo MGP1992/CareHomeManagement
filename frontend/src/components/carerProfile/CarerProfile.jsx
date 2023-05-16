@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CarerProfile.css";
+import { Circles } from "react-loader-spinner";
 
 const CarerProfile = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -14,6 +15,13 @@ const CarerProfile = () => {
     staffID: user.staffID,
   });
   const [tfa, setTfa] = useState("");
+  
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
