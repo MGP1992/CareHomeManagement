@@ -51,9 +51,9 @@ const LandingPage = () => {
        </button>
        <div className="collapse navbar-collapse" id="navbarResponsive">
          <ul className="navbar-nav ms-auto">
-           <li className="nav-item nav-link-cl">
+           <li className="nav-item nav-link-cl" style={{fontWeight: 'bold'}}>
              <a className="nav-link" href=".">
-               Main
+               Home
              </a>
            </li>
            <li className="nav-item nav-link-cl">
