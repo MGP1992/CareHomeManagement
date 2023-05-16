@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./ResidentProfile.css";
 import { Circles } from "react-loader-spinner";
@@ -8,7 +8,7 @@ const ResidentProfile = () => {
   const { residentID } = useParams();
   const [user, setUser] = useState("");
   const [notes, setNotes] = useState(undefined);
-  const [activity, setActivity] = useState("");
+  const [activity, setActivity] = useState("")
   const [resident, setResident] = useState({
     password: "",
     profilePic: "",
@@ -16,12 +16,22 @@ const ResidentProfile = () => {
   });
   const [img, setImg] = useState("");
   const admin = JSON.parse(window.localStorage.getItem("user"));
+  const token = window.localStorage.getItem("token");
+  const navigate = useNavigate()
 
+  const tokenCheck = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
   useEffect(() => {
-    axios.get(`http://localhost:8082/residents/${residentID}`).then((res) => {
+
+    if (token) {
+      axios.get(`http://localhost:8082/residents/${residentID}`, tokenCheck).then((res) => {
       setNotes(res.data.resident.notes);
       setUser(res.data.resident);
-    });
+      });
+    } else {
+      navigate("/")
+    } 
   }, []);
 
   const validatePassword = (input) => {

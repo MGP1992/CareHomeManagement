@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../modal/Modal";
 import { Button } from "reactstrap";
+import {useNavigate} from 'react-router-dom'
 
 const AddNotes = (props) => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -9,6 +10,7 @@ const AddNotes = (props) => {
   const [input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("activities");
+  const token = window.localStorage.getItem("token")
   const [resident, setResident] = useState({
     residentID: "",
     notes: {
@@ -18,6 +20,19 @@ const AddNotes = (props) => {
       others: [],
     },
   });
+  const navigate = useNavigate()
+  const tokenCheck = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  useEffect(() => {
+    if (token) {
+      axios.get(`http://localhost:8082/residents/add-notes`, tokenCheck)
+    } else {
+      navigate("/");
+    }
+  }, []);
+
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +49,7 @@ const AddNotes = (props) => {
     }
   };
 
+  
   const onSubmit = async (e) => {
     e.preventDefault();
     const data = {
@@ -99,7 +115,7 @@ const AddNotes = (props) => {
             className="addnotes-input"
             onChange={(e) => setInput(e.target.value)}
           />
-          <input type="submit" className="addresident-submit-btn" />
+          {<input type="submit" className="addresident-submit-btn" />}
         </form>
       </Modal>
     </>

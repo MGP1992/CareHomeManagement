@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import './AddResident.css'
+import "./AddResident.css";
 
 const AddResident = (props) => {
   const navigate = useNavigate();
@@ -13,6 +13,23 @@ const AddResident = (props) => {
     DOB: undefined,
     // residency: "",
   });
+
+
+
+  const token = window.localStorage.getItem("token");
+
+  const tokenCheck = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  useEffect(() => {
+    if (token) {
+      axios.get(`http://localhost:8082/residents/add`, tokenCheck)
+    } else {
+      navigate("/");
+    }
+  }, []);
+
 
   const generateID = () => {
     const residentID = `${resident.firstName
@@ -40,7 +57,7 @@ const AddResident = (props) => {
           lastName: "",
           residentID: "",
           password: "",
-          DOB: undefined
+          DOB: undefined,
           // residency: "",
         });
         navigate("/residents");
@@ -126,5 +143,6 @@ const AddResident = (props) => {
     </div>
   );
 };
+
 
 export default AddResident;

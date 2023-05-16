@@ -3,6 +3,8 @@ import { CSSTransition } from "react-transition-group";
 import "./Modal.css";
 
 const Modal = (props) => {
+  const token = window.localStorage.getItem("token")
+  
   return (
     <div>
       <CSSTransition

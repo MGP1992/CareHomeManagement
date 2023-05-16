@@ -3,13 +3,27 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Resident from "../resident/resident";
 import { Container, Row, Col, Button, Form, Input } from "reactstrap";
-import './AllResidents.css'
+import "./AllResidents.css";
+
 const AllResidents = () => {
+  const navigate = useNavigate();
+  const [residents, setResidents] = useState([]);
+  const token = window.localStorage.getItem("token");
+
+  const tokenCheck = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
   useEffect(() => {
-    axios.get(`http://localhost:8082/residents/`).then((res) => {
-      setResidents(res.data);
-    });
+    if (token) {
+      axios.get(`http://localhost:8082/residents/`, tokenCheck).then((res) => {
+        setResidents(res.data);
+      });
+    } else {
+      navigate("/");
+    }
   }, []);
+
   const newResident = () => {
     navigate("/residents/add");
   };
@@ -25,8 +39,6 @@ const AllResidents = () => {
     console.log("is anything in the search value", searchValue);
     // The subset of posts is added to the state that will trigger a re-render of the UI
   };
-  const navigate = useNavigate();
-  const [residents, setResidents] = useState([]);
 
   const checker = (e) => {
     e.preventDefault();
@@ -58,25 +70,24 @@ const AllResidents = () => {
             </div>
             <br />
             <div className="residents-box border-1 rounded-5 my-1">
-            <Container className="px-0 md-5">
-            <Row className="pt-2 pt-md-5 px-4 px-xl-0 justify-content-center">
-                {residents.map((resident) => (
-                  <Col
-                    xs={{ order: 3 }}
-                    md={{ size: 4, order: 1 }}
-                    tag="aside"
-                    className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0"
-                  >
-                    <Resident resident={resident} key={resident._id} />
-                  </Col>
-                ))}
-              </Row>
-            </Container>
+              <Container className="px-0 md-5">
+                <Row className="pt-2 pt-md-5 px-4 px-xl-0 justify-content-center">
+                  {residents.map((resident) => (
+                    <Col
+                      xs={{ order: 3 }}
+                      md={{ size: 4, order: 1 }}
+                      tag="aside"
+                      className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0"
+                    >
+                      <Resident resident={resident} key={resident._id} />
+                    </Col>
+                  ))}
+                </Row>
+              </Container>
             </div>
           </main>
         </div>
       </div>
- 
     </>
   );
 };
