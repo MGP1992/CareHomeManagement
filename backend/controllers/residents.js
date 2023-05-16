@@ -29,7 +29,14 @@ const ResidentsController = {
       );
   },
   Create: async (req, res) => {
+    console.log(req.body)
+
     let checkID = null;
+
+    if (req.body.admin !== true) {
+      return res.status(401).json({ message: "You must be an administrator to add residents" });
+    }
+
     await Resident.findOne({ residentID: req.body.residentID }).then(
       (foundUser) => (checkID = foundUser)
     );

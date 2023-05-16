@@ -24,6 +24,10 @@ const CarerSchema = new mongoose.Schema({
     profilePic: {
         type: String,
         default: "https://imgur.com/na6zgUo.png"
+    },
+    admin: {
+        type:Boolean,
+        default: true
     }
 });
 
