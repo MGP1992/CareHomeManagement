@@ -86,7 +86,7 @@ class Caroussel extends Component {
           key={item.src}
                   >
           <img src={item.src} alt={item.altText} style={imgSize}/>
-          <CarouselCaption captionHeader={item.caption} style={textStyle}/>
+          <CarouselCaption captionHeader={item.caption} captionText={""} style={textStyle}/>
         </CarouselItem>
       );
     });

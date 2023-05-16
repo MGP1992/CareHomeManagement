@@ -5,8 +5,8 @@ const Footer = () => {
 
     return (
         <>
-        <body className='footer-body'>
-        <div class='container-fluid'>
+        <main className='footer-body'>
+        <div className='container-fluid'>
         <div className="fcard">
             <div className="heading text-center">
                 <div className="head1">Just Scratching the Surface</div>
@@ -66,7 +66,7 @@ const Footer = () => {
             </div>
         </div>
     </div>
-    </body>
+    </main>
     </>
     )
 }

@@ -2,7 +2,7 @@ import "./Reviews.css";
 
 const Reviews = () => {
   return (
-    <body>
+    <>
       <div className="container-xl" style={{ backgroundColor: "#f5f5f5", borderRadius: "50px"}}>
         <div className="row">
           <div className="col-lg-8 mx-auto">
@@ -123,7 +123,7 @@ const Reviews = () => {
           </div>
         </div>
       </div>
-    </body>
+      </>
   );
 };
 
