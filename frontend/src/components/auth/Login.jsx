@@ -37,7 +37,7 @@ const Login = () => {
         if (user.residentID) {
           navigate(`/residents/profile/${user.residentID}`);
         } else {
-          navigate('/residents')
+          navigate("/residents");
         }
       })
       .catch((err) => {
@@ -53,13 +53,21 @@ const Login = () => {
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div className="card border-0 shadow rounded-3 my-5">
               <div className="card-body p-4 p-sm-5">
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <a href="/">
-                    <img 
-                    className="pic-logo"
-                    src="https://res.cloudinary.com/delftjfkr/image/upload/c_crop,h_306,r_0,w_310/v1684141905/CareLink_u8ka9p.png"
-                    alt="main-logo"
-                    style={{marginLeft: "30%", marginRight: "30%", width: "40%", height: 165 }}
-                    /></a>
+                    <img
+                      className="pic-logo"
+                      src="https://res.cloudinary.com/delftjfkr/image/upload/c_crop,h_306,r_0,w_310/v1684141905/CareLink_u8ka9p.png"
+                      alt="main-logo"
+                      style={{ maxHeight: "110px" }}
+                    />
+                  </a>
+                </div>
                 <h5 className="card-title text-center mb-4 mt-2 fw-light fs-3">
                   Log In
                 </h5>
