@@ -14,8 +14,6 @@ const AddResident = (props) => {
     // residency: "",
   });
 
-
-
   const token = window.localStorage.getItem("token");
 
   const tokenCheck = {
@@ -24,12 +22,11 @@ const AddResident = (props) => {
 
   useEffect(() => {
     if (token) {
-      axios.get(`http://localhost:8082/residents/add`, tokenCheck)
+      axios.get(`http://localhost:8082/residents/add`, tokenCheck);
     } else {
       navigate("/");
     }
   }, []);
-
 
   const generateID = () => {
     const residentID = `${resident.firstName
@@ -44,6 +41,10 @@ const AddResident = (props) => {
   const onChange = (e) => {
     setResident({ ...resident, [e.target.name]: e.target.value });
   };
+
+  const toResidents = () => {
+    navigate('/residents')
+  }
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -135,6 +136,15 @@ const AddResident = (props) => {
                   </div>
                   <hr className="my-4" />
                 </form>
+                <div className="d-grid">
+                    <button
+                      className="btn btn-warning btn-login text-uppercase fw-bold"
+                      type="submit"
+                      onClick={toResidents}
+                    >
+                      Back to residents
+                    </button>
+                  </div>
               </div>
             </div>
           </div>
@@ -143,6 +153,5 @@ const AddResident = (props) => {
     </div>
   );
 };
-
 
 export default AddResident;

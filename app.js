@@ -41,8 +41,8 @@ const tokenChecker = (req, res, next) => {
 };
 
 // use Routes
-app.use("/residents", tokenChecker, residents);
-app.use("/carers", tokenChecker, carers);
+app.use("/residents", residents);
+app.use("/carers", carers);
 app.use("/tokens", tokensRouter);
 
 const port = process.env.PORT || 8082;

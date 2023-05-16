@@ -8,7 +8,7 @@ const ResidentProfile = () => {
   const { residentID } = useParams();
   const [user, setUser] = useState("");
   const [notes, setNotes] = useState(undefined);
-  const [activity, setActivity] = useState("")
+  const [activity, setActivity] = useState("");
   const [resident, setResident] = useState({
     password: "",
     profilePic: "",
@@ -16,22 +16,18 @@ const ResidentProfile = () => {
   });
   const [img, setImg] = useState("");
   const admin = JSON.parse(window.localStorage.getItem("user"));
-  const token = window.localStorage.getItem("token");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const tokenCheck = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
   useEffect(() => {
-
-    if (token) {
-      axios.get(`http://localhost:8082/residents/${residentID}`, tokenCheck).then((res) => {
-      setNotes(res.data.resident.notes);
-      setUser(res.data.resident);
-      });
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
     } else {
-      navigate("/")
-    } 
+      axios.get(`http://localhost:8082/residents/${residentID}`).then((res) => {
+        setNotes(res.data.resident.notes);
+        setUser(res.data.resident);
+      });
+    }
   }, []);
 
   const validatePassword = (input) => {

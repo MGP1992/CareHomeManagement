@@ -1,10 +1,9 @@
-
 /*eslint no-use-before-define: 2*/
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CarerProfile.css";
-
+import { Circles } from "react-loader-spinner";
 
 const CarerProfile = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -17,13 +16,12 @@ const CarerProfile = () => {
   });
   const [tfa, setTfa] = useState("");
 
-  // useEffect(() => {
-  //   if (token) {
-  //     axios.get(`http://localhost:8082/carers/profile`, tokenCheck)
-  //   } else {
-  //     navigate("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
@@ -152,7 +150,6 @@ const CarerProfile = () => {
         });
     }
   };
-
 
   return (
     <div className="container rounded bg-white mt-5 mb-5">

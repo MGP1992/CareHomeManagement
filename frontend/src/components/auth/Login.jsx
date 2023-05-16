@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useParams } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -34,7 +34,12 @@ const Login = () => {
         console.log(res);
       })
       .then(() => {
-        navigate('/')
+        const user = JSON.parse(window.localStorage.getItem("user"));
+        if (user.residentID) {
+          navigate(`/residents/profile/${user.residentID}`);
+        } else {
+          navigate('/residents')
+        }
       })
       .catch((err) => {
         setErrorMsg(err.response.data.message);
