@@ -37,13 +37,8 @@ const App = () => {
           <Route exact path="/login" element={<Login />} />
           <Route element={<AppLayout />}>
             <Route exact path="/carers/profile" element={<CarerProfile />} /> 
-             {/* //done token for residents profile*/}
-            <Route
-              path="/residents/profile/:residentID"
-              element={<ResidentProfile />}
-            />
+            <Route path="/residents/profile/:residentID" element={<ResidentProfile />}/>
             <Route exact path="/residents/add" element={<AddResident />} />
-             {/* //done token for residents*/}
             <Route exact path="/residents" element={<AllResidents />} />
           </Route>
         </Routes>

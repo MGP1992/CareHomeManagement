@@ -34,7 +34,7 @@ const Login = () => {
         console.log(res);
       })
       .then(() => {
-        navigate('/carers/profile')
+        navigate('/')
       })
       .catch((err) => {
         setErrorMsg(err.response.data.message);
