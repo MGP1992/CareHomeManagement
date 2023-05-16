@@ -47,7 +47,6 @@ const ResidentProfile = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     if (!img) {
-      console.log("the img exists otherwise this would run");
       if (resident.password !== "" && !validatePassword(resident.password)) {
         alert(
           "Password needs to be at least 8 characters long, contain 1 number & special character."
@@ -129,7 +128,6 @@ const ResidentProfile = () => {
           axios
             .post("http://localhost:8082/residents/update", resident)
             .then((res) => {
-              console.log(res);
               // CHECK RESPONSE VALUE FOR UPDATED DATA ROUTE??? res.data.profilePic?
               setResident({
                 password: "",
@@ -158,7 +156,6 @@ const ResidentProfile = () => {
   };
 
   const renderNotes = () => {
-    console.log(notes);
     if (activity === "Activities" && notes) {
       return (
         <div

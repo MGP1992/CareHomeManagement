@@ -15,7 +15,7 @@ const CarerProfile = () => {
     staffID: user.staffID,
   });
   const [tfa, setTfa] = useState("");
-
+  
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (!token) {
@@ -43,9 +43,7 @@ const CarerProfile = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(img);
     if (!img) {
-      console.log("the img exists otherwise this would run");
       if (carer.password !== "" && !validatePassword(carer.password)) {
         alert(
           "Password needs to be at least 8 characters long, contain 1 number & special character."
@@ -59,7 +57,6 @@ const CarerProfile = () => {
         axios
           .post("http://localhost:8082/carers/update", carer)
           .then((res) => {
-            console.log("RES ON 44", res);
             setCarer({
               password: "",
               profilePic: "",
@@ -126,7 +123,6 @@ const CarerProfile = () => {
           axios
             .post("http://localhost:8082/carers/update", carer)
             .then((res) => {
-              console.log(res);
               // CHECK RESPONSE VALUE FOR UPDATED DATA ROUTE??? res.data.profilePic?
               setCarer({
                 password: "",
@@ -200,29 +196,7 @@ const CarerProfile = () => {
                   />
                 </div>
                 <p />
-                <div className="col-md-12">
-                  <label className="labels">Placeholder</label>
-                  <input type="text" className="form-control" placeholder="" />
-                </div>
                 <p />
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h5 className="text-left">2FA</h5>
-                </div>
-                <div className="col-md-12">
-                  <label className="labels">Mobile Number</label>
-                  <h6 style={{ color: "#AAAAAA" }} className="text-left">
-                    Please enter your mobile number starting 07 (placeholder)
-                  </h6>
-                  <input
-                    type="number"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    className="form-control"
-                    placeholder=""
-                    value={tfa}
-                    onChange={onChangeTfa}
-                  />
-                </div>
               </div>
               <div className="mt-5 text-center">
                 <input

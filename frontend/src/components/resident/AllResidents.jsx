@@ -25,11 +25,11 @@ const AllResidents = () => {
       .get(`http://localhost:8082/residents/search?search=${searchValue}`)
       .then((data) => {
         setResidents(data.data.resident);
-        console.log(residents);
       });
   };
   const navigate = useNavigate();
   const [residents, setResidents] = useState([]);
+
 
   return (
     <>

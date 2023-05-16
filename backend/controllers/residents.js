@@ -30,11 +30,10 @@ const ResidentsController = {
   },
   Create: async (req, res) => {
     let checkID = null;
-    console.log(req.body);
     await Resident.findOne({ residentID: req.body.residentID }).then(
       (foundUser) => (checkID = foundUser)
     );
-    console.log(req.body);
+
     if (
       !req.body.firstName ||
       !req.body.lastName ||

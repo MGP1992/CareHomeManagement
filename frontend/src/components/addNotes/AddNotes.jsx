@@ -68,7 +68,7 @@ const AddNotes = (props) => {
         },
       });
     } catch (err) {
-      console.log("Still a shitting error", err);
+      console.log(err);
     }
   };
 
