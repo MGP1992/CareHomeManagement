@@ -15,6 +15,7 @@ const ResidentProfile = () => {
     residentID: residentID,
   });
   const [img, setImg] = useState("");
+  const admin = JSON.parse(window.localStorage.getItem("user"));
 
   useEffect(() => {
     axios.get(`http://localhost:8082/residents/${residentID}`).then((res) => {
@@ -39,7 +40,6 @@ const ResidentProfile = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(img);
     if (!img) {
       console.log("the img exists otherwise this would run");
       if (resident.password !== "" && !validatePassword(resident.password)) {
@@ -55,7 +55,6 @@ const ResidentProfile = () => {
         axios
           .post("http://localhost:8082/residents/update", resident)
           .then((res) => {
-            console.log("RES ON 44", res);
             setResident({
               password: "",
               profilePic: "",
@@ -98,10 +97,12 @@ const ResidentProfile = () => {
                   lastName: user.lastName,
                   profilePic: res.data.profilePic,
                 };
-                window.localStorage.setItem(
-                  "user",
-                  JSON.stringify(updatedUser)
-                );
+                if (admin.admin === false) {
+                  window.localStorage.setItem(
+                    "user",
+                    JSON.stringify(updatedUser)
+                  );
+                }
               })
               .catch((err) => {
                 console.log(err);
@@ -136,8 +137,12 @@ const ResidentProfile = () => {
                 lastName: resident.lastName,
                 profilePic: res.data.profilePic,
               };
-              window.localStorage.setItem("user", JSON.stringify(updatedUser));
-              // setRerender(!false)
+              if (admin.admin === false) {
+                window.localStorage.setItem(
+                  "user",
+                  JSON.stringify(updatedUser)
+                );
+              }
             })
             .catch((err) => {
               console.log(err);
@@ -151,7 +156,7 @@ const ResidentProfile = () => {
     if (activity === "Activities" && notes) {
       return (
         <div
-          className="col-md-4"
+          className="col-md-4 notes-background"
           style={{ height: "500px", overflowY: "scroll" }}
         >
           <div className="p-3 py-5">
@@ -184,7 +189,7 @@ const ResidentProfile = () => {
     } else if (activity === "Medication" && notes) {
       return (
         <div
-          className="col-md-4"
+          className="col-md-4 notes-background"
           style={{ height: "500px", overflowY: "scroll" }}
         >
           <div className="p-3 py-5">
@@ -217,7 +222,7 @@ const ResidentProfile = () => {
     } else if (activity === "Wellbeing" && notes) {
       return (
         <div
-          className="col-md-4"
+          className="col-md-4 notes-background"
           style={{ height: "500px", overflowY: "scroll" }}
         >
           <div className="p-3 py-5">
@@ -250,7 +255,7 @@ const ResidentProfile = () => {
     } else if (activity === "Other" && notes) {
       return (
         <div
-          className="col-md-4"
+          className="col-md-4 notes-background"
           style={{ height: "500px", overflowY: "scroll" }}
         >
           <div className="p-3 py-5">
@@ -314,7 +319,7 @@ const ResidentProfile = () => {
     setActivity(e.target.id);
   };
 
-  if (notes === "Not loaded") {
+  if (notes === undefined) {
     return (
       <Circles
         height="80"
