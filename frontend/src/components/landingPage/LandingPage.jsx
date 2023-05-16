@@ -65,14 +65,14 @@ const LandingPage = () => {
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/signup">
-                  <button type="button" class="signup-btn">
+                  <button type="button" className="signup-btn">
                     Sign Up
                   </button>
                 </a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="/login">
-                  <button type="button" class="login-btn">
+                  <button type="button" className="login-btn">
                     Log In
                   </button>
                 </a>
