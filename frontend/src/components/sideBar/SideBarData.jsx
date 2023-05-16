@@ -18,7 +18,7 @@ export const SideBarData = [
   },
   {
     title: "My Profile",
-    path: "/carers/profile",
+    path: "/profile",
     icons: <ImIcons.ImProfile />,
     cName: "nav-text",
   },
