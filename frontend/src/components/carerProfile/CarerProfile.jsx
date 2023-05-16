@@ -17,14 +17,6 @@ const CarerProfile = () => {
   });
   const [tfa, setTfa] = useState("");
 
-  // useEffect(() => {
-  //   if (token) {
-  //     axios.get(`http://localhost:8082/carers/profile`, tokenCheck)
-  //   } else {
-  //     navigate("/");
-  //   }
-  // }, []);
-
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
   };
