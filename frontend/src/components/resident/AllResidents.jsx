@@ -35,10 +35,6 @@ const AllResidents = () => {
   const navigate = useNavigate();
   const [residents, setResidents] = useState([]);
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 7c41e8008af19110247a84d884609d200b2e13d5
 
   return (
     <>
