@@ -4,26 +4,21 @@ import axios from "axios";
 import Resident from "../resident/resident";
 import { Container, Row, Col, Button, Form, Input } from "reactstrap";
 import "./AllResidents.css";
-
 const AllResidents = () => {
-  const navigate = useNavigate();
-  const [residents, setResidents] = useState([]);
-  const token = window.localStorage.getItem("token");
-
-  const tokenCheck = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
+  const user = JSON.parse(window.localStorage.getItem("user"));
 
   useEffect(() => {
-    if (token) {
-      axios.get(`http://localhost:8082/residents/`, tokenCheck).then((res) => {
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    } else if (user.residentID) {
+      navigate(`/residents/profile/${user.residentID}`);
+    } else {
+      axios.get(`http://localhost:8082/residents/`).then((res) => {
         setResidents(res.data);
       });
-    } else {
-      navigate("/");
     }
   }, []);
-
   const newResident = () => {
     navigate("/residents/add");
   };
@@ -35,8 +30,10 @@ const AllResidents = () => {
       .then((data) => {
         setResidents(data.data.resident);
       });
-    // The subset of posts is added to the state that will trigger a re-render of the UI
   };
+  const navigate = useNavigate();
+  const [residents, setResidents] = useState([]);
+
 
   return (
     <>
@@ -68,7 +65,7 @@ const AllResidents = () => {
                   {residents.map((resident) => (
                     <Col
                       xs={{ order: 3 }}
-                      md={{ size: 4, order: 1 }}
+                      md={{ size: 6, order: 1 }}
                       tag="aside"
                       className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0"
                     >

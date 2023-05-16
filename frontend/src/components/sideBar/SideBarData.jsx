@@ -18,14 +18,8 @@ export const SideBarData = [
     cName: "nav-text",
   },
   {
-    title: "Messages",
-    path: "/message",
-    icons: <BsIcons.BsFillChatDotsFill />,
-    cName: "nav-text",
-  },
-  {
     title: "My Profile",
-    path: "/carers/profile",
+    path: "/profile",
     icons: <ImIcons.ImProfile />,
     cName: "nav-text",
   },

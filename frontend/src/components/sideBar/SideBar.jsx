@@ -9,6 +9,7 @@ import { IconContext } from "react-icons";
 const SideBar = () => {
   const [sideBar, setSideBar] = useState(false);
   const showSideBar = () => setSideBar(!sideBar);
+  const user = JSON.parse(window.localStorage.getItem("user"));
 
   return (
     <>
@@ -26,6 +27,25 @@ const SideBar = () => {
               </Link>
             </li>
             {SideBarData.map((item, index) => {
+              if (item.path === "/profile" && user.residentID) {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={`/residents/profile/${user.residentID}`}>
+                      {item.icons}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              } else if (item.path === "/profile" && user.staffID) {
+                return (
+                  <li key={index} className={item.cName}>
+                    <Link to={`/carers/profile`}>
+                      {item.icons}
+                      <span>{item.title}</span>
+                    </Link>
+                  </li>
+                );
+              } 
               if (item.path === "/login") {
                 return (
                   <li

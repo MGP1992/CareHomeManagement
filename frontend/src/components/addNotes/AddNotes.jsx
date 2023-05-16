@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Modal from "../modal/Modal";
 import { Button } from "reactstrap";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
+import './AddNotes.css'
 
 const AddNotes = (props) => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -10,7 +11,7 @@ const AddNotes = (props) => {
   const [input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("activities");
-  const token = window.localStorage.getItem("token")
+  const token = window.localStorage.getItem("token");
   const [resident, setResident] = useState({
     residentID: "",
     notes: {
@@ -20,19 +21,14 @@ const AddNotes = (props) => {
       others: [],
     },
   });
-  const navigate = useNavigate()
-  const tokenCheck = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (token) {
-      axios.get(`http://localhost:8082/residents/add-notes`, tokenCheck)
-    } else {
-      navigate("/");
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
     }
   }, []);
-
 
   const onChange = (e) => {
     const { name, value } = e.target;
@@ -49,23 +45,19 @@ const AddNotes = (props) => {
     }
   };
 
-  
   const onSubmit = async (e) => {
     e.preventDefault();
     const data = {
       residentID: residentID,
-      notes: input, 
+      notes: input,
       category: category,
       time: new Date().toLocaleString(
         ("en-GB", { hour: "numeric", minute: "numeric" })
       ),
-      by: user.firstName + ' ' + user.lastName
+      by: user.firstName + " " + user.lastName,
     };
     try {
-      const res = await axios.post(
-        "http://localhost:8082/residents/add-note",
-        data
-      );
+      await axios.post("http://localhost:8082/residents/add-note", data);
       setResident({
         ...resident,
         notes: {
@@ -86,32 +78,39 @@ const AddNotes = (props) => {
         <Button onClick={() => setShow(true)}>Add Note</Button>
       </div>
       <Modal
-        title="New Note"
+        title="Add a note"
         className="notes-modal"
         onClose={() => setShow(false)}
         show={show}
       >
         <form noValidate onSubmit={onSubmit}>
-          <label htmlFor="dropdown">Choose a category:</label>
+          <label htmlFor="dropdown">Select a note category: </label>
           <select
             id="dropdown"
             name="category"
             value={category}
             onChange={onChange}
+            class="form-select"
           >
-            <option value="activities">Activities</option>
+            <option value="activities" class="form-input">
+              Activities
+            </option>
             <option value="medication">Medication</option>
-            <option value="wellbeing">Well-being</option>
+            <option value="wellbeing">Wellbeing</option>
             <option value="other">Other</option>
           </select>
-          <input
+          <p />
+          <textarea
             type="text"
-            placeholder="Enter your text.."
+            placeholder="Your note..."
             name="notes"
-            className="addnotes-input"
+            className="form-control"
             onChange={(e) => setInput(e.target.value)}
           />
-          {<input type="submit" className="addresident-submit-btn" />}
+          <p />
+          <button type="submit" className="btn btn-primary">
+            Submit Note
+          </button>
         </form>
       </Modal>
     </>
