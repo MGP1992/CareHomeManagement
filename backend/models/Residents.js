@@ -27,26 +27,14 @@ const ResidentSchema = new mongoose.Schema({
   // refer to business account that creates the resident
   // },
   notes: {
-    activities: [
-      {
-        type: String, 
-      },
-    ],
-    medication: [
-      {
-        type: String,
-      },
-    ],
-    wellbeing: [
-      {
-        type: String,
-      },
-    ],
-    other: [
-      {
-        type: String,
-      },
-    ],
+    activities: [{}],
+    medication: [{}],
+    wellbeing: [{}],
+    other: [{}],
+  },
+  profilePic: {
+    type: String,
+    default: "https://imgur.com/na6zgUo.png",
   },
   admin: {
     type:Boolean,

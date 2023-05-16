@@ -4,7 +4,7 @@ import { useNavigate, Navigate } from "react-router-dom";
 import "./Signup.css";
 
 const AddCarer = (props) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [carer, setCarer] = useState({
     email: "",
     password: "",
@@ -12,10 +12,11 @@ const AddCarer = (props) => {
     lastName: "",
     staffID: "",
   });
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handlePathChange = () => {
-    navigate("/login")
-  }
+    navigate("/login");
+  };
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
@@ -61,7 +62,6 @@ const AddCarer = (props) => {
     } else if (!validateEmail(carer.email)) {
       alert("The email address entered is invalid");
     } else {
-      console.log("got past the checks m8");
       generateID();
       axios
         .post("http://localhost:8082/carers/add", carer)
@@ -76,6 +76,7 @@ const AddCarer = (props) => {
           navigate("/login");
         })
         .catch((err) => {
+          setErrorMsg(err.response.data.message);
           console.log(err);
         });
     }
@@ -88,7 +89,16 @@ const AddCarer = (props) => {
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div className="card border-0 shadow rounded-3 my-5">
               <div className="card-body p-4 p-sm-5">
-                <h6 className="card-title text-center mb-5 fw-light fs-3">
+              <div className="main-logo" >
+                  <a href="/">
+                    <img 
+                    className="pic-logo"
+                    src="https://res.cloudinary.com/delftjfkr/image/upload/c_crop,h_306,r_0,w_310/v1684141905/CareLink_u8ka9p.png"
+                    alt="main-logo"
+                    style={{marginLeft: "30%", marginRight: "30%", width: "40%", height: 165}}
+                    /></a>
+                      </div>
+                <h6 className="card-title text-center mb-5 mt-3 fw-light fs-3">
                   Sign Up
                 </h6>
                 <form onSubmit={onSubmit}>
@@ -139,6 +149,11 @@ const AddCarer = (props) => {
                     />
                     <label htmlFor="floatingPassword">Password</label>
                   </div>
+                  {errorMsg !== "" ? (
+                    <p style={{ color: "red" }}>{errorMsg}</p>
+                  ) : (
+                    false
+                  )}
                   <div className="d-grid">
                     <button
                       className="btn btn-primary btn-login text-uppercase fw-bold"
@@ -150,7 +165,10 @@ const AddCarer = (props) => {
                   <hr className="my-4" />
                 </form>
                 <div className="d-grid mb-2">
-                  <button className="btn btn-login text-uppercase a-user" onClick={handlePathChange}>
+                  <button
+                    className="btn btn-login text-uppercase a-user"
+                    onClick={handlePathChange}
+                  >
                     Already a user?
                   </button>
                 </div>

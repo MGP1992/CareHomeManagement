@@ -1,46 +1,132 @@
-import React from "react";
+import React, { useState } from "react";
 import AddNotes from "../addNotes/AddNotes";
-import { Button, Card, CardImg, CardBody, CardTitle, CardSubtitle, CardText, CardGroup } from "reactstrap";
+import {
+  Button,
+  CardTitle,
+  CardSubtitle,
+  CardText,
+} from "reactstrap";
 import { useNavigate } from "react-router-dom";
 
-const Resident = ({resident}) => {
-    const navigate = useNavigate()
-    const RESIDENTPIC = "URL";
-    const goToProfile = () => {
-        navigate(`/residents/profile/${resident.residentID}`)
-    }
+const Resident = ({ resident }) => {
+  const navigate = useNavigate();
+  const goToProfile = () => {
+    navigate(`/residents/profile/${resident.residentID}`);
+  };
 
-    return (
-        <Card>
-           <CardImg top width="100%" src={RESIDENTPIC} alt="ResidentPic" />
-           <CardBody>
-            <CardTitle className="h3 mb-2 pt-2 font-weight-bold text-secondary">
-                <p style={{fontSize: "36px"}}>{resident.firstName} {resident.lastName}</p>
-                </CardTitle>
-                    <CardSubtitle
-                    className="text-secondary mb-3 font-weight-light text-uppercase"
-                    style={{ fontSize: "0.8rem" }}
-                    >
-                    <p style={{fontSize: "24px"}}>Resident ID: {resident.residentID}</p>
-                    </CardSubtitle>
-                <br />
-                    <CardText
-                    className="text-secondary mb-4"
-                    style={{ fontSize: "0.75rem" }}
-                    > 
-                    <AddNotes residentID={resident.residentID}/>  
-                    <div className="activity-notes"><h5>Activities:</h5>{resident.notes.activities}</div><br/>
-                    <div className="medication-notes"><h5>Medications:</h5>{resident.notes.medication}</div><br/>
-                    <div className="wellbeing-notes"><h5>Well-being</h5>{resident.notes.wellbeing}</div><br/>
-                    <div className="other-notes"><h5>Other</h5>{resident.notes.others}</div><br/>  
-                    </CardText>
-                <Button color="success" className="font-weight-bold" onClick={goToProfile}>
+
+  return (
+    <div className="container">
+      <div className="row">
+        <div className="card border-1 shadow rounded-5 my-1">
+          <div className="card-body p-4">
+            <CardTitle className="card-title text-center fw-light fs-3">
+              <p style={{ fontSize: "32px" }}>
+                {resident.firstName} {resident.lastName}
+              </p>
+              <CardSubtitle className="text-secondary mb-3 text-center font-weight-light text-uppercase">
+                <p style={{ fontSize: "22px" }}>{resident.residentID}</p>
+              </CardSubtitle>
+              <Button
+                color="success"
+                className="font-weight-bold"
+                onClick={goToProfile}
+              >
                 View Profile
-                </Button>
-            </CardBody>
-        </Card>
-
-    );
+              </Button><AddNotes residentID={resident.residentID} />
+            </CardTitle>
+            <CardText
+              className="text-secondary mb-4"
+              style={{ fontSize: "16px" }}
+            >                
+            <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}> Latest Activity</h5>
+              <div className="notes-all">
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.activities.length > 0
+                    ? resident.notes.activities[
+                        resident.notes.activities.length - 1
+                      ].by
+                    : ""}
+                </h6>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.activities.length > 0
+                    ? resident.notes.activities[
+                        resident.notes.activities.length - 1
+                      ].time
+                    : ""}
+                </h6>
+                <h6 style={{ color: "#3b3a3a" }}>
+                  {resident.notes.activities.length > 0
+                    ? `'${resident.notes.activities[
+                        resident.notes.activities.length - 1
+                      ].note}'`
+                    : "No notes added."}
+                </h6>
+              </div>
+              <br />
+              <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Medication</h5>
+              <div className="notes-all">
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.medication.length > 0
+                    ? resident.notes.medication[resident.notes.medication.length  - 1].by
+                    : ""}
+                </h6>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.medication.length > 0
+                    ? resident.notes.medication[resident.notes.medication.length  - 1].time
+                    : ""}
+                </h6>
+                <h6 style={{ color: "#3b3a3a" }}>
+                  {resident.notes.medication.length > 0
+                    ? `'${resident.notes.medication[resident.notes.medication.length  - 1].note}'`
+                    : "No notes added."}
+                </h6>
+              </div>
+              <br />
+              <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Wellbeing</h5>
+              <div className="notes-all">
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.wellbeing.length > 0
+                    ? resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].by
+                    : ""}
+                </h6>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.wellbeing.length > 0
+                    ? resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].time
+                    : ""}
+                </h6>
+                <h6 style={{ color: "#3b3a3a" }}>
+                  {resident.notes.wellbeing.length > 0
+                    ? `'${resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].note}'`
+                    : "No notes added."}
+                </h6>
+              </div>
+              <br />
+              <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Other</h5>
+              <div className="notes-all">
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.other.length > 0
+                    ? resident.notes.other[resident.notes.other.length  - 1].by
+                    : ""}
+                </h6>
+                <h6 style={{ "fontSize": "14px" }}>
+                  {resident.notes.other.length > 0
+                    ? resident.notes.other[resident.notes.other.length  - 1].time
+                    : ""}
+                </h6>
+                <h6 style={{ color: "#3b3a3a" }}>
+                  {resident.notes.other.length > 0
+                    ? `'${resident.notes.other[resident.notes.other.length  - 1].note}'`
+                    : "No notes added."}
+                </h6>
+              </div>
+              <br />
+            </CardText>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Resident;

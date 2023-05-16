@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useParams } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -10,11 +10,11 @@ const Login = () => {
     password: "",
     typeOfUser: "",
   });
-  
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handlePathChange = () => {
-    navigate("/signup")
-  }
+    navigate("/signup");
+  };
 
   const emailOrID = () => {
     if (loginInfo.typeOfUser === "Family Member") {
@@ -23,6 +23,7 @@ const Login = () => {
       return "Email";
     }
   };
+
   const onSubmit = (e) => {
     e.preventDefault();
     axios
@@ -31,11 +32,16 @@ const Login = () => {
         window.localStorage.setItem("user", JSON.stringify(res.data.user));
         window.localStorage.setItem("token", res.data.token);
       })
-      .then((res) => {
-        navigate("/carers/profile")
-        console.log(JSON.parse(window.localStorage.getItem("user")).admin);
+      .then(() => {
+        const user = JSON.parse(window.localStorage.getItem("user"));
+        if (user.residentID) {
+          navigate(`/residents/profile/${user.residentID}`);
+        } else {
+          navigate('/residents')
+        }
       })
       .catch((err) => {
+        setErrorMsg(err.response.data.message);
         console.log(err);
       });
   };
@@ -47,7 +53,14 @@ const Login = () => {
           <div className="col-sm-9 col-md-7 col-lg-5 mx-auto">
             <div className="card border-0 shadow rounded-3 my-5">
               <div className="card-body p-4 p-sm-5">
-                <h5 className="card-title text-center mb-5 fw-light fs-3">
+                  <a href="/">
+                    <img 
+                    className="pic-logo"
+                    src="https://res.cloudinary.com/delftjfkr/image/upload/c_crop,h_306,r_0,w_310/v1684141905/CareLink_u8ka9p.png"
+                    alt="main-logo"
+                    style={{marginLeft: "30%", marginRight: "30%", width: "40%", height: 165 }}
+                    /></a>
+                <h5 className="card-title text-center mb-4 mt-2 fw-light fs-3">
                   Log In
                 </h5>
                 <div className="row mt-2">
@@ -99,30 +112,6 @@ const Login = () => {
                       </label>
                     </div>
                   </div>
-                  <div className="form-check mb-3">
-                    <div className="col-md-6">
-                      <input
-                        type="radio"
-                        name="typeOfUser"
-                        value="Business"
-                        id="business"
-                        className="form-check-input"
-                        checked={loginInfo.typeOfUser === "Business"}
-                        onChange={(e) => {
-                          setloginInfo({
-                            ...loginInfo,
-                            typeOfUser: e.target.value,
-                          });
-                        }}
-                      />
-                      <label
-                        className="form-check-label"
-                        htmlFor="rememberPasswordCheck"
-                      >
-                        Business
-                      </label>
-                    </div>
-                  </div>
                 </div>
                 <form onSubmit={onSubmit}>
                   <div className="form-floating mb-3">
@@ -152,6 +141,11 @@ const Login = () => {
                     />
                     <label htmlFor="floatingPassword">Password</label>
                   </div>
+                  {errorMsg !== "" ? (
+                    <p style={{ color: "red" }}>{errorMsg}</p>
+                  ) : (
+                    false
+                  )}
                   <div className="d-grid">
                     <button
                       className="btn btn-primary btn-login text-uppercase fw-bold"
@@ -163,7 +157,10 @@ const Login = () => {
                   <hr className="my-4" />
                 </form>
                 <div className="d-grid mb-2">
-                  <button className="btn btn-login text-uppercase a-user" onClick={handlePathChange} >
+                  <button
+                    className="btn btn-login text-uppercase a-user"
+                    onClick={handlePathChange}
+                  >
                     Don't have an account?
                   </button>
                 </div>
@@ -177,81 +174,3 @@ const Login = () => {
 };
 
 export default Login;
-
-{
-  /* <div>
-      <h1 className="login-header">Login</h1>
-      <form noValidate onSubmit={onSubmit}>
-        <div className="login-form-entry">
-          <div className="loginContainer">
-            <div className="App">
-              <h3>Who are you logging in as?</h3>
-
-              <input
-                type="radio"
-                name="typeOfUser"
-                value="Carer"
-                id="carer"
-                checked={loginInfo.typeOfUser === "Carer"}
-                onChange={(e) => {
-                  setloginInfo({ ...loginInfo, typeOfUser: e.target.value });
-                }}
-              />
-              <label htmlFor="regular">Carer</label>
-              <br />
-              <input
-                type="radio"
-                name="typeOfUser"
-                value="Family Member"
-                id="family"
-                checked={loginInfo.typeOfUser === "Family Member"}
-                onChange={(e) => {
-                  setloginInfo({ ...loginInfo, typeOfUser: e.target.value });
-                }}
-              />
-              <label htmlFor="medium">Family Member</label>
-              <br />
-              <input
-                type="radio"
-                name="typeOfUser"
-                value="Business"
-                id="business"
-                checked={loginInfo.typeOfUser === "Business"}
-                onChange={(e) => {
-                  setloginInfo({ ...loginInfo, typeOfUser: e.target.value });
-                }}
-              />
-              <label htmlFor="large">Business</label>
-
-              <p>
-                You are logging in as a <strong>{loginInfo.typeOfUser}</strong>
-              </p>
-            </div>
-          </div>
-          <input
-            type="text"
-            placeholder={emailOrID()}
-            name="email"
-            className="addcarer-input"
-            onChange={(e) => {
-              setloginInfo({ ...loginInfo, email: e.target.value });
-            }}
-          />
-        </div>
-        <br />
-        <div className="addcarer-form-entry">
-          <input
-            type="password"
-            placeholder="Password"
-            name="password"
-            className="addcarer-input"
-            onChange={(e) => {
-              setloginInfo({ ...loginInfo, password: e.target.value });
-            }}
-          />
-        </div>
-        <br />
-        <input type="submit" value="Login" className="addcarer-submit-btn" />
-      </form>
-    </div> */
-}
