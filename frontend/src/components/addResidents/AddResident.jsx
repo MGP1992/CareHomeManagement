@@ -51,7 +51,6 @@ const AddResident = (props) => {
     axios
       .post("http://localhost:8082/residents/add", resident)
       .then((res) => {
-        console.log("res", res);
         setResident({
           firstName: "",
           lastName: "",

@@ -31,7 +31,6 @@ const Login = () => {
       .then((res) => {
         window.localStorage.setItem("user", JSON.stringify(res.data.user));
         window.localStorage.setItem("token", res.data.token);
-        console.log(res);
       })
       .then(() => {
         navigate('/')

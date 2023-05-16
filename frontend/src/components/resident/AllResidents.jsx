@@ -34,15 +34,8 @@ const AllResidents = () => {
       .get(`http://localhost:8082/residents/search?search=${searchValue}`)
       .then((data) => {
         setResidents(data.data.resident);
-        console.log(residents);
       });
-    console.log("is anything in the search value", searchValue);
     // The subset of posts is added to the state that will trigger a re-render of the UI
-  };
-
-  const checker = (e) => {
-    e.preventDefault();
-    console.log("residents", residents);
   };
 
   return (

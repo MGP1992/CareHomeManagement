@@ -66,10 +66,6 @@ const AddNotes = (props) => {
         "http://localhost:8082/residents/add-note",
         data
       );
-      console.log(
-        "this is the response after the database has been pinged",
-        res
-      );
       setResident({
         ...resident,
         notes: {
@@ -80,7 +76,7 @@ const AddNotes = (props) => {
         },
       });
     } catch (err) {
-      console.log("Still a shitting error", err);
+      console.log(err);
     }
   };
 

@@ -45,9 +45,7 @@ const CarerProfile = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(img);
     if (!img) {
-      console.log("the img exists otherwise this would run");
       if (carer.password !== "" && !validatePassword(carer.password)) {
         alert(
           "Password needs to be at least 8 characters long, contain 1 number & special character."
@@ -61,7 +59,6 @@ const CarerProfile = () => {
         axios
           .post("http://localhost:8082/carers/update", carer)
           .then((res) => {
-            console.log("RES ON 44", res);
             setCarer({
               password: "",
               profilePic: "",
@@ -128,7 +125,6 @@ const CarerProfile = () => {
           axios
             .post("http://localhost:8082/carers/update", carer)
             .then((res) => {
-              console.log(res);
               // CHECK RESPONSE VALUE FOR UPDATED DATA ROUTE??? res.data.profilePic?
               setCarer({
                 password: "",

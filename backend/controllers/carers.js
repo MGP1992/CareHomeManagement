@@ -44,7 +44,6 @@ const CarersController = {
           staffID: req.body.staffID,
         };
         const carer = new Carer(newCarer);
-        console.log(carer);
         carer
           .save()
           .then((carer) =>
@@ -58,11 +57,9 @@ const CarersController = {
   },
   Update: async (req, res) => {
     const user = await Carer.findOne({ staffID: req.body.staffID });
-    console.log(req.body)
     if (!req.body.profilePic && !req.body.password) {
       res.status(401).json({ message: "Please update at least one field." });
     } else if (!req.body.password) {
-      console.log("USER ON LINE 66", user)
       user.profilePic = req.body.profilePic;
       user
         .save()
@@ -80,7 +77,6 @@ const CarersController = {
           res.status(400).json({ message: "Error creating carer." })
         );
     } else if (!req.body.profilePic) {
-      console.log("USER ON LINE 84", user)
       bcrypt.hash(req.body.password, 11).then((hashPassword) => {
         user.password = hashPassword;
         user
@@ -100,7 +96,6 @@ const CarersController = {
           );
       });
     } else {
-      console.log("USER ON LINE 105", user)
       bcrypt.hash(req.body.password, 11).then((hashPassword) => {
         user.password = hashPassword;
         user.profilePic = req.body.profilePic;
