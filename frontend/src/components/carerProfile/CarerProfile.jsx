@@ -1,10 +1,9 @@
-
 /*eslint no-use-before-define: 2*/
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./CarerProfile.css";
-
+import { Circles } from "react-loader-spinner";
 
 const CarerProfile = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -16,14 +15,13 @@ const CarerProfile = () => {
     staffID: user.staffID,
   });
   const [tfa, setTfa] = useState("");
-
-  // useEffect(() => {
-  //   if (token) {
-  //     axios.get(`http://localhost:8082/carers/profile`, tokenCheck)
-  //   } else {
-  //     navigate("/");
-  //   }
-  // }, []);
+  
+  useEffect(() => {
+    const token = window.localStorage.getItem("token");
+    if (!token) {
+      navigate("/login");
+    }
+  }, []);
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
@@ -45,9 +43,7 @@ const CarerProfile = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(img);
     if (!img) {
-      console.log("the img exists otherwise this would run");
       if (carer.password !== "" && !validatePassword(carer.password)) {
         alert(
           "Password needs to be at least 8 characters long, contain 1 number & special character."
@@ -61,7 +57,6 @@ const CarerProfile = () => {
         axios
           .post("http://localhost:8082/carers/update", carer)
           .then((res) => {
-            console.log("RES ON 44", res);
             setCarer({
               password: "",
               profilePic: "",
@@ -128,7 +123,6 @@ const CarerProfile = () => {
           axios
             .post("http://localhost:8082/carers/update", carer)
             .then((res) => {
-              console.log(res);
               // CHECK RESPONSE VALUE FOR UPDATED DATA ROUTE??? res.data.profilePic?
               setCarer({
                 password: "",
@@ -152,7 +146,6 @@ const CarerProfile = () => {
         });
     }
   };
-
 
   return (
     <div className="container rounded bg-white mt-5 mb-5">
@@ -203,29 +196,7 @@ const CarerProfile = () => {
                   />
                 </div>
                 <p />
-                <div className="col-md-12">
-                  <label className="labels">Placeholder</label>
-                  <input type="text" className="form-control" placeholder="" />
-                </div>
                 <p />
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h5 className="text-left">2FA</h5>
-                </div>
-                <div className="col-md-12">
-                  <label className="labels">Mobile Number</label>
-                  <h6 style={{ color: "#AAAAAA" }} className="text-left">
-                    Please enter your mobile number starting 07 (placeholder)
-                  </h6>
-                  <input
-                    type="number"
-                    inputMode="numeric"
-                    pattern="[0-9]*"
-                    className="form-control"
-                    placeholder=""
-                    value={tfa}
-                    onChange={onChangeTfa}
-                  />
-                </div>
               </div>
               <div className="mt-5 text-center">
                 <input

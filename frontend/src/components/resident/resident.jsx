@@ -19,8 +19,8 @@ const Resident = ({ resident }) => {
     <div className="container">
       <div className="row">
         <div className="card border-1 shadow rounded-5 my-1">
-          <div className="card-body p-3">
-            <CardTitle className="card-title text-center fw-light fs-4">
+          <div className="card-body p-4">
+            <CardTitle className="card-title text-center fw-light fs-3">
               <p style={{ fontSize: "32px" }}>
                 {resident.firstName} {resident.lastName}
               </p>
