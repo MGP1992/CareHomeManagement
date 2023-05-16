@@ -27,6 +27,7 @@ const AllResidents = () => {
   const newResident = () => {
     navigate("/residents/add");
   };
+  
 
   const searchResident = async (e) => {
     const searchValue = e.target.value;
@@ -40,10 +41,7 @@ const AllResidents = () => {
     // The subset of posts is added to the state that will trigger a re-render of the UI
   };
 
-  const checker = (e) => {
-    e.preventDefault();
-    console.log("residents", residents);
-  };
+
 
   return (
     <>
@@ -79,7 +77,7 @@ const AllResidents = () => {
                       tag="aside"
                       className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0"
                     >
-                      <Resident resident={resident} key={resident._id} />
+                      <Resident resident={resident} key={resident._id} setResidents={setResidents}/>
                     </Col>
                   ))}
                 </Row>

@@ -4,14 +4,33 @@ import Modal from "../modal/Modal";
 import { Button } from "reactstrap";
 import {useNavigate} from 'react-router-dom'
 
-const AddNotes = (props) => {
+// const AddNotes = (props) => {
+//   const user = JSON.parse(window.localStorage.getItem("user"));
+//   const residentID = props.residentID;
+//   const [input, setInput] = useState("");
+//   const [show, setShow] = useState(false);
+//   const [category, setCategory] = useState("activities");
+//   const token = window.localStorage.getItem("token")
+//   const [resident, setResident] = useState({
+//     residentID: "",
+//     notes: {
+//       activities: [],
+//       medication: [],
+//       wellbeing: [],
+//       others: [],
+//     },
+//   });
+
+
+const AddNotes = ( props) => {
   const user = JSON.parse(window.localStorage.getItem("user"));
   const residentID = props.residentID;
+
   const [input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("activities");
   const token = window.localStorage.getItem("token")
-  const [resident, setResident] = useState({
+  const [resident, setResidents] = useState({
     residentID: "",
     notes: {
       activities: [],
@@ -39,7 +58,7 @@ const AddNotes = (props) => {
     if (name === "category") {
       setCategory(value);
     } else {
-      setResident({
+      setResidents({
         ...resident,
         notes: {
           ...resident.notes,
@@ -70,7 +89,7 @@ const AddNotes = (props) => {
         "this is the response after the database has been pinged",
         res
       );
-      setResident({
+      props.setResident({
         ...resident,
         notes: {
           activities: [],
@@ -80,7 +99,7 @@ const AddNotes = (props) => {
         },
       });
     } catch (err) {
-      console.log("Still a shitting error", err);
+      console.log("Still an error", err);
     }
   };
 
@@ -115,7 +134,7 @@ const AddNotes = (props) => {
             className="addnotes-input"
             onChange={(e) => setInput(e.target.value)}
           />
-          {<input type="submit" className="addresident-submit-btn" />}
+          {<input type="submit" className="addresident-submit-btn" onClick={() => setShow(false)} />}
         </form>
       </Modal>
     </>
