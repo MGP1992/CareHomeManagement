@@ -17,6 +17,7 @@ const ResidentProfile = () => {
   const [img, setImg] = useState("");
   const admin = JSON.parse(window.localStorage.getItem("user"));
   const navigate = useNavigate();
+  const moment = require("moment");
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -153,6 +154,17 @@ const ResidentProfile = () => {
             });
         });
     }
+  };
+
+  const deleteUser = () => {
+    axios
+      .delete(`http://localhost:8082/residents/delete/${residentID}`)
+      .then((res) => {
+        navigate("/residents");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const renderNotes = () => {
@@ -350,7 +362,22 @@ const ResidentProfile = () => {
                 {user.firstName} {user.lastName}
               </h4>
               <h6 className="text-black-50">{user.residentID}</h6>
+              <h6 className="text-black-50">
+                {moment(user.DOB).utc().format("DD/MM/YYYY")}
+              </h6>
               <span> </span>
+              <br />
+              {admin.admin ? (
+                <button
+                  type="button"
+                  class="btn btn-danger"
+                  onClick={deleteUser}
+                >
+                  Delete
+                </button>
+              ) : (
+                <p />
+              )}
             </div>
           </div>
           <div className="col-md-5 border-right">
