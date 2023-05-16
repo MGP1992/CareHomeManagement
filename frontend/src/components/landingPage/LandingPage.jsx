@@ -5,7 +5,7 @@ import Caroussel from "../reacstrap-stuff/Caroussel";
 import Footer from "../reacstrap-stuff/Footer";
 import Reviews from "./Reviews";
 import './LandingPage.css'
-import SideBar from '../sideBar/SideBar'
+import SideBarLP from "../sideBar/SideBar-LP";
 
 
 
@@ -19,11 +19,9 @@ const LandingPage = () => {
   return (
     <>
     {(token) ? //Nav bar when LOGGED IN
-     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top" style={{zIndex: 1 }}>
+     <nav className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <SideBarLP/>
      <div className="container" style={{ height: 65}}>
-      <div className="sidebar-div" style={{width: 95 }}>
-        <SideBar/>
-      </div>
        <a className="navbar-brand" href=".">
          <img
            src="https://res.cloudinary.com/delftjfkr/image/upload/c_crop,h_306,r_0,w_310/v1684141905/CareLink_u8ka9p.png"
@@ -36,7 +34,7 @@ const LandingPage = () => {
              padding: 0,
            }}
          />
-         Linking care, residents, and family
+         <i>Linking care, residents, and family</i>
        </a>
        <button
          className="navbar-toggler"
