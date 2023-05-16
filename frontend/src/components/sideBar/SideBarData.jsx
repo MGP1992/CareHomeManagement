@@ -13,18 +13,6 @@ export const SideBarData = [
     cName: "nav-text",
   },
   {
-    title: "Business",
-    path: "/business",
-    icons: <BsIcons.BsFillBuildingsFill />,
-    cName: "nav-text",
-  },
-  {
-    title: "Messages",
-    path: "/message",
-    icons: <BsIcons.BsFillChatDotsFill />,
-    cName: "nav-text",
-  },
-  {
     title: "My Profile",
     path: "/carers/profile",
     icons: <ImIcons.ImProfile />,
