@@ -40,7 +40,6 @@ const ResidentsController = {
     await Resident.findOne({ residentID: req.body.residentID }).then(
       (foundUser) => (checkID = foundUser)
     );
-
     if (
       !req.body.firstName ||
       !req.body.lastName ||
@@ -133,7 +132,8 @@ const ResidentsController = {
     }
   },
   Delete: async (req, res) => {
-    Resident.findByIdAndRemove(req.params.id, req.body)
+    console.log(req.params.id)
+    Resident.findOneAndDelete({ residentID: req.params.id })
       .then((resident) =>
         res.json({ message: "Resident successfully deleted!" })
       )
