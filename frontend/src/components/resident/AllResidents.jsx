@@ -5,10 +5,14 @@ import Resident from "../resident/resident";
 import { Container, Row, Col, Button, Form, Input } from "reactstrap";
 import "./AllResidents.css";
 const AllResidents = () => {
+  const user = JSON.parse(window.localStorage.getItem("user"));
+
   useEffect(() => {
     const token = window.localStorage.getItem("token");
     if (!token) {
       navigate("/login");
+    } else if (user.residentID) {
+      navigate(`/residents/profile/${user.residentID}`);
     } else {
       axios.get(`http://localhost:8082/residents/`).then((res) => {
         setResidents(res.data);
