@@ -16,18 +16,14 @@ const CarerProfile = () => {
     staffID: user.staffID,
   });
   const [tfa, setTfa] = useState("");
-  const token = window.localStorage.getItem("token");
-  const tokenCheck = {
-    headers: {Authorization: `Bearer: ${token}`}
-  }
 
-  useEffect(() => {
-    if (token) {
-      axios.get(`http://localhost:8082/carers/profile`, tokenCheck)
-    } else {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (token) {
+  //     axios.get(`http://localhost:8082/carers/profile`, tokenCheck)
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   const onChange = (e) => {
     setCarer({ ...carer, [e.target.name]: e.target.value });
@@ -267,43 +263,5 @@ const CarerProfile = () => {
     </div>
   );
 };
-
-// useEffect(() => {
-//           axios
-//           .get(`http://localhost:8082/residents/`)
-//           .then((res) => {
-//               setResidents(res.data);
-//           });
-//       }, [])
-
-//         const newResident = () =>{
-//           navigate('/residents/add')
-//         }
-
-//   return (
-//     <>
-//     <Header/>
-//     <main className="my-5 py-5">
-//     <div  className='d-flex justify-content-center'>
-//     <Button type='submit' onClick={newResident} color='warning'>Add Resident</Button>
-//     </div>
-//     <Container className="px-0 md-5">
-//         <Row
-//           className="pt-2 pt-md-5 w-100 px-4 px-xl-0"
-//         >
-//               {residents.map(
-//                 (resident) =>
-//                 <Col
-//                 xs={{ order: 3 }}
-//                 md={{ size: 6, order: 1 }}
-//                 tag="aside"
-//                 className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0">
-//                 <Resident resident={resident} key={resident._id}/>
-//                 </Col>
-//               )}
-//         </Row>
-//       </Container>
-//       </main>
-//    </>
 
 export default CarerProfile;
