@@ -12,7 +12,6 @@ import AddResident from "./components/addResidents/AddResident";
 import Login from "./components/auth/Login";
 import CarerProfile from "./components/carerProfile/CarerProfile";
 import ResidentProfile from "./components/residentProfile/ResidentProfile";
-import AddNotes from "./components/addNotes/AddNotes";
 import LandingPage from "./components/landingPage/LandingPage";
 import SideBar from "./components/sideBar/SideBar";
 import AllResidents from "./components/resident/AllResidents";
@@ -32,7 +31,7 @@ const App = () => {
     <Router>
       <div>
         <Routes>
-          <Route exact path="/" element={<LandingPage />} />
+        <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/signup" element={<AddCarer />} />
           <Route exact path="/login" element={<Login />} />
           <Route element={<AppLayout />}>
