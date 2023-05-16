@@ -36,6 +36,10 @@ const ResidentSchema = new mongoose.Schema({
     type: String,
     default: "https://imgur.com/na6zgUo.png",
   },
+  admin: {
+    type:Boolean,
+    default: false
+}
 });
 
 module.exports = Resident = mongoose.model("resident", ResidentSchema);

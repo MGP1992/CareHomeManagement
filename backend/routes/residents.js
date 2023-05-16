@@ -9,6 +9,6 @@ router.get("/:id", ResidentController.FindByID);
 router.post("/add", ResidentController.Create);
 router.post("/update", ResidentController.Update);
 router.post("/add-note", ResidentController.AddNote);
-router.delete("/:id", ResidentController.Delete);
+router.delete("/delete/:id", ResidentController.Delete);
 
 module.exports = router;

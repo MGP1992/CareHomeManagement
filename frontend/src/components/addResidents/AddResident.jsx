@@ -10,8 +10,8 @@ const AddResident = (props) => {
     lastName: "",
     residentID: "",
     password: "",
+    admin: JSON.parse(window.localStorage.getItem("user")).admin,
     DOB: undefined,
-    // residency: "",
   });
 
   const token = window.localStorage.getItem("token");
@@ -57,8 +57,8 @@ const AddResident = (props) => {
           lastName: "",
           residentID: "",
           password: "",
+          admin: JSON.parse(window.localStorage.getItem("user")).admin,
           DOB: undefined,
-          // residency: "",
         });
         navigate("/residents");
       })
