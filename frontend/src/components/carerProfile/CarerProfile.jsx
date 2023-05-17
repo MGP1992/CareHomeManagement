@@ -62,6 +62,7 @@ const CarerProfile = () => {
               profilePic: "",
               staffID: user.staffID,
             });
+            document.getElementById("chooseImg").value = "";
           })
           .catch((err) => {
             console.log(err);
@@ -91,6 +92,7 @@ const CarerProfile = () => {
                   profilePic: "",
                   staffID: user.staffID,
                 });
+                document.getElementById("chooseImg").value = "";
                 const updatedUser = {
                   _id: user._id,
                   staffID: user.staffID,
@@ -129,6 +131,7 @@ const CarerProfile = () => {
                 profilePic: "",
                 staffID: user.staffID,
               });
+              document.getElementById("chooseImg").value = "";
               const updatedUser = {
                 _id: user._id,
                 staffID: user.staffID,
@@ -163,6 +166,7 @@ const CarerProfile = () => {
               {user.firstName} {user.lastName}
             </h4>
             <h6 className="text-black-50">{user.email}</h6>
+            <h6 className="text-black-50">ID: {user.staffID}</h6>
             <span> </span>
           </div>
         </div>

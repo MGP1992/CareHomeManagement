@@ -66,6 +66,7 @@ const ResidentProfile = () => {
               profilePic: "",
               resident: residentID,
             });
+            document.getElementById("chooseImg").value = "";
           })
           .catch((err) => {
             console.log(err);
@@ -95,6 +96,7 @@ const ResidentProfile = () => {
                   profilePic: "",
                   staffID: user.staffID,
                 });
+                document.getElementById("chooseImg").value = "";
                 const updatedUser = {
                   _id: user._id,
                   staffID: user.staffID,
@@ -135,6 +137,7 @@ const ResidentProfile = () => {
                 profilePic: "",
                 resident: resident.residentID,
               });
+              document.getElementById("chooseImg").value = "";
               const updatedUser = {
                 _id: resident._id,
                 residentID: residentID,
