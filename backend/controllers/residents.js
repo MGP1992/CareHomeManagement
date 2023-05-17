@@ -87,6 +87,7 @@ const ResidentsController = {
             firstName: user.firstName,
             lastName: user.lastName,
             profilePic: user.profilePic,
+            admin: user.admin
           })
         )
         .catch((err) =>
@@ -104,6 +105,7 @@ const ResidentsController = {
               firstName: user.firstName,
               lastName: user.lastName,
               profilePic: user.profilePic,
+              admin: user.admin
             })
           )
           .catch((err) =>
@@ -123,6 +125,7 @@ const ResidentsController = {
               firstName: user.firstName,
               lastName: user.lastName,
               profilePic: user.profilePic,
+              admin: user.admin
             })
           )
           .catch((err) =>
