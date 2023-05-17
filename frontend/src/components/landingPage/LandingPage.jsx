@@ -34,7 +34,7 @@ const LandingPage = () => {
              padding: 0,
            }}
          />
-         <i>Linking care, residents, and family</i>
+         {/* Linking care, residents, and family */}
        </a>
        <button
          className="navbar-toggler"
@@ -49,7 +49,7 @@ const LandingPage = () => {
        </button>
        <div className="collapse navbar-collapse" id="navbarResponsive">
          <ul className="navbar-nav ms-auto">
-           <li className="nav-item nav-link-cl" style={{fontWeight: 'bold'}}>
+           <li className="nav-item nav-link-cl">
              <a className="nav-link" href=".">
                Home
              </a>
@@ -57,16 +57,6 @@ const LandingPage = () => {
            <li className="nav-item nav-link-cl">
              <a className="nav-link" href=".">
                About
-             </a>
-           </li>
-           <li className="nav-item nav-link-cl">
-             <a className="nav-link" href="/carers/profile">
-              Profile
-             </a>
-           </li>
-           <li className="nav-item nav-link-cl">
-             <a className="nav-link" href="/residents">
-               Residents
              </a>
            </li>
            <li className="nav-item">

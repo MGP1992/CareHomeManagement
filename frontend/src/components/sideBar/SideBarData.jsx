@@ -24,15 +24,15 @@ export const SideBarData = [
     cName: "nav-text",
   },
   {
+    title: "Help",
+    path: "",
+    icons: <MdOutlineHelp/>,
+    cName: "nav-text help-text"
+  },
+  {
     title: "Log Out",
     path: "/login",
     icons: <RiIcons.RiLogoutCircleFill />,
     cName: "nav-text logout-text",
   },
-  {
-    title: "Help",
-    path: "",
-    icons: <MdOutlineHelp/>,
-    cName: "nav-text logout-text"
-  }
 ];
