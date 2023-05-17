@@ -15,13 +15,13 @@
   color: #737373;
 }
 
-.open-bars-lp:hover {
-    color: #348ebe;
-  }
+.close-bars {
+  color: white;
+}
 
-  .close-bars:hover {
-    color: #33aeff
-  }
+.close-bars:hover {
+  color: #c3c3c3 !important;
+}
 
 .nav-menu-lp {
   background: #222222ac;
@@ -90,7 +90,6 @@
 .logout-text a:hover {
   color: #ce4545;
   background: rgba(0, 0, 0, 0) !important;
-
 }
 
 .logout-text a {
