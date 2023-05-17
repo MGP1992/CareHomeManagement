@@ -30,7 +30,7 @@ const AddNotes = ({resident, setNotes}) => {
     if (name === "category") {
       setCategory(value);
     } else {
-      setInput(value
+      setInput(value)
     }
   };
 
