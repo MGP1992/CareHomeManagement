@@ -153,10 +153,11 @@ const LandingPage = () => {
       <Caroussel/>
     </div>
     <section className="py-5" >
-          <div className="container" styles={{"backgroundColor" : "#f5f5f5"}}>
-              <h1 className="fw-light">Welcome to CareLink </h1>
-                <p className="lead">Stay connected with your loved ones </p>
-                <p>Care, with CareLink</p>
+          <div className="slogan-container" styles={{"backgroundColor" : "#f5f5f5"}}>
+              <h1 className="slogan-title fw-light">Welcome to</h1>
+              <img className="slogan-pic" src="https://res.cloudinary.com/delftjfkr/image/upload/c_crop,h_306,r_0,w_310/v1684141905/CareLink_u8ka9p.png" alt="main-logo"/>
+                <p className="slogan-body lead">Stay connected with your loved ones </p>
+                <p className="slogan-p">Care, with CareLink</p>
           </div>
           <div>
             <Reviews/>
