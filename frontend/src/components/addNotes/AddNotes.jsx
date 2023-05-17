@@ -7,6 +7,7 @@ import "./AddNotes.css";
 
 
 
+
 const AddNotes = ({resident, setNotes}) => {
   const user = JSON.parse(window.localStorage.getItem("user"));
   const residentID = resident.residentID;
@@ -14,7 +15,6 @@ const AddNotes = ({resident, setNotes}) => {
   const [input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("activities");
-  
 
   const navigate = useNavigate();
 
@@ -30,8 +30,7 @@ const AddNotes = ({resident, setNotes}) => {
     if (name === "category") {
       setCategory(value);
     } else {
-      setInput(value)
-     
+      setInput(value
     }
   };
 
@@ -49,7 +48,7 @@ const AddNotes = ({resident, setNotes}) => {
     };
     try {
       await axios.post("http://localhost:8082/residents/add-note", data);
-  
+
       let notePatch = {}
 
       // build the note patch using the existng notes and a new note
@@ -68,6 +67,7 @@ const AddNotes = ({resident, setNotes}) => {
       )
       setShow(false)
       // we are not clearing the form as it does not match our usecase
+
     } catch (err) {
       console.log(err);
     }

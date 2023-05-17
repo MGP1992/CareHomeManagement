@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Resident = ({ resident }) => {
-  // separate out the notes into it's own piece of state
+   // separate out the notes into it's own piece of state
   // below, pass setNotes to the AddNotes component
   const [notes, setNotes] = useState(resident.notes)
   const navigate = useNavigate();
