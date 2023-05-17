@@ -100,6 +100,7 @@ const CarerProfile = () => {
                   firstName: user.firstName,
                   lastName: user.lastName,
                   profilePic: res.data.profilePic,
+                  admin: user.admin
                 };
                 window.localStorage.setItem(
                   "user",
@@ -139,6 +140,7 @@ const CarerProfile = () => {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 profilePic: res.data.profilePic,
+                admin: user.admin
               };
               window.localStorage.setItem("user", JSON.stringify(updatedUser));
               // setRerender(!false)

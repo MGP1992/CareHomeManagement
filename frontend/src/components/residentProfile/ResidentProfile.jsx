@@ -104,6 +104,7 @@ const ResidentProfile = () => {
                   firstName: user.firstName,
                   lastName: user.lastName,
                   profilePic: res.data.profilePic,
+                  admin: res.data.admin
                 };
                 if (admin.admin === false) {
                   window.localStorage.setItem(
@@ -144,6 +145,7 @@ const ResidentProfile = () => {
                 firstName: resident.firstName,
                 lastName: resident.lastName,
                 profilePic: res.data.profilePic,
+                admin: res.data.admin
               };
               if (admin.admin === false) {
                 window.localStorage.setItem(

@@ -37,7 +37,7 @@ const LandingPage = () => {
                 padding: 0,
               }}
             />
-        <h5 className="user-name">Hello {user.firstName}</h5>
+        <h5 className="user-name">Hello, {user.firstName}</h5>
      <div className="container" style={{ height: 65, width: "40%", marginLeft: "30%", marginRight: "0%"}}>
        <a className="navbar-brand" href=".">
        </a>
@@ -152,8 +152,8 @@ const LandingPage = () => {
     <section className="py-5" >
           <div className="slogan-container" styles={{"backgroundColor" : "#f5f5f5"}}>
               <h3 className="slogan-title fw-light"> <img className="slogan-pic" src="https://res.cloudinary.com/delftjfkr/image/upload/v1684329567/grandmother_1_enqr8f.png" alt="main-logo"/></h3>
-                <p className="slogan-body lead">Stay connected with your loved ones </p>
-                <p className="slogan-p">Care, with CareLink</p>
+                <p className="slogan-body lead">The key to unlocking excellence in care management </p>
+                <p className="slogan-p">CareLink</p>
           </div>
           <div>
             <Reviews/>
