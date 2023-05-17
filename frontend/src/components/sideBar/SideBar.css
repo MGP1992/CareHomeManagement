@@ -13,8 +13,43 @@
   z-index: 100000011;
 }
 
+.sidebar-pp-div {
+  display: flex;
+  justify-content: center;
+  margin-right: 26px;
+  margin-bottom: 26px;
+  
+}
+
+.sidebar-pp {
+  background: #007bff;
+  background: linear-gradient(to right, #0062e6, #2f8ac7, #0062e6);
+  border: 8px solid rgb(255, 255, 255);
+  max-height: 140px;
+  border-radius: 50%;
+}
+
+.sidebar-li-div {
+  display: flex;
+  justify-content: center;
+  margin-right: 26px;
+  
+}
+
+
+.sidebar-name-div {
+  display: flex;
+  justify-content: center;
+  margin-right: 26px;
+  margin-bottom: 26px;
+}
+
+.sidebar-name {
+  color: white;
+}
+
 .menu-bars {
-  margin-left: 2rem;
+  margin-left: 5rem;
   font-size: 2rem;
   background: none;
   color: #f5f5f5;
@@ -29,7 +64,8 @@
   }
 
 .nav-menu {
-  background: #0e1e34;
+  background: #222222ac;
+  backdrop-filter: blur(4px);
   width: 250px;
   height: 100vh;
   display: flex;
@@ -67,14 +103,14 @@
   display: flex;
   align-items: center;
   padding: 0 16px;
-  border-radius: 4px;
-  border: 2px solid rgb(187, 187, 187);
+  border-top: 1px solid rgb(236, 236, 236);
+  border-bottom: 1px solid rgb(236, 236, 236);
 }
 
 .nav-text a:hover {
-  border: 2px solid rgb(187, 187, 187);
-  background: rgb(187, 187, 187);
-  color: #0e1e34;
+  border-top: 2px solid rgb(236, 236, 236);
+  border-bottom: 2px solid rgb(236, 236, 236);
+  background: rgba(0, 0, 0, 0.022);
 }
 
 .logout-text a {
@@ -82,25 +118,40 @@
   color: #f5f5f5;
   font-size: 18px;
   font-weight: bold;
-  width: 80%;
-  height: 100%;
+  margin-top: 800px;
   display: flex;
   align-items: center;
-  padding: 0 16px;
-  border-radius: 4px;
-  border: 0px solid rgb(187, 187, 187) !important;
+  bottom: 0;
 }
 
 .logout-text a:hover {
-  color: #ce4545;
-  background: rgba(0, 0, 0, 0) !important;
-
+  color: #ffffff;
+  border-radius: 0;
+  border-top: 2px solid rgb(255, 94, 94) !important;
+  border-bottom: 2px solid rgb(255, 94, 94) !important;
 }
 
-.logout-text a {
-  border: 2px solid rgb(187, 187, 187);
+.help-text a {
+  text-decoration: none;
+  color: #f5f5f5;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 800px;
+  display: flex;
+  align-items: center;
   bottom: 0;
+  border: 0;
 }
+
+.help-text a:hover {
+  color: #ffffff;
+  border-radius: 0;
+  border-top: 2px solid rgb(38, 181, 31) !important;
+  border-bottom: 2px solid rgb(38, 181, 31) !important;
+}
+
+
+
 
 .nav-menu-items {
   width: 100%;

@@ -26,6 +26,17 @@ const SideBarLP = () => {
                 <AiIcons.AiOutlineClose />
               </Link>
             </li>
+            <div className="sidebar-pp-div">
+              <img src={user.profilePic} className="sidebar-pp"></img>
+            </div>
+            <div className="sidebar-li-div">
+              <h6 className="fw-light fs-6 sidebar-name">Logged in as:</h6>
+            </div>
+            <div className="sidebar-name-div">
+              <h6 className="fw-light fs-3 sidebar-name">
+                {user.firstName} {user.lastName}
+              </h6>
+            </div>
             {SideBarData.map((item, index) => {
               if (item.path === "/profile" && user.residentID) {
                 return (

@@ -9,10 +9,10 @@
 }
 
 .menu-bars-lp {
-  margin-left: 2rem;
+  margin-left: 5rem;
   font-size: 2rem;
   background: none;
-  color: #757171;
+  color: #737373;
 }
 
 .open-bars-lp:hover {
@@ -24,7 +24,8 @@
   }
 
 .nav-menu-lp {
-  background: #0e1e34;
+  background: #222222ac;
+  backdrop-filter: blur(4px);
   width: 250px;
   height: 100vh;
   display: flex;
