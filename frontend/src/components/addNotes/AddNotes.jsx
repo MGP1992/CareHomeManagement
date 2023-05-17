@@ -3,7 +3,7 @@ import axios from "axios";
 import Modal from "../modal/Modal";
 import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-import './AddNotes.css'
+import "./AddNotes.css";
 
 const AddNotes = (props) => {
   const user = JSON.parse(window.localStorage.getItem("user"));
@@ -12,15 +12,6 @@ const AddNotes = (props) => {
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("activities");
   const token = window.localStorage.getItem("token");
-  const [resident, setResident] = useState({
-    residentID: "",
-    notes: {
-      activities: [],
-      medication: [],
-      wellbeing: [],
-      others: [],
-    },
-  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,18 +22,8 @@ const AddNotes = (props) => {
   }, []);
 
   const onChange = (e) => {
-    const { name, value } = e.target;
-    if (name === "category") {
-      setCategory(value);
-    } else {
-      setResident({
-        ...resident,
-        notes: {
-          ...resident.notes,
-          [category]: [...resident.notes[category], { [name]: value }],
-        },
-      });
-    }
+    const { value } = e.target;
+    setCategory(value);
   };
 
   const onSubmit = async (e) => {
@@ -57,16 +38,9 @@ const AddNotes = (props) => {
       by: user.firstName + " " + user.lastName,
     };
     try {
-      await axios.post("http://localhost:8082/residents/add-note", data);
-      setResident({
-        ...resident,
-        notes: {
-          activities: [],
-          medication: [],
-          wellbeing: [],
-          other: [],
-        },
-      });
+      await axios
+        .post("http://localhost:8082/residents/add-note", data)
+        .then(window.location.reload());
     } catch (err) {
       console.log(err);
     }
