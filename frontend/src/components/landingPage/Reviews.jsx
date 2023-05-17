@@ -70,10 +70,12 @@ const Reviews = () => {
                     />
                   </div>
                   <p className="testimonial">
-                    This care home, mate, top-notch! They provide care like no
-                    other, ya know. The staff's dedication is unreal, always
-                    giving it their all. You want some quality care? I'll give
-                    it ya! The Wealdstone Raider approves!
+                    You want a review, yeah? Well, let me tell ya, this care
+                    home software is bangin'! It's like a proper game-changer,
+                    mate. Keeps everything in check, runs smoother than a
+                    well-struck ball. No messin' about! Care home management
+                    sorted, and I'm lovin' it! "You've got no care home, you've
+                    got no residents!"
                   </p>
                   <p className="overview">
                     <b>Wealdstone Raider</b>, Care Home Football Pundit
@@ -108,12 +110,11 @@ const Reviews = () => {
                     />
                   </div>
                   <p className="testimonial">
-                    Do you know who I am? It's Ronnie Pickering, the Managing
-                    Director of Sevenoaks. With unwavering dedication, our care
-                    home ensures top-notch care for your loved ones. Trust us to
-                    provide a nurturing environment and exceptional services.
-                    Remember, it's Ronnie Pickering, here to exceed your
-                    expectations!
+                    Listen up, mate! Sevenoaks Care Home is top-notch, just like
+                    me, Ronnie Pickering! And this care home management
+                    software? Unbelievable! Keeps everything in line, smooth as
+                    silk. So next time you ask, "Do you know who I am?" just
+                    remember, Sevenoaks and CareLink software lead the pack!
                   </p>
                   <p className="overview">
                     <b>Ronnie Pickering</b>, Managing Director of Sevenoaks
