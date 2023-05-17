@@ -352,7 +352,7 @@ const ResidentProfile = () => {
           <div className="col-md-3 border-right">
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
               <img
-                className="rounded"
+                className="profile-pp"
                 width="150px"
                 src={user.profilePic}
                 alt="img"

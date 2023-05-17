@@ -18,15 +18,22 @@
   justify-content: center;
   margin-right: 26px;
   margin-bottom: 26px;
-  
+  position: relative;
+}
+
+.sidebar-pp-div::after {
+  content: "";
+  display: block;
+  padding-bottom: 75%;
 }
 
 .sidebar-pp {
-  background: #007bff;
-  background: linear-gradient(to right, #0062e6, #2f8ac7, #0062e6);
+  position: absolute;
   border: 8px solid rgb(255, 255, 255);
-  max-height: 140px;
+  height: 140px;
+  width: 140px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .sidebar-li-div {

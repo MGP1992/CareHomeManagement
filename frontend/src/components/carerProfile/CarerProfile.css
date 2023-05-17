@@ -1,5 +1,13 @@
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.profile-pp {
+  border: 8px solid rgb(232, 232, 232);
+  height: 164px;
+  width: 164px;
+  border-radius: 50%;
+  object-fit: cover;
 }
