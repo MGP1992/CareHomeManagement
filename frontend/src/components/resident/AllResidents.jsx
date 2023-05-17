@@ -6,6 +6,8 @@ import { Container, Row, Col, Button, Form, Input } from "reactstrap";
 import "./AllResidents.css";
 const AllResidents = () => {
   const user = JSON.parse(window.localStorage.getItem("user"));
+  const navigate = useNavigate();
+  const [residents, setResidents] = useState([]);
 
   useEffect(() => {
     const token = window.localStorage.getItem("token");
@@ -19,10 +21,11 @@ const AllResidents = () => {
       });
     }
   }, []);
+  
   const newResident = () => {
     navigate("/residents/add");
   };
-
+  
   const searchResident = async (e) => {
     const searchValue = e.target.value;
     axios
@@ -31,10 +34,7 @@ const AllResidents = () => {
         setResidents(data.data.resident);
       });
   };
-  const navigate = useNavigate();
-  const [residents, setResidents] = useState([]);
-
-
+  
   return (
     <>
       <div className="container">
@@ -69,7 +69,7 @@ const AllResidents = () => {
                       tag="aside"
                       className="pb-5 mb-5 pb-md-0 mb-md-4 mx-auto mx-md-0"
                     >
-                      <Resident resident={resident} key={resident._id} />
+                      <Resident resident={resident} key={resident._id} setResidents={setResidents}/>
                     </Col>
                   ))}
                 </Row>

@@ -5,13 +5,17 @@ import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import "./AddNotes.css";
 
-const AddNotes = (props) => {
+
+
+const AddNotes = ({resident, setNotes}) => {
   const user = JSON.parse(window.localStorage.getItem("user"));
-  const residentID = props.residentID;
+  const residentID = resident.residentID;
+
   const [input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("activities");
-  const token = window.localStorage.getItem("token");
+  
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,9 +26,15 @@ const AddNotes = (props) => {
   }, []);
 
   const onChange = (e) => {
-    const { value } = e.target;
-    setCategory(value);
+    const { name, value } = e.target;
+    if (name === "category") {
+      setCategory(value);
+    } else {
+      setInput(value)
+     
+    }
   };
+
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -38,9 +48,26 @@ const AddNotes = (props) => {
       by: user.firstName + " " + user.lastName,
     };
     try {
-      await axios
-        .post("http://localhost:8082/residents/add-note", data)
-        .then(window.location.reload());
+      await axios.post("http://localhost:8082/residents/add-note", data);
+  
+      let notePatch = {}
+
+      // build the note patch using the existng notes and a new note
+      // TODO: use the current time and user below
+      notePatch[category] = [
+        ...resident.notes[category],
+        { note: input, time: data.time, by: data.by }
+      ]
+
+      // merge the existing notes with the note patch to update the correct category
+      setNotes(
+        {
+          ...resident.notes,
+          ...notePatch
+        }
+      )
+      setShow(false)
+      // we are not clearing the form as it does not match our usecase
     } catch (err) {
       console.log(err);
     }
