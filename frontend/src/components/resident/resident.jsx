@@ -9,6 +9,9 @@ import {
 import { useNavigate } from "react-router-dom";
 
 const Resident = ({ resident }) => {
+   // separate out the notes into it's own piece of state
+  // below, pass setNotes to the AddNotes component
+  const [notes, setNotes] = useState(resident.notes)
   const navigate = useNavigate();
   const goToProfile = () => {
     navigate(`/residents/profile/${resident.residentID}`);
@@ -33,7 +36,7 @@ const Resident = ({ resident }) => {
                 onClick={goToProfile}
               >
                 View Profile
-              </Button><AddNotes residentID={resident.residentID} />
+                </Button><AddNotes resident={resident} setNotes={setNotes} />
             </CardTitle>
             <CardText
               className="text-secondary mb-4"
@@ -42,23 +45,23 @@ const Resident = ({ resident }) => {
             <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}> Latest Activity</h5>
               <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
-                  {resident.notes.activities.length > 0
-                    ? resident.notes.activities[
-                        resident.notes.activities.length - 1
+                {notes.activities.length > 0
+                    ? notes.activities[
+                        notes.activities.length - 1
                       ].by
                     : ""}
                 </h6>
                 <h6 style={{ "fontSize": "14px" }}>
-                  {resident.notes.activities.length > 0
-                    ? resident.notes.activities[
-                        resident.notes.activities.length - 1
+                  {notes.activities.length > 0
+                    ? notes.activities[
+                        notes.activities.length - 1
                       ].time
                     : ""}
                 </h6>
                 <h6 style={{ color: "#3b3a3a" }}>
-                  {resident.notes.activities.length > 0
-                    ? `'${resident.notes.activities[
-                        resident.notes.activities.length - 1
+                  {notes.activities.length > 0
+                    ? `'${notes.activities[
+                        notes.activities.length - 1
                       ].note}'`
                     : "No notes added."}
                 </h6>
@@ -67,18 +70,18 @@ const Resident = ({ resident }) => {
               <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Medication</h5>
               <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
-                  {resident.notes.medication.length > 0
-                    ? resident.notes.medication[resident.notes.medication.length  - 1].by
+                  {notes.medication.length > 0
+                    ? notes.medication[notes.medication.length  - 1].by
                     : ""}
                 </h6>
                 <h6 style={{ "fontSize": "14px" }}>
-                  {resident.notes.medication.length > 0
-                    ? resident.notes.medication[resident.notes.medication.length  - 1].time
+                  {notes.medication.length > 0
+                    ? notes.medication[notes.medication.length  - 1].time
                     : ""}
                 </h6>
                 <h6 style={{ color: "#3b3a3a" }}>
-                  {resident.notes.medication.length > 0
-                    ? `'${resident.notes.medication[resident.notes.medication.length  - 1].note}'`
+                  {notes.medication.length > 0
+                    ? `'${notes.medication[notes.medication.length  - 1].note}'`
                     : "No notes added."}
                 </h6>
               </div>
@@ -86,18 +89,18 @@ const Resident = ({ resident }) => {
               <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Wellbeing</h5>
               <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
-                  {resident.notes.wellbeing.length > 0
-                    ? resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].by
+                  {notes.wellbeing.length > 0
+                    ? notes.wellbeing[notes.wellbeing.length  - 1].by
                     : ""}
                 </h6>
                 <h6 style={{ "fontSize": "14px" }}>
-                  {resident.notes.wellbeing.length > 0
-                    ? resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].time
+                  {notes.wellbeing.length > 0
+                    ? notes.wellbeing[notes.wellbeing.length  - 1].time
                     : ""}
                 </h6>
                 <h6 style={{ color: "#3b3a3a" }}>
-                  {resident.notes.wellbeing.length > 0
-                    ? `'${resident.notes.wellbeing[resident.notes.wellbeing.length  - 1].note}'`
+                  {notes.wellbeing.length > 0
+                    ? `'${notes.wellbeing[notes.wellbeing.length  - 1].note}'`
                     : "No notes added."}
                 </h6>
               </div>
@@ -105,18 +108,18 @@ const Resident = ({ resident }) => {
               <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}>Latest Other</h5>
               <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
-                  {resident.notes.other.length > 0
-                    ? resident.notes.other[resident.notes.other.length  - 1].by
+                  {notes.other.length > 0
+                    ? notes.other[notes.other.length  - 1].by
                     : ""}
                 </h6>
                 <h6 style={{ "fontSize": "14px" }}>
-                  {resident.notes.other.length > 0
-                    ? resident.notes.other[resident.notes.other.length  - 1].time
+                  {notes.other.length > 0
+                    ? notes.other[notes.other.length  - 1].time
                     : ""}
                 </h6>
                 <h6 style={{ color: "#3b3a3a" }}>
-                  {resident.notes.other.length > 0
-                    ? `'${resident.notes.other[resident.notes.other.length  - 1].note}'`
+                  {notes.other.length > 0
+                    ? `'${notes.other[notes.other.length  - 1].note}'`
                     : "No notes added."}
                 </h6>
               </div>
