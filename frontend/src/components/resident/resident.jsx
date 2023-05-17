@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import AddNotes from "../addNotes/AddNotes";
 import {
   Button,
@@ -36,7 +36,7 @@ const Resident = ({ resident }) => {
                 onClick={goToProfile}
               >
                 View Profile
-                </Button><AddNotes resident={resident} setNotes={setNotes} />
+              </Button><AddNotes resident={resident} setNotes={setNotes} />
             </CardTitle>
             <CardText
               className="text-secondary mb-4"
@@ -45,7 +45,7 @@ const Resident = ({ resident }) => {
             <h5 style={{ color: "black", fontStyle: "italic", fontSize: "16px" }}> Latest Activity</h5>
               <div className="notes-all">
                 <h6 style={{ "fontSize": "14px" }}>
-                {notes.activities.length > 0
+                  {notes.activities.length > 0
                     ? notes.activities[
                         notes.activities.length - 1
                       ].by

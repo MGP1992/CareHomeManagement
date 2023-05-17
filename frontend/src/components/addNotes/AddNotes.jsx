@@ -5,22 +5,7 @@ import { Button } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import "./AddNotes.css";
 
-// const AddNotes = (props) => {
-//   const user = JSON.parse(window.localStorage.getItem("user"));
-//   const residentID = props.residentID;
-//   const [input, setInput] = useState("");
-//   const [show, setShow] = useState(false);
-//   const [category, setCategory] = useState("activities");
-//   const token = window.localStorage.getItem("token")
-//   const [resident, setResident] = useState({
-//     residentID: "",
-//     notes: {
-//       activities: [],
-//       medication: [],
-//       wellbeing: [],
-//       others: [],
-//     },
-//   });
+
 
 
 const AddNotes = ({resident, setNotes}) => {
@@ -30,16 +15,7 @@ const AddNotes = ({resident, setNotes}) => {
   const [input, setInput] = useState("");
   const [show, setShow] = useState(false);
   const [category, setCategory] = useState("activities");
-  const token = window.localStorage.getItem("token");
-  // const [resident, setResident] = useState({
-  //   residentID: "",
-  //   notes: {
-  //     activities: [],
-  //     medication: [],
-  //     wellbeing: [],
-  //     others: [],
-  //   },
-  // });
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -54,14 +30,7 @@ const AddNotes = ({resident, setNotes}) => {
     if (name === "category") {
       setCategory(value);
     } else {
-      setInput(value)
-      // setResident({
-      //   ...resident,
-      //   notes: {
-      //     ...resident.notes,
-      //     [category]: [...resident.notes[category], { [name]: value }],
-      //   },
-      // });
+      setInput(value
     }
   };
 
@@ -79,15 +48,6 @@ const AddNotes = ({resident, setNotes}) => {
     };
     try {
       await axios.post("http://localhost:8082/residents/add-note", data);
-      // setResident({
-      //   ...resident,
-      //   notes: {
-      //     activities: [],
-      //     medication: [],
-      //     wellbeing: [],
-      //     other: [],
-      //   },
-      // });
 
       let notePatch = {}
 
@@ -95,7 +55,7 @@ const AddNotes = ({resident, setNotes}) => {
       // TODO: use the current time and user below
       notePatch[category] = [
         ...resident.notes[category],
-        { note: input, time: '17/05/2023, 10:59:52', by: 'eddie andress' }
+        { note: input, time: data.time, by: data.by }
       ]
 
       // merge the existing notes with the note patch to update the correct category
@@ -106,7 +66,8 @@ const AddNotes = ({resident, setNotes}) => {
         }
       )
       setShow(false)
-      // TODO: do something to clear the form
+      // we are not clearing the form as it does not match our usecase
+
     } catch (err) {
       console.log(err);
     }
